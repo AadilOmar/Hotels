@@ -50,53 +50,39 @@ import javafx.fxml.Initializable;
  *
  * @author Aadil
  */
-public class CustomerHome implements Initializable, ControlledScreen {
+public class ManagerHome implements Initializable, ControlledScreen {
 
     ScreensController myController;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
     @FXML
-    private void make_new_registration (ActionEvent event){
-        myController.setScreen(Main.SEARCH_ROOMS_SCREEN);
-    }
-
-    @FXML
-    private void update_reservation (ActionEvent event){
+    private void view_reservation_report (ActionEvent event){
 
     }
 
     @FXML
-    private void provide_feedback (ActionEvent event){
+    private void view_pop_room_category_report (ActionEvent event){
 
     }
 
     @FXML
-    private void view_feedback (ActionEvent event){
+    private void view_venue_report (ActionEvent event){
 
     }
 
-    @FXML
-    private void cancel_reservation (ActionEvent event){
-
-    }
-    @FXML
-    private void goToScreen1(ActionEvent event){
-       myController.setScreen(Main.LOGIN_SCREEN);
-    }
-    
     @FXML
     private void goToScreen2(ActionEvent event){
-       myController.setScreen(Main.REGISTER_SCREEN);
+        myController.setScreen(Main.REGISTER_SCREEN);
     }
 }

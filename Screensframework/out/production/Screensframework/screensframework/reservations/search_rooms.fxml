@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="screensframework.reservations.ReservationController">
+
+    <Text text="SEARCH ROOMS" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+
+    <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+
+  <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+    <items>
+      <MenuItem mnemonicParsing="false" text="Atlanta" />
+        <MenuItem mnemonicParsing="false" text="Charlotte" />
+        <MenuItem mnemonicParsing="false" text="Savannah" />
+        <MenuItem mnemonicParsing="false" text="Orlando" />
+        <MenuItem mnemonicParsing="false" text="Miami" />
+    </items>
+  </SplitMenuButton>
+
+    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="start_date"/>
+
+    <Label text="End Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="end_date"/>
+
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <Button onAction="#search" text="Search" />
+    </HBox>
+</GridPane>

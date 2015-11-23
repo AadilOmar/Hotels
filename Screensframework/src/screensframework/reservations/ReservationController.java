@@ -37,66 +37,79 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package screensframework;
+package screensframework.reservations;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
+import screensframework.ControlledScreen;
+import screensframework.Main;
+import screensframework.Room;
+import screensframework.ScreensController;
 
 /**
  * FXML Controller class
  *
  * @author Aadil
  */
-public class CustomerHome implements Initializable, ControlledScreen {
+public class ReservationController implements Initializable, ControlledScreen {
 
     ScreensController myController;
-    
+    @FXML private TableView all_rooms_table;
+    @FXML private TableView checked_rooms_table;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    @FXML
+    //should display the rooms it finds from the database
+    public void search(ActionEvent event){
+        Room r1 = new Room("01", "standard", 1, 80, 15);
+        Room r2 = new Room("02", "family", 4, 130, 30);
+        Room r3 = new Room("03", "suite", 5, 160, 30);
+        int num_rooms = 3;
+        myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
+    }
+
+    @FXML
+    //submits the reservations
+    public void submit(ActionEvent event){
+        Room r1 = new Room("01", "standard", 1, 80, 15);
+        Room r2 = new Room("02", "family", 4, 130, 30);
+        Room r3 = new Room("03", "suite", 5, 160, 30);
+        int num_rooms = 3;
+        myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
+    }
+
+    @FXML
+    //goes to add_card view.
+    public void add_card(ActionEvent event){
+        myController.setScreen(Main.ADD_CARD_SCREEN);
+    }
+
+
+    @FXML
+    //should display the rooms that were clicked as well as the start date, end date, and total cost
+    public void checkDetails(ActionEvent event){
+        myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+    }
+
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
-    @FXML
-    private void make_new_registration (ActionEvent event){
-        myController.setScreen(Main.SEARCH_ROOMS_SCREEN);
-    }
 
-    @FXML
-    private void update_reservation (ActionEvent event){
-
-    }
-
-    @FXML
-    private void provide_feedback (ActionEvent event){
-
-    }
-
-    @FXML
-    private void view_feedback (ActionEvent event){
-
-    }
-
-    @FXML
-    private void cancel_reservation (ActionEvent event){
-
-    }
-    @FXML
-    private void goToScreen1(ActionEvent event){
-       myController.setScreen(Main.LOGIN_SCREEN);
-    }
-    
-    @FXML
-    private void goToScreen2(ActionEvent event){
-       myController.setScreen(Main.REGISTER_SCREEN);
-    }
 }
