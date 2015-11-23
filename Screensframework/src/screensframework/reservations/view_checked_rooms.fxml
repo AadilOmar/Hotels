@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import com.sun.javafx.scene.control.skin.TableColumnHeader?>
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="screensframework.reservations.ReservationController">
+
+    <Text text="VIEW PICKED ROOMS" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+    <TableView GridPane.columnIndex="0" fx:id="checked_rooms_table" GridPane.rowIndex="2" GridPane.columnSpan="4">
+        <columns>
+            <TableColumn editable="false" maxWidth="80.0" prefWidth="50.0" text="Room No." />
+            <TableColumn editable="false" maxWidth="200.0" prefWidth="180.0" text="Room Category" />
+            <TableColumn editable="false" maxWidth="80.0" prefWidth="50.0" text="# people allowed" />
+            <TableColumn editable="false" maxWidth="200.0" prefWidth="180.0" text="Cost/ day" />
+            <TableColumn editable="false" maxWidth="80.0" prefWidth="50.0" text="Cost of ex bed/ day" />
+            <TableColumn editable="false" maxWidth="200.0" prefWidth="180.0" text="Select Room" />
+        </columns>
+    </TableView>
+
+    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="start_date"/>
+
+    <Label text="End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <TextField
+            GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="end_date"/>
+
+    <Label text="Total Cost:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="tota_cost"/>
+
+        <Label text="Use Card:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <SplitMenuButton mnemonicParsing="false" text="card" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <items>
+                <MenuItem mnemonicParsing="false" text="1002" />
+                <MenuItem mnemonicParsing="false" text="4039" />
+            </items>
+        </SplitMenuButton>
+
+    <HBox alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+        <Button onAction="#add_card" text="Add Card" />
+    </HBox>
+
+    <HBox alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
+        <Button onAction="#submit" text="Submit" />
+    </HBox>
+
+
+</GridPane>

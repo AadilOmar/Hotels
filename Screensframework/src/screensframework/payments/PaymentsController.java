@@ -37,66 +37,57 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package screensframework;
+package screensframework.payments;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
+import screensframework.ControlledScreen;
+import screensframework.Main;
+import screensframework.Room;
+import screensframework.ScreensController;
 
 /**
  * FXML Controller class
  *
  * @author Aadil
  */
-public class CustomerHome implements Initializable, ControlledScreen {
+public class PaymentsController implements Initializable, ControlledScreen {
 
     ScreensController myController;
-    
+
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    @FXML
+    //saves the card info
+    public void save(ActionEvent event) {
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+    }
+
+    @FXML
+    //deletes the card
+    public void delete(ActionEvent event) {
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+    }
+
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
-    @FXML
-    private void make_new_registration (ActionEvent event){
-        myController.setScreen(Main.SEARCH_ROOMS_SCREEN);
-    }
 
-    @FXML
-    private void update_reservation (ActionEvent event){
-
-    }
-
-    @FXML
-    private void provide_feedback (ActionEvent event){
-
-    }
-
-    @FXML
-    private void view_feedback (ActionEvent event){
-
-    }
-
-    @FXML
-    private void cancel_reservation (ActionEvent event){
-
-    }
-    @FXML
-    private void goToScreen1(ActionEvent event){
-       myController.setScreen(Main.LOGIN_SCREEN);
-    }
-    
-    @FXML
-    private void goToScreen2(ActionEvent event){
-       myController.setScreen(Main.REGISTER_SCREEN);
-    }
 }

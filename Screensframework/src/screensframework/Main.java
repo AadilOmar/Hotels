@@ -57,8 +57,18 @@ public class Main extends Application {
     public static String REGISTER_SCREEN_LAYOUT = "register.fxml";
     public static String CUSTOMER_HOME_SCREEN = "customer_home";
     public static String CUSTOMER_HOME_SCREEN_LAYOUT = "customer_home.fxml";
-    public static String MANAGER_HOME_SCREEN = "managerhome";
+    public static String MANAGER_HOME_SCREEN = "manager_home";
     public static String MANAGER_HOME_SCREEN_LAYOUT = "manager_home.fxml";
+    public static String SEARCH_ROOMS_SCREEN = "reservations/search_rooms";
+    public static String SEARCH_ROOMS_SCREEN_LAYOUT = "reservations/search_rooms.fxml";
+    public static String VIEW_ALL_ROOMS_SCREEN = "reservations/view_rooms";
+    public static String VIEW_ALL_ROOMS_SCREEN_LAYOUT = "reservations/view_rooms.fxml";
+    public static String VIEW_CHECKED_ROOMS_SCREEN = "reservations/view_checked_rooms";
+    public static String VIEW_CHECKED_ROOMS_SCREEN_LAYOUT = "reservations/view_checked_rooms.fxml";
+    public static String ADD_CARD_SCREEN = "payments/card_info";
+    public static String ADD_CARD_SCREEN_LAYOUT = "payments/card_info.fxml";
+    public static String RESERVATION_CONFIRM_SCREEN = "reservations/confirmation";
+    public static String RESERVATION_CONFIRM_SCREEN_LAYOUT = "reservations/confirmation.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -68,6 +78,11 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.REGISTER_SCREEN, Main.REGISTER_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.CUSTOMER_HOME_SCREEN, Main.CUSTOMER_HOME_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.MANAGER_HOME_SCREEN, Main.MANAGER_HOME_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.SEARCH_ROOMS_SCREEN, Main.SEARCH_ROOMS_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.VIEW_ALL_ROOMS_SCREEN, Main.VIEW_ALL_ROOMS_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.VIEW_CHECKED_ROOMS_SCREEN, Main.VIEW_CHECKED_ROOMS_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.ADD_CARD_SCREEN, Main.ADD_CARD_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.RESERVATION_CONFIRM_SCREEN, Main.RESERVATION_CONFIRM_SCREEN_LAYOUT);
 
         mainContainer.setScreen(Main.LOGIN_SCREEN);
         
