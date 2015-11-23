@@ -43,12 +43,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import screensframework.ControlledScreen;
 import screensframework.Main;
@@ -61,10 +69,18 @@ import screensframework.ScreensController;
  * @author Aadil
  */
 public class ReservationController implements Initializable, ControlledScreen {
-
+    ObservableList<Room> all_rooms =FXCollections.observableArrayList(
+            new Room("01", "standard", 1, 80, 15, "x"),
+            new Room("02", "family", 4, 130, 30, "x"),
+            new Room("03", "suite", 5, 160, 30, "x")
+    );
+    ObservableList<Room> selected_rooms = FXCollections.observableArrayList(
+    );
     ScreensController myController;
     @FXML private TableView all_rooms_table;
     @FXML private TableView checked_rooms_table;
+    @FXML private TableColumn column;
+    @FXML private TextField start_date;
 
     /**
      * Initializes the controller class.
@@ -77,20 +93,16 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms it finds from the database
     public void search(ActionEvent event){
-        Room r1 = new Room("01", "standard", 1, 80, 15);
-        Room r2 = new Room("02", "family", 4, 130, 30);
-        Room r3 = new Room("03", "suite", 5, 160, 30);
-        int num_rooms = 3;
+        System.out.println("+++++++++ "+start_date.toString());
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
+        create_table(true);
+        add_to_table(all_rooms, true);
+        createTableListener();
     }
 
     @FXML
     //submits the reservations
     public void submit(ActionEvent event){
-        Room r1 = new Room("01", "standard", 1, 80, 15);
-        Room r2 = new Room("02", "family", 4, 130, 30);
-        Room r3 = new Room("03", "suite", 5, 160, 30);
-        int num_rooms = 3;
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
 
@@ -105,11 +117,86 @@ public class ReservationController implements Initializable, ControlledScreen {
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+        create_table(false);
+        add_to_table(selected_rooms,false);
     }
 
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
+    private void createTableListener(){
+        all_rooms_table.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown()) {
+                    System.out.println(all_rooms_table.getSelectionModel().getSelectedItem());
+                    Room roomSelected = (Room)all_rooms_table.getSelectionModel().getSelectedItem();
+                    if(roomSelected.selected.get().equals("x")){
+                        roomSelected.selected = new SimpleStringProperty("yes");
+                        selected_rooms.add(roomSelected);
+                    }
+                    else{
+                        roomSelected.selected = new SimpleStringProperty("x");
+                        selected_rooms.remove(roomSelected);
+                    }
+                    TableColumn c = (TableColumn)all_rooms_table.getColumns().get(0);
+                    c.setVisible(false);
+                    c.setVisible(true);
+                }
+            }
+        });
+    }
 
+    private void create_table(boolean allRooms){
+
+        TableColumn roomNumber = new TableColumn("Room Number");
+        roomNumber.setMinWidth(100);
+        TableColumn roomType = new TableColumn("Room Type");
+        roomType.setMinWidth(100);
+        TableColumn maxPeople = new TableColumn("Max People");
+        maxPeople.setMinWidth(100);
+        TableColumn costPerDay = new TableColumn("Cost per Day");
+        costPerDay.setMinWidth(100);
+        TableColumn costExtraBed = new TableColumn("Cost Extra Bed");
+        costExtraBed.setMinWidth(100);
+        TableColumn selected = new TableColumn("Select");
+        selected.setMinWidth(100);
+
+        roomNumber.setCellValueFactory(
+                new PropertyValueFactory<Room,String>("roomNumber")
+        );
+        roomType.setCellValueFactory(
+                new PropertyValueFactory<Room,String>("roomCategory")
+        );
+        maxPeople.setCellValueFactory(
+                new PropertyValueFactory<Room,Integer>("numPeopleAllowed")
+        );
+        costPerDay.setCellValueFactory(
+                new PropertyValueFactory<Room,Integer>("costPerDay")
+        );
+        costExtraBed.setCellValueFactory(
+                new PropertyValueFactory<Room,Integer>("costExtraBedPerDay")
+        );
+        selected.setCellValueFactory(
+                new PropertyValueFactory<Room,Boolean>("selected")
+        );
+        if(allRooms){
+            all_rooms_table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
+        }
+        else{
+            checked_rooms_table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
+        }
+
+    }
+    private void add_to_table(ObservableList<Room> rooms, boolean all_rooms){
+        if(all_rooms){
+            all_rooms_table.setItems(rooms);
+        }
+        else{
+            checked_rooms_table.setItems(rooms);
+        }
+
+    }
 }
+

@@ -44,13 +44,15 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import screensframework.reservations.ReservationController;
 
 /**
  *
  * @author Aadil
  */
 public class Main extends Application {
-    
+
+    private static ReservationController controller;
     public static String LOGIN_SCREEN = "login";
     public static String LOGIN_SCREEN_LAYOUT = "login.fxml";
     public static String REGISTER_SCREEN = "register";
@@ -70,9 +72,13 @@ public class Main extends Application {
     public static String RESERVATION_CONFIRM_SCREEN = "reservations/confirmation";
     public static String RESERVATION_CONFIRM_SCREEN_LAYOUT = "reservations/confirmation.fxml";
 
+    public static ReservationController getReservationController(){
+        return controller;
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        
+        controller = new ReservationController();
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.LOGIN_SCREEN, Main.LOGIN_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.REGISTER_SCREEN, Main.REGISTER_SCREEN_LAYOUT);
