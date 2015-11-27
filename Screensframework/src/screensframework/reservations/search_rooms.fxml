@@ -33,6 +33,6 @@
             GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="end_date"/>
 
     <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-        <Button onAction="#search" text="Search" />
+        <Button onAction="#search_all_rooms" text="Search" />
     </HBox>
 </GridPane>

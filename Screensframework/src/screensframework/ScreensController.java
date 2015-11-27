@@ -82,7 +82,9 @@ public class ScreensController  extends StackPane {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
             //if view needs reservation controller, add it in code bc issues when using 1 controller w/ multiple layouts
-            if(name.equals("reservations/view_rooms") || name.equals("reservations/search_rooms") || name.equals("reservations/view_checked_rooms") ||name.equals("reservations/confirmation")) {
+            System.out.println(name);
+            if(name.equals("reservations/view_rooms") || name.equals("reservations/search_rooms") || name.equals("reservations/view_checked_rooms") ||name.equals("reservations/confirmation")||name.equals("reservations/update_reservation")) {
+                System.out.println(name + " is ready");
                 myLoader.setController(Main.getReservationController());
             }
             Parent loadScreen = (Parent) myLoader.load();

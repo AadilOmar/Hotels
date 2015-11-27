@@ -77,10 +77,22 @@ public class ReservationController implements Initializable, ControlledScreen {
     ObservableList<Room> selected_rooms = FXCollections.observableArrayList(
     );
     ScreensController myController;
+    //for all
     @FXML private TableView all_rooms_table;
     @FXML private TableView checked_rooms_table;
     @FXML private TableColumn column;
+
+    //for searching all rooms
     @FXML private TextField start_date;
+    @FXML private TextField end_date;
+
+    //for updating reservation
+    @FXML private TextField reservation_id;
+    @FXML private TextField current_start_date;
+    @FXML private TextField current_end_date;
+    @FXML private TextField new_start_date;
+    @FXML private TextField new_end_date;
+    @FXML private Text updated_cost;
 
     /**
      * Initializes the controller class.
@@ -90,10 +102,27 @@ public class ReservationController implements Initializable, ControlledScreen {
         // TODO
     }
 
+    //finds if there is a reservation by the ID given and displays the rooms in the table as well as the original dates
+    @FXML
+    public void searchReservation(ActionEvent event){
+    }
+
+    //searches if the rooms have availability in the dates specified. Returns no rooms if they dont
+    @FXML
+    public void searchAvailability(ActionEvent event){
+
+    }
+
+
+    //updates the reservation in the databse based on what dates were selected
+    @FXML
+    public void update_reservation(ActionEvent event){
+
+    }
+
     @FXML
     //should display the rooms it finds from the database
-    public void search(ActionEvent event){
-        System.out.println("+++++++++ "+start_date.toString());
+    public void search_all_rooms(ActionEvent event){
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
         create_table(true);
         add_to_table(all_rooms, true);

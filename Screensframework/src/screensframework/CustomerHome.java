@@ -73,7 +73,7 @@ public class CustomerHome implements Initializable, ControlledScreen {
 
     @FXML
     private void update_reservation (ActionEvent event){
-
+        myController.setScreen(Main.UPDATE_RESERVATION_SCREEN);
     }
 
     @FXML

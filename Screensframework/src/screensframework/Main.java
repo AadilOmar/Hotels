@@ -71,6 +71,8 @@ public class Main extends Application {
     public static String ADD_CARD_SCREEN_LAYOUT = "payments/card_info.fxml";
     public static String RESERVATION_CONFIRM_SCREEN = "reservations/confirmation";
     public static String RESERVATION_CONFIRM_SCREEN_LAYOUT = "reservations/confirmation.fxml";
+    public static String UPDATE_RESERVATION_SCREEN = "reservations/update_reservation";
+    public static String UPDATE_RESERVATION_SCREEN_LAYOUT = "reservations/update_reservation.fxml";
 
     public static ReservationController getReservationController(){
         return controller;
@@ -89,6 +91,7 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.VIEW_CHECKED_ROOMS_SCREEN, Main.VIEW_CHECKED_ROOMS_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.ADD_CARD_SCREEN, Main.ADD_CARD_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.RESERVATION_CONFIRM_SCREEN, Main.RESERVATION_CONFIRM_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.UPDATE_RESERVATION_SCREEN, Main.UPDATE_RESERVATION_SCREEN_LAYOUT);
 
         mainContainer.setScreen(Main.LOGIN_SCREEN);
         
