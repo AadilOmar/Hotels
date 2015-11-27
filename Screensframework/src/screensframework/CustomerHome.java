@@ -88,7 +88,7 @@ public class CustomerHome implements Initializable, ControlledScreen {
 
     @FXML
     private void cancel_reservation (ActionEvent event){
-
+        myController.setScreen(Main.CANCEL_RESERVATION_SCREEN);
     }
     @FXML
     private void goToScreen1(ActionEvent event){

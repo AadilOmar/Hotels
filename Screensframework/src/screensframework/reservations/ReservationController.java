@@ -102,6 +102,12 @@ public class ReservationController implements Initializable, ControlledScreen {
         // TODO
     }
 
+    //removes the reservation from the database
+    @FXML
+    public void cancelReservation(ActionEvent event){
+
+    }
+
     //finds if there is a reservation by the ID given and displays the rooms in the table as well as the original dates
     @FXML
     public void searchReservation(ActionEvent event){

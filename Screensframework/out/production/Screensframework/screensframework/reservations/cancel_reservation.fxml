@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+
+    <Text text="CANCEL RESERVATION" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+
+    <Label text="Reservation ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="reservation_id"/>
+
+    <HBox  alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Button onAction="#searchReservation" text="Search" />
+    </HBox>
+
+    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="start_date"/>
+
+    <Label text="End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    <TextField
+            GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="end_date"/>
+
+    <TableView GridPane.columnIndex="0" fx:id="all_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
+        <columns>
+        </columns>
+
+    </TableView>
+
+    <Label text="Total Cost Of Reservation" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost"/>
+
+    <Label text="Date of Cancellation" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="cancellation_date"/>
+
+    <Label text="Amount to be Refunded" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="amount_refunded"/>
+
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+        <Button onAction="#cancelReservation" text="Submit" />
+    </HBox>
+
+
+</GridPane>
