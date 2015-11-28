@@ -27,8 +27,8 @@
 
     <HBox spacing="10" alignment="bottom_right"
           GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <Button text="View Venue Report"
-                onAction="#view_venue_report"/>
+        <Button text="View Revenue Report"
+                onAction="#view_revenue_report"/>
     </HBox>
 
 

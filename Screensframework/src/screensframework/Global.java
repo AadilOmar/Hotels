@@ -5,7 +5,7 @@ package screensframework;
  */
 public class Global {
 
-    public static String user_type = "customer";
+    public static String user_type = "manager";
     public static String username;
     public static String password;
     public static String email;

@@ -55,6 +55,7 @@ public class Main extends Application {
 
     private static ReservationController reservationController;
     private static ReviewController reviewController;
+    private static ManagerHome managerController;
     public static String LOGIN_SCREEN = "login";
     public static String LOGIN_SCREEN_LAYOUT = "login.fxml";
     public static String REGISTER_SCREEN = "register";
@@ -81,6 +82,16 @@ public class Main extends Application {
     public static String VIEW_REVIEW_SCREEN_LAYOUT = "reviews/view_review.fxml";
     public static String GIVE_REVIEW_SCREEN = "reviews/give_review";
     public static String GIVE_REVIEW_SCREEN_LAYOUT = "reviews/give_review.fxml";
+    public static String RESERVATION_REPORT_SCREEN = "manager_screens/reservation_report";
+    public static String RESERVATION_REPORT_SCREEN_LAYOUT = "manager_screens/reservation_report.fxml";
+    public static String POP_ROOM_CATEGORY_SCREEN = "manager_screens/popular_room_category";
+    public static String POP_ROOM_CATEGORY_SCREEN_LAYOUT = "manager_screens/popular_room_category.fxml";
+    public static String REVENUE_REPORT_SCREEN = "manager_screens/revenue_report";
+    public static String REVENUE_REPORT_SCREEN_LAYOUT = "manager_screens/revenue_report.fxml";
+
+    public static ManagerHome getManagerController(){
+        return managerController;
+    }
 
     public static ReservationController getReservationController(){
         return reservationController;
@@ -93,6 +104,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         reservationController = new ReservationController();
         reviewController = new ReviewController();
+        managerController = new ManagerHome();
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.LOGIN_SCREEN, Main.LOGIN_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.REGISTER_SCREEN, Main.REGISTER_SCREEN_LAYOUT);
@@ -107,6 +119,9 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.CANCEL_RESERVATION_SCREEN, Main.CANCEL_RESERVATION_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.VIEW_REVIEW_SCREEN, Main.VIEW_REVIEW_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.GIVE_REVIEW_SCREEN, Main.GIVE_REVIEW_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.RESERVATION_REPORT_SCREEN, Main.RESERVATION_REPORT_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.POP_ROOM_CATEGORY_SCREEN, Main.POP_ROOM_CATEGORY_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.REVENUE_REPORT_SCREEN, Main.REVENUE_REPORT_SCREEN_LAYOUT);
 
         mainContainer.setScreen(Main.LOGIN_SCREEN);
         

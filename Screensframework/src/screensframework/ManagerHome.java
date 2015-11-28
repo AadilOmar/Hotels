@@ -41,9 +41,18 @@ package screensframework;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -51,6 +60,8 @@ import javafx.fxml.Initializable;
  * @author Aadil
  */
 public class ManagerHome implements Initializable, ControlledScreen {
+
+    @FXML private TableView all_reservations_table;
 
     ScreensController myController;
 
@@ -68,16 +79,17 @@ public class ManagerHome implements Initializable, ControlledScreen {
 
     @FXML
     private void view_reservation_report (ActionEvent event){
-
+        myController.setScreen(Main.RESERVATION_REPORT_SCREEN);
     }
 
     @FXML
     private void view_pop_room_category_report (ActionEvent event){
-
+        myController.setScreen(Main.POP_ROOM_CATEGORY_SCREEN);
     }
 
     @FXML
-    private void view_venue_report (ActionEvent event){
+    private void view_revenue_report (ActionEvent event){
+        myController.setScreen(Main.REVENUE_REPORT_SCREEN);
 
     }
 
@@ -85,4 +97,10 @@ public class ManagerHome implements Initializable, ControlledScreen {
     private void goToScreen2(ActionEvent event){
         myController.setScreen(Main.REGISTER_SCREEN);
     }
+
+    @FXML
+    private void back (ActionEvent event){
+        myController.setScreen(Main.MANAGER_HOME_SCREEN);
+    }
+
 }
