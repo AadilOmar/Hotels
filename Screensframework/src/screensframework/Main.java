@@ -45,6 +45,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import screensframework.reservations.ReservationController;
+import screensframework.reviews.ReviewController;
 
 /**
  *
@@ -52,7 +53,8 @@ import screensframework.reservations.ReservationController;
  */
 public class Main extends Application {
 
-    private static ReservationController controller;
+    private static ReservationController reservationController;
+    private static ReviewController reviewController;
     public static String LOGIN_SCREEN = "login";
     public static String LOGIN_SCREEN_LAYOUT = "login.fxml";
     public static String REGISTER_SCREEN = "register";
@@ -75,14 +77,22 @@ public class Main extends Application {
     public static String UPDATE_RESERVATION_SCREEN_LAYOUT = "reservations/update_reservation.fxml";
     public static String CANCEL_RESERVATION_SCREEN = "reservations/cancel_reservation";
     public static String CANCEL_RESERVATION_SCREEN_LAYOUT = "reservations/cancel_reservation.fxml";
+    public static String VIEW_REVIEW_SCREEN = "reviews/view_review";
+    public static String VIEW_REVIEW_SCREEN_LAYOUT = "reviews/view_review.fxml";
+    public static String GIVE_REVIEW_SCREEN = "reviews/give_review";
+    public static String GIVE_REVIEW_SCREEN_LAYOUT = "reviews/give_review.fxml";
 
     public static ReservationController getReservationController(){
-        return controller;
+        return reservationController;
+    }
+    public static ReviewController getReviewController(){
+        return reviewController;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        controller = new ReservationController();
+        reservationController = new ReservationController();
+        reviewController = new ReviewController();
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.LOGIN_SCREEN, Main.LOGIN_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.REGISTER_SCREEN, Main.REGISTER_SCREEN_LAYOUT);
@@ -95,6 +105,8 @@ public class Main extends Application {
         mainContainer.loadScreen(Main.RESERVATION_CONFIRM_SCREEN, Main.RESERVATION_CONFIRM_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.UPDATE_RESERVATION_SCREEN, Main.UPDATE_RESERVATION_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.CANCEL_RESERVATION_SCREEN, Main.CANCEL_RESERVATION_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.VIEW_REVIEW_SCREEN, Main.VIEW_REVIEW_SCREEN_LAYOUT);
+        mainContainer.loadScreen(Main.GIVE_REVIEW_SCREEN, Main.GIVE_REVIEW_SCREEN_LAYOUT);
 
         mainContainer.setScreen(Main.LOGIN_SCREEN);
         

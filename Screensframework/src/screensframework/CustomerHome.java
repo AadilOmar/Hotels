@@ -78,12 +78,12 @@ public class CustomerHome implements Initializable, ControlledScreen {
 
     @FXML
     private void provide_feedback (ActionEvent event){
-
+        myController.setScreen(Main.GIVE_REVIEW_SCREEN);
     }
 
     @FXML
     private void view_feedback (ActionEvent event){
-
+        myController.setScreen(Main.VIEW_REVIEW_SCREEN);
     }
 
     @FXML

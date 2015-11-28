@@ -12,4 +12,9 @@
     <Label text="ID:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Label text="Please save this reservation ID for all further communication" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 
+
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+        <Button onAction="#back" text="Back" />
+    </HBox>
+
 </GridPane>

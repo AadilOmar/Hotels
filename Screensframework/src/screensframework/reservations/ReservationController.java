@@ -119,6 +119,11 @@ public class ReservationController implements Initializable, ControlledScreen {
 
     }
 
+    @FXML
+    private void back (ActionEvent event){
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+    }
+
 
     //updates the reservation in the databse based on what dates were selected
     @FXML

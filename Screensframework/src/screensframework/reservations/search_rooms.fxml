@@ -35,4 +35,10 @@
     <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <Button onAction="#search_all_rooms" text="Search" />
     </HBox>
+
+
+  <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+    <Button onAction="#back" text="Back" />
+  </HBox>
+
 </GridPane>

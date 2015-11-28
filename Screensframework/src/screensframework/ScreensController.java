@@ -87,6 +87,9 @@ public class ScreensController  extends StackPane {
                 System.out.println(name + " is ready");
                 myLoader.setController(Main.getReservationController());
             }
+            else if(name.equals("reviews/view_review")||name.equals("reviews/give_review")){
+                myLoader.setController(Main.getReviewController());
+            }
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             myScreenControler.setScreenParent(this);
