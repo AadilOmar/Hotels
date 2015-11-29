@@ -15,14 +15,16 @@ public class Room {
     public SimpleIntegerProperty costPerDay;
     public SimpleIntegerProperty costExtraBedPerDay;
     public SimpleStringProperty selected;
+    public SimpleStringProperty selectedBed;
 
-    public Room(String roomNo, String category, int numPpl, int costDay, int costExBed, String selected){
+    public Room(String roomNo, String category, int numPpl, int costDay, int costExBed, String selected, String selectedBed){
         this.roomNumber = new SimpleStringProperty(roomNo);
         this.roomCategory = new SimpleStringProperty(category);
         this.numPeopleAllowed = new SimpleIntegerProperty(numPpl);
         this.costExtraBedPerDay = new SimpleIntegerProperty(costExBed);
         this.costPerDay = new SimpleIntegerProperty(costDay);
         this.selected = new SimpleStringProperty(selected);
+        this.selectedBed = new SimpleStringProperty(selectedBed);
     }
 
     public String getRoomNumber() {
@@ -45,6 +47,9 @@ public class Room {
 
     public String getSelected(){
         return this.selected.get();
+    }
+    public String getSelectedBed(){
+        return this.selectedBed.get();
     }
 
 }

@@ -68,9 +68,9 @@ import screensframework.ScreensController;
  */
 public class ReservationController implements Initializable, ControlledScreen {
     ObservableList<Room> all_rooms =FXCollections.observableArrayList(
-            new Room("01", "standard", 1, 80, 15, "x"),
-            new Room("02", "family", 4, 130, 30, "x"),
-            new Room("03", "suite", 5, 160, 30, "x")
+            new Room("01", "standard", 1, 80, 15, "x", "x"),
+            new Room("02", "family", 4, 130, 30, "x", "x"),
+            new Room("03", "suite", 5, 160, 30, "x", "x")
     );
     ObservableList<Room> selected_rooms = FXCollections.observableArrayList(
     );
@@ -84,6 +84,9 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private SplitMenuButton card;
     @FXML private SplitMenuButton location;
 
+    private boolean already_created_all_rooms = false;
+    private boolean already_created_checked_rooms = false;
+    private boolean already_created_reserved_rooms = false;
 
     //for searching all rooms
     @FXML private TextField start_date;
@@ -102,6 +105,10 @@ public class ReservationController implements Initializable, ControlledScreen {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        create_table(all_reserved_rooms_table);
+//        create_table(all_rooms_table);
+//        create_table(checked_rooms_table);
+
         // TODO
     }
 
@@ -114,6 +121,14 @@ public class ReservationController implements Initializable, ControlledScreen {
     //finds if there is a reservation by the ID given and displays the rooms in the table as well as the original dates
     @FXML
     public void searchReservation(ActionEvent event){
+        String reservationId = reservation_id.getText().toString();
+        //find reservations by that id
+        if(!already_created_reserved_rooms){
+            create_table(all_reserved_rooms_table);
+            createTableListener();
+            already_created_reserved_rooms = true;
+        }
+        add_to_table(all_rooms, all_reserved_rooms_table);
     }
 
     //searches if the rooms have availability in the dates specified. Returns no rooms if they dont
@@ -138,9 +153,12 @@ public class ReservationController implements Initializable, ControlledScreen {
     //should display the rooms it finds from the database
     public void search_all_rooms(ActionEvent event){
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
-        create_table(true);
-        add_to_table(all_rooms, true);
-        createTableListener();
+        if(!already_created_all_rooms) {
+            create_table(all_rooms_table);
+            already_created_all_rooms=true;
+            createTableListener();
+        }
+        add_to_table(all_rooms, all_rooms_table);
     }
 
     @FXML
@@ -160,8 +178,12 @@ public class ReservationController implements Initializable, ControlledScreen {
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
-        create_table(false);
-        add_to_table(selected_rooms,false);
+        if(!already_created_checked_rooms){
+            create_table(checked_rooms_table);
+            already_created_checked_rooms=true;
+            createTableListener();
+        }
+        add_to_table(selected_rooms,checked_rooms_table);
     }
     @FXML
     public void updateCardMenu(ActionEvent event){
@@ -199,9 +221,27 @@ public class ReservationController implements Initializable, ControlledScreen {
                 }
             }
         });
+        checked_rooms_table.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown()) {
+                    System.out.println(checked_rooms_table.getSelectionModel().getSelectedItem());
+                    Room roomSelected = (Room)checked_rooms_table.getSelectionModel().getSelectedItem();
+                    if(roomSelected.selectedBed.get().equals("x")){
+                        roomSelected.selectedBed = new SimpleStringProperty("yes");
+                    }
+                    else{
+                        roomSelected.selectedBed = new SimpleStringProperty("x");
+                    }
+                    TableColumn c = (TableColumn)checked_rooms_table.getColumns().get(0);
+                    c.setVisible(false);
+                    c.setVisible(true);
+                }
+            }
+        });
     }
 
-    private void create_table(boolean allRooms){
+    private void create_table(TableView table){
 
         TableColumn roomNumber = new TableColumn("Room Number");
         roomNumber.setMinWidth(100);
@@ -213,8 +253,20 @@ public class ReservationController implements Initializable, ControlledScreen {
         costPerDay.setMinWidth(100);
         TableColumn costExtraBed = new TableColumn("Cost Extra Bed");
         costExtraBed.setMinWidth(100);
-        TableColumn selected = new TableColumn("Select");
-        selected.setMinWidth(100);
+        TableColumn selected;
+        if(table == checked_rooms_table){
+            selected = new TableColumn("Extra Bed");
+            selected.setMinWidth(100);
+        }
+        else if(table == all_reserved_rooms_table){
+            selected = new TableColumn("Extra Bed");
+            selected.setMinWidth(100);
+        }
+        else{
+            selected = new TableColumn("Select");
+            selected.setMinWidth(100);
+        }
+
 
         roomNumber.setCellValueFactory(
                 new PropertyValueFactory<Room,String>("roomNumber")
@@ -231,24 +283,28 @@ public class ReservationController implements Initializable, ControlledScreen {
         costExtraBed.setCellValueFactory(
                 new PropertyValueFactory<Room,Integer>("costExtraBedPerDay")
         );
-        selected.setCellValueFactory(
-                new PropertyValueFactory<Room,Boolean>("selected")
-        );
-        if(allRooms){
-            all_rooms_table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
+        if(table==(all_reserved_rooms_table)){
+            selected.setCellValueFactory(
+                    new PropertyValueFactory<Room,Boolean>("selectedBed")
+            );
+        }
+        if(table==(checked_rooms_table)){
+            selected.setCellValueFactory(
+                    new PropertyValueFactory<Room,Boolean>("selectedBed")
+            );
         }
         else{
-            checked_rooms_table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
+            selected.setCellValueFactory(
+                    new PropertyValueFactory<Room,Boolean>("selected")
+            );
         }
 
+        table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
+
     }
-    private void add_to_table(ObservableList<Room> rooms, boolean all_rooms){
-        if(all_rooms){
-            all_rooms_table.setItems(rooms);
-        }
-        else{
-            checked_rooms_table.setItems(rooms);
-        }
+    private void add_to_table(ObservableList<Room> rooms, TableView table){
+        table.setItems(null);
+        table.setItems(rooms);
 
     }
 }

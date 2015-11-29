@@ -11,9 +11,7 @@
 
     <Text text="POPULAR ROOM-CATEGORY" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-    <TableView GridPane.columnIndex="0" fx:id="all_reservations_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
-        <columns>
-        </columns>
+    <TableView GridPane.columnIndex="0" fx:id="all_pop_category_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
 
     </TableView>
 

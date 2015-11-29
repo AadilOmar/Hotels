@@ -44,6 +44,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import screensframework.manager_screens.ManagerController;
 import screensframework.reservations.ReservationController;
 import screensframework.reviews.ReviewController;
 
@@ -55,7 +56,7 @@ public class Main extends Application {
 
     private static ReservationController reservationController;
     private static ReviewController reviewController;
-    private static ManagerHome managerController;
+    private static ManagerController managerController;
     public static String LOGIN_SCREEN = "login";
     public static String LOGIN_SCREEN_LAYOUT = "login.fxml";
     public static String REGISTER_SCREEN = "register";
@@ -89,7 +90,7 @@ public class Main extends Application {
     public static String REVENUE_REPORT_SCREEN = "manager_screens/revenue_report";
     public static String REVENUE_REPORT_SCREEN_LAYOUT = "manager_screens/revenue_report.fxml";
 
-    public static ManagerHome getManagerController(){
+    public static ManagerController getManagerController(){
         return managerController;
     }
 
@@ -104,7 +105,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         reservationController = new ReservationController();
         reviewController = new ReviewController();
-        managerController = new ManagerHome();
+        managerController = new ManagerController();
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(Main.LOGIN_SCREEN, Main.LOGIN_SCREEN_LAYOUT);
         mainContainer.loadScreen(Main.REGISTER_SCREEN, Main.REGISTER_SCREEN_LAYOUT);
