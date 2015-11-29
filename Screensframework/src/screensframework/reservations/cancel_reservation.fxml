@@ -24,7 +24,7 @@
     <TextField
             GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="end_date"/>
 
-    <TableView GridPane.columnIndex="0" fx:id="all_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
+    <TableView GridPane.columnIndex="0" fx:id="all_to_cancel_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
         <columns>
         </columns>
 

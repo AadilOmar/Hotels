@@ -32,13 +32,13 @@
 
     <Label text="Total Cost:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="tota_cost"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost"/>
 
         <Label text="Use Card:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <SplitMenuButton mnemonicParsing="false" text="card" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <SplitMenuButton mnemonicParsing="false" fx:id="card" text="card" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <items>
-                <MenuItem mnemonicParsing="false" text="1002" />
-                <MenuItem mnemonicParsing="false" text="4039" />
+                <MenuItem mnemonicParsing="false" text="1002" onAction="#updateCardMenu"/>
+                <MenuItem mnemonicParsing="false" text="4039" onAction="#updateCardMenu"/>
             </items>
         </SplitMenuButton>
 

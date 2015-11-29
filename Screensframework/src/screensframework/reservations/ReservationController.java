@@ -52,9 +52,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -79,8 +77,13 @@ public class ReservationController implements Initializable, ControlledScreen {
     ScreensController myController;
     //for all
     @FXML private TableView all_rooms_table;
+    @FXML private TableView all_to_cancel_rooms_table;
+    @FXML private TableView all_reserved_rooms_table; //table for updating reservations
     @FXML private TableView checked_rooms_table;
     @FXML private TableColumn column;
+    @FXML private SplitMenuButton card;
+    @FXML private SplitMenuButton location;
+
 
     //for searching all rooms
     @FXML private TextField start_date;
@@ -159,6 +162,16 @@ public class ReservationController implements Initializable, ControlledScreen {
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
         create_table(false);
         add_to_table(selected_rooms,false);
+    }
+    @FXML
+    public void updateCardMenu(ActionEvent event){
+        MenuItem item = (MenuItem)event.getSource();
+        card.setText(item.getText().toString());
+    }
+    @FXML
+    public void updateLocationMenu(ActionEvent event){
+        MenuItem item = (MenuItem)event.getSource();
+        location.setText(item.getText().toString());
     }
 
     public void setScreenParent(ScreensController screenParent){

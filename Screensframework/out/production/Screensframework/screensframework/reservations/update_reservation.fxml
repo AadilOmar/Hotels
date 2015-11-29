@@ -39,7 +39,7 @@
         <Button onAction="#searchAvailability" text="Search" />
     </HBox>
 
-    <TableView GridPane.columnIndex="0" fx:id="all_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="5">
+    <TableView GridPane.columnIndex="0" fx:id="all_reserved_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="5">
         <columns>
         </columns>
 

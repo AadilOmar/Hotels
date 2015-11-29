@@ -12,15 +12,14 @@
     <Text text="SEARCH ROOMS" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
     <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-
-
-  <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+  
+  <SplitMenuButton mnemonicParsing="false" fx:id="location" text="Location" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
     <items>
-      <MenuItem mnemonicParsing="false" text="Atlanta" />
-        <MenuItem mnemonicParsing="false" text="Charlotte" />
-        <MenuItem mnemonicParsing="false" text="Savannah" />
-        <MenuItem mnemonicParsing="false" text="Orlando" />
-        <MenuItem mnemonicParsing="false" text="Miami" />
+      <MenuItem mnemonicParsing="false" text="Atlanta" onAction="#updateLocationMenu"/>
+        <MenuItem mnemonicParsing="false" text="Charlotte" onAction="#updateLocationMenu"/>
+        <MenuItem mnemonicParsing="false" text="Savannah" onAction="#updateLocationMenu"/>
+        <MenuItem mnemonicParsing="false" text="Orlando" onAction="#updateLocationMenu"/>
+        <MenuItem mnemonicParsing="false" text="Miami" onAction="#updateLocationMenu"/>
     </items>
   </SplitMenuButton>
 
