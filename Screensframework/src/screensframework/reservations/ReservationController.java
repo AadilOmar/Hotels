@@ -41,6 +41,7 @@ package screensframework.reservations;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -54,6 +55,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import screensframework.*;
@@ -80,6 +82,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private TableColumn column;
     @FXML private SplitMenuButton card;
     @FXML private SplitMenuButton location;
+    @FXML private Text confirmation_reservation_id;
 
     private boolean already_created_all_rooms = false;
     private boolean already_created_checked_rooms = false;
@@ -88,11 +91,9 @@ public class ReservationController implements Initializable, ControlledScreen {
     //error texts for each of the views that need one
     @FXML private Text error_search_all;
     @FXML private Text error_picked_rooms;
-//    @FXML private Text error_;
-//    @FXML private Text error_;
-//    @FXML private Text error_;
-//    @FXML private Text error_;
-//    @FXML private Text error_;
+    @FXML private Text error_invalid_reservaion_id;
+    @FXML private Text error_search_reservation;
+    @FXML private Text error_rooms_not_available_for_update;
 
 
     //for searching all rooms
@@ -106,8 +107,8 @@ public class ReservationController implements Initializable, ControlledScreen {
 
     //for updating reservation
     @FXML private TextField reservation_id;
-    @FXML private TextField current_start_date;
-    @FXML private TextField current_end_date;
+    @FXML private Text current_start_date;
+    @FXML private Text current_end_date;
     @FXML private TextField new_start_date;
     @FXML private TextField new_end_date;
     @FXML private Text updated_cost;
@@ -126,23 +127,44 @@ public class ReservationController implements Initializable, ControlledScreen {
 
     }
 
-    //finds if there is a reservation by the ID given and displays the rooms in the table as well as the original dates
+    //finds if there is a reservation by the ID given. updates the dates of original reservation
     @FXML
     public void searchReservation(ActionEvent event){
+
         String reservationId = reservation_id.getText().toString();
-        //find reservations by that id
-        if(!already_created_reserved_rooms){
-            create_table(all_reserved_rooms_table);
-            createTableListener();
-            already_created_reserved_rooms = true;
+
+        //check if reservations exist by that reservation id
+        boolean idIsValid = Validator.validate_reservation_id(reservationId, error_invalid_reservaion_id);
+        if (idIsValid){
+            String old_start = "01/12/2016";
+            String old_end = "01/14/2016";
+            current_start_date.setText(old_start);
+            current_end_date.setText(old_end);
         }
-        add_to_table(all_rooms, all_reserved_rooms_table);
+
     }
 
     //searches if the rooms have availability in the dates specified. Returns no rooms if they dont
     @FXML
     public void searchAvailability(ActionEvent event){
-
+        boolean datesAreValid = Validator.validate_reservation_date(new_start_date.getText(), new_end_date.getText(), error_search_reservation);
+        if(datesAreValid){
+            boolean allRoomsAvailable = true;
+            //QUERY WITH DATES TO SEE IF ALL ARE AVAILABLE ROOMS  (all_rooms should be the rooms found)
+            if(allRoomsAvailable){
+                error_rooms_not_available_for_update.setText("");
+                if(!already_created_reserved_rooms){
+                    create_table(all_reserved_rooms_table);
+                    createTableListener();
+                    already_created_reserved_rooms = true;
+                }
+                add_to_table(all_rooms, all_reserved_rooms_table);
+                updateTotalCost(all_rooms, updated_cost);
+            }
+            else{
+                error_rooms_not_available_for_update.setText("The rooms are not available for this date range");
+            }
+        }
     }
 
     @FXML
@@ -151,10 +173,12 @@ public class ReservationController implements Initializable, ControlledScreen {
     }
 
 
-    //updates the reservation in the databse based on what dates were selected
+    //updates the reservation in the database based on what dates were selected
     @FXML
     public void update_reservation(ActionEvent event){
-
+        //QUERY TO UPDATE RESERVATION
+        confirmation_reservation_id.setText(reservation_id.getText());
+        myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
 
     @FXML
@@ -182,23 +206,23 @@ public class ReservationController implements Initializable, ControlledScreen {
     public void submit(ActionEvent event){
         boolean card_is_valid = Validator.validate_selected_card(card, error_picked_rooms);
         if (!card_is_valid){ return; }
+        String new_id = create_reservation_id();
+        confirmation_reservation_id.setText(new_id);
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
 
     @FXML
     //goes to add_card view.
     public void add_card(ActionEvent event){
-
         myController.setScreen(Main.ADD_CARD_SCREEN);
     }
-
 
     @FXML
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
         //sets the start/end date text to whatever was put in when creating reservation
         start_date_picked.setText(Global.newReservationStart);
-        updateTotalCost(selected_rooms);
+        updateTotalCost(selected_rooms, total_cost);
         end_date_picked.setText(Global.newReservationEnd);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
         if(!already_created_checked_rooms){
@@ -208,6 +232,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         }
         add_to_table(selected_rooms,checked_rooms_table);
     }
+
     @FXML
     public void updateCardMenu(ActionEvent event){
         MenuItem item = (MenuItem)event.getSource();
@@ -219,7 +244,15 @@ public class ReservationController implements Initializable, ControlledScreen {
         location.setText(item.getText().toString());
     }
 
-    private void updateTotalCost(ObservableList<Room> selectedRooms){
+    private String create_reservation_id(){
+        //return id
+        int total_reservations = 100;
+        int id = total_reservations+1;
+        Random rand = new Random();
+        return rand.nextInt(100000)+"";
+    }
+
+    private void updateTotalCost(ObservableList<Room> selectedRooms, Text toUpdate){
         int total = 0;
         for(int x=0;x<selectedRooms.size();x++){
             Room r = selectedRooms.get(x);
@@ -228,7 +261,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                 total+=r.getCostExtraBedPerDay();
             }
         }
-        total_cost.setText("$"+total+".00");
+        toUpdate.setText("$"+total+".00");
     }
 
     public void setScreenParent(ScreensController screenParent){
@@ -268,7 +301,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                     else{
                         roomSelected.selectedBed = new SimpleStringProperty("x");
                     }
-                    updateTotalCost(selected_rooms);
+                    updateTotalCost(selected_rooms, total_cost);
                     TableColumn c = (TableColumn)checked_rooms_table.getColumns().get(0);
                     c.setVisible(false);
                     c.setVisible(true);
@@ -338,6 +371,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         table.getColumns().addAll(roomNumber, roomType, maxPeople,costPerDay, costExtraBed, selected);
 
     }
+
     private void add_to_table(ObservableList<Room> rooms, TableView table){
         table.setItems(null);
         table.setItems(rooms);

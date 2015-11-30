@@ -47,7 +47,7 @@ public class Validator {
             errorText.setText("Dates of Stay must be after current date");
             return false;
         }
-
+        errorText.setText("");
         return true;
     }
 
@@ -60,6 +60,7 @@ public class Validator {
             errorText.setText("Add a card to proceed with the reservation");
             return false;
         }
+        errorText.setText("");
         return true;
     }
 
@@ -88,7 +89,20 @@ public class Validator {
             errorText.setText("ccv must have between 3 and 5 digits");
             return false;
         }
+        errorText.setText("");
         return true;
     }
+
+    public static boolean validate_reservation_id(String id, Text errorText) {
+        boolean validId = true;
+        if (!validId){
+            errorText.setText("A future reservation with that ID could not be found");
+            return false;
+        }
+        errorText.setText("");
+        return true;
+    }
+
+
 }
 

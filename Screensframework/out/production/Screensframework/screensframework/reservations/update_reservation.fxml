@@ -19,41 +19,46 @@
         <Button onAction="#searchReservation" text="Search" />
     </HBox>
 
-    <Label text="Current Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="current_start_date"/>
+    <Text fx:id="error_invalid_reservaion_id" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2"/>
 
-    <Label text="Current End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <TextField
-            GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="current_end_date"/>
+    <Label text="Current Start Date(mm/dd/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Text
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="current_start_date"/>
 
-    <Label text="New Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="new_start_date"/>
+    <Label text="Current End Date(mm/dd/yyyy):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Text GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="current_end_date"/>
 
-    <Label text="New End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextField
-            GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="new_end_date"/>
+    <Label text="New Start Date(mm/dd/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="new_start_date"/>
 
-    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+    <Label text="New End Date(mm/dd/yyyy):" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextField
+            GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="new_end_date"/>
+
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
         <Button onAction="#searchAvailability" text="Search" />
     </HBox>
 
-    <TableView GridPane.columnIndex="0" fx:id="all_reserved_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="5">
+    <Text fx:id="error_search_reservation" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="6"/>
+
+    <TableView GridPane.columnIndex="0" fx:id="all_reserved_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="7">
         <columns>
         </columns>
 
     </TableView>
 
-    <Label text="Total Cost Updated: " GridPane.columnIndex="0" GridPane.rowIndex="6" />
-    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="updated_cost"/>
+    <Label text="Total Cost Updated: " GridPane.columnIndex="0" GridPane.rowIndex="8" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="8" fx:id="updated_cost"/>
 
-    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
         <Button onAction="#update_reservation" text="Submit" />
     </HBox>
 
-    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="10">
         <Button onAction="#back" text="Back" />
     </HBox>
+
+    <Text fx:id="error_rooms_not_available_for_update" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="10"/>
+
 
 </GridPane>
