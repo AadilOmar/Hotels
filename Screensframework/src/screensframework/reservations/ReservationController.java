@@ -85,7 +85,9 @@ public class ReservationController implements Initializable, ControlledScreen {
     private boolean already_created_checked_rooms = false;
     private boolean already_created_reserved_rooms = false;
 
+    //error texts for each of the views that need one
     @FXML private Text error_search_all;
+    @FXML private Text error_picked_rooms;
 //    @FXML private Text error_;
 //    @FXML private Text error_;
 //    @FXML private Text error_;
@@ -100,6 +102,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     //for looking at selected rooms
     @FXML private Text start_date_picked;
     @FXML private Text end_date_picked;
+    @FXML private Text total_cost;
 
     //for updating reservation
     @FXML private TextField reservation_id;
@@ -163,6 +166,8 @@ public class ReservationController implements Initializable, ControlledScreen {
 //        String end =  "09/30/2016";
         boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
         if(!datesAreValid){ return; }
+        Global.newReservationStart = start;
+        Global.newReservationEnd = end;
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
         if(!already_created_all_rooms) {
             create_table(all_rooms_table);
@@ -175,6 +180,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //submits the reservations
     public void submit(ActionEvent event){
+        boolean card_is_valid = Validator.validate_selected_card(card, error_picked_rooms);
+        if (!card_is_valid){ return; }
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
 
@@ -188,6 +195,10 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
+        //sets the start/end date text to whatever was put in when creating reservation
+        start_date_picked.setText(Global.newReservationStart);
+        updateTotalCost(selected_rooms);
+        end_date_picked.setText(Global.newReservationEnd);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
         if(!already_created_checked_rooms){
             create_table(checked_rooms_table);
@@ -205,6 +216,18 @@ public class ReservationController implements Initializable, ControlledScreen {
     public void updateLocationMenu(ActionEvent event){
         MenuItem item = (MenuItem)event.getSource();
         location.setText(item.getText().toString());
+    }
+
+    private void updateTotalCost(ObservableList<Room> selectedRooms){
+        int total = 0;
+        for(int x=0;x<selectedRooms.size();x++){
+            Room r = selectedRooms.get(x);
+            total+=r.costPerDay.get();
+            if(r.getSelectedBed().equals("yes")){
+                total+=r.getCostExtraBedPerDay();
+            }
+        }
+        total_cost.setText("$"+total+".00");
     }
 
     public void setScreenParent(ScreensController screenParent){
@@ -244,6 +267,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                     else{
                         roomSelected.selectedBed = new SimpleStringProperty("x");
                     }
+                    updateTotalCost(selected_rooms);
                     TableColumn c = (TableColumn)checked_rooms_table.getColumns().get(0);
                     c.setVisible(false);
                     c.setVisible(true);

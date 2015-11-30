@@ -1,5 +1,6 @@
 package screensframework;
 
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.text.Text;
 
 import java.text.ParseException;
@@ -49,4 +50,15 @@ public class Validator {
         return true;
     }
 
+    public static boolean validate_selected_card(SplitMenuButton card, Text errorText){
+        if(card.getText().equals("card")){
+            errorText.setText("Choose a card to proceed with the reservation");
+            return false;
+        }
+        if(card.getItems().size()==0){
+            errorText.setText("Add a card to proceed with the reservation");
+            return false;
+        }
+        return true;
+    }
 }

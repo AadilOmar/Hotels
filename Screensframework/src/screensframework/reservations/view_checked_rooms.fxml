@@ -31,7 +31,7 @@
             GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="end_date_picked"/>
 
     <Label text="Total Cost:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <TextField
+    <Text
             GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost"/>
 
         <Label text="Use Card:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
@@ -53,5 +53,8 @@
     <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
         <Button onAction="#back" text="Back" />
     </HBox>
+
+    <Text fx:id="error_picked_rooms" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8"/>
+
 
 </GridPane>

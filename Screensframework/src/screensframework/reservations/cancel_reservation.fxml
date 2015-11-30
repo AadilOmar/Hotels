@@ -31,7 +31,7 @@
     </TableView>
 
     <Label text="Total Cost Of Reservation" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost"/>
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost_c"/>
 
     <Label text="Date of Cancellation" GridPane.columnIndex="0" GridPane.rowIndex="5" />
     <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="cancellation_date"/>

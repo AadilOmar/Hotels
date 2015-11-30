@@ -10,4 +10,7 @@ public class Global {
     public static String password;
     public static String email;
 
+    //so its easier to pass reservation start/end dates from 'view_all_rooms' to 'view_checked_rooms'
+    public static String newReservationStart;
+    public static String newReservationEnd;
 }
