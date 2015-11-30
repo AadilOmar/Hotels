@@ -1,7 +1,13 @@
 package screensframework;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 import java.text.ParseException;
@@ -12,6 +18,7 @@ import java.util.Date;
  * Created by aadil on 11/29/15.
  */
 public class Validator {
+
 
     private Validator() {
 
@@ -100,6 +107,23 @@ public class Validator {
             return false;
         }
         errorText.setText("");
+        return true;
+    }
+
+    public static boolean validate_all_menus_checked(SplitMenuButton location, SplitMenuButton rating, Text errorText){
+        if(rating==null){
+            if(location.getText().equals("Hotel Location")){
+                errorText.setText("Location must be selected see reviews");
+                return false;
+            }
+        }
+        else{
+            if(location.getText().equals("Hotel Location") || rating.getText().equals("Rating")){
+                errorText.setText("Location and Rating must be selected to submit a review");
+                return false;
+            }
+        }
+
         return true;
     }
 

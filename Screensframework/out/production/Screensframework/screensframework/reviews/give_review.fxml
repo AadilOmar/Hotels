@@ -11,23 +11,23 @@
 
     <Text text="GIVE REVIEW" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-    <SplitMenuButton mnemonicParsing="false" text="Hotel Location" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+    <SplitMenuButton fx:id="locationMenuGiveReview" mnemonicParsing="false" text="Hotel Location" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
         <items>
-            <MenuItem mnemonicParsing="false" text="Atlanta" />
-            <MenuItem mnemonicParsing="false" text="Charlotte" />
-            <MenuItem mnemonicParsing="false" text="Savannah" />
-            <MenuItem mnemonicParsing="false" text="Orlando" />
-            <MenuItem mnemonicParsing="false" text="Miami" />
+            <MenuItem mnemonicParsing="false" text="Atlanta" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Charlotte" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Savannah" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Orlando" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Miami" onAction="#updateGiveLocationMenu"/>
         </items>
     </SplitMenuButton>
 
-    <SplitMenuButton mnemonicParsing="false" text="RATING" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+    <SplitMenuButton fx:id="ratingMenu" mnemonicParsing="false" text="Rating" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
         <items>
-            <MenuItem mnemonicParsing="false" text="Excellent" />
-            <MenuItem mnemonicParsing="false" text="Good" />
-            <MenuItem mnemonicParsing="false" text="Neutral" />
-            <MenuItem mnemonicParsing="false" text="Bad" />
-            <MenuItem mnemonicParsing="false" text="Very Bad" />
+            <MenuItem mnemonicParsing="false" text="Excellent" onAction="#updateRatingMenu"/>
+            <MenuItem mnemonicParsing="false" text="Good" onAction="#updateRatingMenu"/>
+            <MenuItem mnemonicParsing="false" text="Neutral" onAction="#updateRatingMenu" />
+            <MenuItem mnemonicParsing="false" text="Bad" onAction="#updateRatingMenu" />
+            <MenuItem mnemonicParsing="false" text="Very Bad" onAction="#updateRatingMenu" />
         </items>
     </SplitMenuButton>
 
@@ -43,5 +43,8 @@
     <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button onAction="#back" text="Back" />
     </HBox>
+
+    <Text fx:id="error_giving_review" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5"/>
+
 
 </GridPane>

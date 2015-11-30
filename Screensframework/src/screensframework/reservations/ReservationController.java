@@ -168,7 +168,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    private void back (ActionEvent event){
+    public void back (ActionEvent event){
         myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
     }
 

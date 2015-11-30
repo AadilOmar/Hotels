@@ -129,7 +129,7 @@ public class ManagerController implements Initializable, ControlledScreen {
 
 
     @FXML
-    private void back (ActionEvent event){
+    public void back (ActionEvent event){
 
         System.out.println(mand.getText());
         myController.setScreen(Main.MANAGER_HOME_SCREEN);
