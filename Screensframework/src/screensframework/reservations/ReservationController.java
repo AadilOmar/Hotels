@@ -56,10 +56,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import screensframework.ControlledScreen;
-import screensframework.Main;
-import screensframework.Room;
-import screensframework.ScreensController;
+import screensframework.*;
 
 /**
  * FXML Controller class
@@ -88,9 +85,21 @@ public class ReservationController implements Initializable, ControlledScreen {
     private boolean already_created_checked_rooms = false;
     private boolean already_created_reserved_rooms = false;
 
+    @FXML private Text error_search_all;
+//    @FXML private Text error_;
+//    @FXML private Text error_;
+//    @FXML private Text error_;
+//    @FXML private Text error_;
+//    @FXML private Text error_;
+
+
     //for searching all rooms
     @FXML private TextField start_date;
     @FXML private TextField end_date;
+
+    //for looking at selected rooms
+    @FXML private Text start_date_picked;
+    @FXML private Text end_date_picked;
 
     //for updating reservation
     @FXML private TextField reservation_id;
@@ -105,10 +114,6 @@ public class ReservationController implements Initializable, ControlledScreen {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        create_table(all_reserved_rooms_table);
-//        create_table(all_rooms_table);
-//        create_table(checked_rooms_table);
-
         // TODO
     }
 
@@ -152,6 +157,12 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms it finds from the database
     public void search_all_rooms(ActionEvent event){
+        String start = start_date.getText().toString();
+        String end = end_date.getText().toString();
+//        String start = "09/29/2016";
+//        String end =  "09/30/2016";
+        boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
+        if(!datesAreValid){ return; }
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
         if(!already_created_all_rooms) {
             create_table(all_rooms_table);

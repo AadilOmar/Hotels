@@ -40,4 +40,6 @@
     <Button onAction="#back" text="Back" />
   </HBox>
 
+  <Text fx:id="error_search_all" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8"/>
+
 </GridPane>

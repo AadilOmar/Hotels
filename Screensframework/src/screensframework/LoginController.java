@@ -109,13 +109,5 @@ public class LoginController implements Initializable, ControlledScreen {
 
         }
     }
-    
-    @FXML
-    private void goToScreen3(ActionEvent event){
-        if(Global.user_type.equals("customer")){
-            myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-        }
-        else{
-            myController.setScreen(Main.MANAGER_HOME_SCREEN);
-        }     }
+
 }

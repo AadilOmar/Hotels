@@ -22,13 +22,13 @@
         </columns>
     </TableView>
 
-    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="start_date"/>
+    <Label text="Start Date(mm/dd/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Text
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="start_date_picked"/>
 
-    <Label text="End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextField
-            GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="end_date"/>
+    <Label text="End Date(mm/dd/yyyy):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Text
+            GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="end_date_picked"/>
 
     <Label text="Total Cost:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField
