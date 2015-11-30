@@ -13,37 +13,43 @@
             GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="reservation_id_c"/>
 
     <HBox  alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-        <Button onAction="#searchReservation" text="Search" />
+        <Button onAction="#searchReservationCancel" text="Search" />
     </HBox>
 
-    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="start_date_c"/>
+    <Text fx:id="error_invalid_reservaion_id_cancel" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2"/>
 
-    <Label text="End Date(m/d/yr):" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <TextField
-            GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="end_date_c"/>
 
-    <TableView GridPane.columnIndex="0" fx:id="all_to_cancel_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
+    <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Text
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="start_date_cancelled"/>
+
+    <Label text="End Date:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Text
+            GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="end_date_cancelled"/>
+
+    <Text fx:id="error_invalid_dates_cancel" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
+
+
+    <TableView GridPane.columnIndex="0" fx:id="all_cancelled_rooms_table" GridPane.columnSpan="6" GridPane.rowIndex="5">
         <columns>
         </columns>
 
     </TableView>
 
-    <Label text="Total Cost Of Reservation" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="total_cost_c"/>
+    <Label text="Total Cost Of Reservation:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="total_cost_reserved"/>
 
-    <Label text="Date of Cancellation" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="cancellation_date"/>
+    <Label text="Date of Cancellation:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="7" fx:id="cancellation_date"/>
 
-    <Label text="Amount to be Refunded" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="amount_refunded"/>
+    <Label text="Amount to be Refunded:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+    <Text text=" " GridPane.columnIndex="1" GridPane.rowIndex="8" fx:id="amount_refunded"/>
 
-    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+    <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
         <Button onAction="#cancelReservation" text="Submit" />
     </HBox>
 
-    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="10">
         <Button onAction="#back" text="Back" />
     </HBox>
 

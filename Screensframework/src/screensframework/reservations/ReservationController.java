@@ -40,9 +40,15 @@
 package screensframework.reservations;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.beans.property.SimpleStringProperty;
@@ -79,6 +85,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private TableView all_to_cancel_rooms_table;
     @FXML private TableView all_reserved_rooms_table; //table for updating reservations
     @FXML private TableView checked_rooms_table;
+    @FXML private TableView all_cancelled_rooms_table;
+
     @FXML private TableColumn column;
     @FXML private SplitMenuButton card;
     @FXML private SplitMenuButton location;
@@ -87,6 +95,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     private boolean already_created_all_rooms = false;
     private boolean already_created_checked_rooms = false;
     private boolean already_created_reserved_rooms = false;
+    private boolean already_created_cancelled_rooms = false;
 
     //error texts for each of the views that need one
     @FXML private Text error_search_all;
@@ -94,6 +103,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private Text error_invalid_reservaion_id;
     @FXML private Text error_search_reservation;
     @FXML private Text error_rooms_not_available_for_update;
+    @FXML private Text error_invalid_reservaion_id_cancel;
+    @FXML private Text error_invalid_dates_cancel;
 
 
     //for searching all rooms
@@ -113,6 +124,16 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private TextField new_end_date;
     @FXML private Text updated_cost;
 
+    //for canceling reservation
+
+    @FXML private Text total_cost_reserved;
+    @FXML private Text cancellation_date;
+    @FXML private Text amount_refunded;
+    @FXML private Text start_date_cancelled;
+    @FXML private Text end_date_cancelled;
+
+
+
     /**
      * Initializes the controller class.
      */
@@ -124,6 +145,36 @@ public class ReservationController implements Initializable, ControlledScreen {
     //removes the reservation from the database
     @FXML
     public void cancelReservation(ActionEvent event){
+        //have confirmation screen maybe?...if time
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+    }
+
+    //finds if there is a reservation by the ID given. updates the dates of original reservation
+    @FXML
+    public void searchReservationCancel(ActionEvent event){
+
+        String reservationId = reservation_id.getText().toString();
+
+        //check if reservations exist by that reservation id
+        boolean idIsValid = Validator.validate_reservation_id(reservationId, error_invalid_reservaion_id_cancel);
+        if (idIsValid){
+            String old_start = "12/02/2015";
+            String old_end = "12/03/2015";
+            start_date_cancelled.setText(old_start);
+            end_date_cancelled.setText(old_end);
+
+            error_invalid_reservaion_id_cancel.setText("");
+            if(!already_created_cancelled_rooms){
+                create_table(all_cancelled_rooms_table);
+                createTableListener();
+                already_created_cancelled_rooms = true;
+            }
+            setCancelledDate();
+            add_to_table(all_rooms, all_cancelled_rooms_table);
+            updateTotalCost(all_rooms, total_cost_reserved);
+            setAmountToBeRefunded(total_cost_reserved.getText());
+
+        }
 
     }
 
@@ -143,6 +194,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         }
 
     }
+
 
     //searches if the rooms have availability in the dates specified. Returns no rooms if they dont
     @FXML
@@ -262,6 +314,42 @@ public class ReservationController implements Initializable, ControlledScreen {
             }
         }
         toUpdate.setText("$"+total+".00");
+    }
+
+    private void setCancelledDate(){
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        cancellation_date.setText(dateFormat.format(date));
+
+    }
+    private void setAmountToBeRefunded(String totalCost){
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date currentDate = new Date();
+        Date startDate = new Date();
+        int total = 0;
+        try{
+            total = Integer.parseInt(format.parse(totalCost).toString());
+            startDate = sdf.parse(start_date_cancelled.getText());
+            currentDate = sdf.parse(sdf.format(currentDate));
+        }catch(ParseException e){
+
+        }
+        long diff = startDate.getTime() - currentDate.getTime();
+        long daysAway = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        int refund = 0;
+        if(daysAway > 3){
+            refund = total;
+        }
+        else if(daysAway > 1 && daysAway <= 3){
+            refund = (int)(total*.8);
+        }
+        else if(daysAway <= 1){
+            refund = 0;
+        }
+        amount_refunded.setText("$"+refund+".00");
     }
 
     public void setScreenParent(ScreensController screenParent){

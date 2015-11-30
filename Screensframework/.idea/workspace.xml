@@ -93,11 +93,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4368932">
-              <caret line="127" column="8" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="122" column="57" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,15 +105,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="196" column="32" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.47815534">
+              <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
               <folding>
-                <element signature="method#searchAvailability#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#updateCardMenu#0;class#ReservationController#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
+                <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
+                <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
+                <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
@@ -122,26 +125,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java">
+      <file leaf-file-name="Validator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/Validator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="10" selection-start-line="131" selection-start-column="10" selection-end-line="131" selection-end-column="10" />
+              <caret line="40" column="23" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
-                <element signature="class#ReservationReportItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="class#RoomCategoryItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="class#RevenueItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="method#create_revenue_report_table#0;class#ManagerController#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#validate_selected_card#0;class#Validator#0" expanded="false" />
+                <element signature="method#validate_adding_card#0;class#Validator#0" expanded="false" />
+                <element signature="method#validate_reservation_id#0;class#Validator#0" expanded="false" />
+                <element signature="method#validate_all_menus_checked#0;class#Validator#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaymentsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/payments/PaymentsController.java">
+      <file leaf-file-name="cancel_reservation.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.5925927">
+              <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -157,11 +161,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Global.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/Global.java">
+      <file leaf-file-name="update_reservation.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="-2.6666667">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -270,15 +274,15 @@
         <option value="$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/Global.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/confirmation.fxml" />
-        <option value="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/Validator.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reviews/give_review.fxml" />
-        <option value="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/popular_room_category.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/ScreensController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" />
+        <option value="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
       </list>
     </option>
   </component>
@@ -835,13 +839,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>271</line>
+          <line>359</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>314</line>
+          <line>402</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
@@ -863,11 +867,17 @@
           <properties class="screensframework.reviews.ReviewController" method="updateRatingMenu" />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
+          <line>306</line>
+          <properties class="screensframework.reservations.ReservationController" method="updateTotalCost" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="23" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -881,9 +891,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
-            <element signature="method#searchAvailability#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#updateCardMenu#0;class#ReservationController#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
             <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
             <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
             <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
             <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
@@ -1184,14 +1197,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.259259">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/confirmation.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.666667">
@@ -1208,14 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.666667">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/Room.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1224,21 +1221,6 @@
             <element signature="imports" expanded="false" />
             <element signature="e#1190#1191#0" expanded="false" />
             <element signature="e#1234#1235#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/Validator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#validate_reservation_date#0;class#Validator#0" expanded="false" />
-            <element signature="method#validate_selected_card#0;class#Validator#0" expanded="false" />
-            <element signature="method#validate_adding_card#0;class#Validator#0" expanded="false" />
-            <element signature="method#validate_reservation_id#0;class#Validator#0" expanded="false" />
-            <element signature="method#validate_all_menus_checked#0;class#Validator#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1296,21 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="196" column="32" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
-          <folding>
-            <element signature="method#searchAvailability#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#updateCardMenu#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1333,10 +1300,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4368932">
-          <caret line="127" column="8" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="57" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6666667">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5925927">
+          <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/Validator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="23" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#validate_selected_card#0;class#Validator#0" expanded="false" />
+            <element signature="method#validate_adding_card#0;class#Validator#0" expanded="false" />
+            <element signature="method#validate_reservation_id#0;class#Validator#0" expanded="false" />
+            <element signature="method#validate_all_menus_checked#0;class#Validator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47815534">
+          <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
+            <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
           </folding>
         </state>
       </provider>
