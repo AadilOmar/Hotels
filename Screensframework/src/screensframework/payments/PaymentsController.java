@@ -49,11 +49,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import screensframework.ControlledScreen;
-import screensframework.Main;
-import screensframework.Room;
-import screensframework.ScreensController;
+import screensframework.*;
 
 /**
  * FXML Controller class
@@ -63,6 +61,11 @@ import screensframework.ScreensController;
 public class PaymentsController implements Initializable, ControlledScreen {
 
     ScreensController myController;
+    @FXML private Text error_card_detail;
+    @FXML private TextField exp_date;
+    @FXML private TextField card_number;
+    @FXML private TextField card_name;
+    @FXML private TextField cvv;
 
 
     /**
@@ -76,14 +79,25 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //saves the card info
     public void save(ActionEvent event) {
-        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
+        if(!card_fields_are_valid){
+            return;
+        }
+        myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
 
     @FXML
     //deletes the card
     public void delete(ActionEvent event) {
-        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+        myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
+
+    @FXML
+    //saves the card info
+    public void back(ActionEvent event) {
+        myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+    }
+
 
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;

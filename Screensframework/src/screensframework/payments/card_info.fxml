@@ -10,21 +10,21 @@
 
     <Text text="ADD CARD" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-    <Label text="Name on Card:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label text="Name on Card:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="card_name"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="card_name"/>
 
-    <Label text="Card Number:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="Card Number:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="card_number"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="card_number"/>
 
-    <Label text="Expiration Date(m/yr):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Expiration Date(mm/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="exp_date"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="exp_date"/>
 
-    <Label text="CCV:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="CVV:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="ccv"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="cvv"/>
 
     <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <Button onAction="#save" text="Save" />
@@ -32,7 +32,7 @@
 
     <Text text="DELETE CARD" GridPane.columnIndex="5" GridPane.rowIndex="0" />
 
-    <Label text="Use Card:" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+    <Label text="Delete:" GridPane.columnIndex="5" GridPane.rowIndex="1" />
     <SplitMenuButton mnemonicParsing="false" text="card" GridPane.columnIndex="6" GridPane.rowIndex="1">
         <items>
             <MenuItem mnemonicParsing="false" text="1002" />
@@ -43,5 +43,12 @@
     <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="5" GridPane.rowIndex="7">
         <Button onAction="#delete" text="Delete" />
     </HBox>
+
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+        <Button onAction="#back" text="Back" />
+    </HBox>
+
+    <Text fx:id="error_card_detail" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="8"/>
+
 
 </GridPane>

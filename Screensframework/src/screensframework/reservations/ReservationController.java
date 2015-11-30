@@ -188,6 +188,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //goes to add_card view.
     public void add_card(ActionEvent event){
+
         myController.setScreen(Main.ADD_CARD_SCREEN);
     }
 
