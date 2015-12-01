@@ -23,6 +23,6 @@ public class Global {
     public static String reservationID;
     public static ArrayList<String>cards;
     public static ArrayList<MenuItem>cardItems;
-    public static Stage primaryStage;
 
+    public static Stage primaryStage;
 }

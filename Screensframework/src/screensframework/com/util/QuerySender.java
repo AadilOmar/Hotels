@@ -5,6 +5,7 @@ import com.sun.org.apache.bcel.internal.ExceptionConstants;
 import screensframework.Global;
 
 import javax.management.Query;
+import java.security.spec.ECField;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -519,4 +520,172 @@ public class QuerySender {
     }
 
 
+
+    public static ResultSet getAugustReservationSet() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet augResultSet = null;
+        String augQuery = "SELECT Hotel_Location, COUNT(Reservation_ID) FROM `RESERVED` WHERE Start_Date >= \"2015-8-1\" and Start_Date <= \"2015-8-31\" GROUP BY Hotel_Location";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(augQuery);
+            augResultSet = preparedStatement.executeQuery();
+            return augResultSet;
+        } catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static ResultSet getSeptemberReservationSet() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet septResultSet = null;
+        String septQuery = "SELECT Hotel_Location, COUNT(Reservation_ID) FROM `RESERVED` WHERE Start_Date >= \"2015-9-1\" and Start_Date <= \"2015-9-30\" GROUP BY Hotel_Location";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(septQuery);
+            septResultSet = preparedStatement.executeQuery();
+            return septResultSet;
+        } catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static ResultSet getPopularCategorySet() {
+        Connection connection;
+        PreparedStatement preparedStatement1;
+        PreparedStatement preparedStatement2;
+        PreparedStatement preparedStatement3;
+        PreparedStatement preparedStatement4;
+        PreparedStatement preparedStatement5;
+        PreparedStatement preparedStatement6;
+        PreparedStatement preparedStatement7;
+        ResultSet resultSet;
+
+        String query1 = "CREATE  VIEW COST_CALCULATION AS  SELECT  * \n" +
+                "FROM ROOM\n" +
+                "NATURAL  JOIN HAS";
+
+        String query2 = "CREATE  VIEW DATES_COST_CALC AS  SELECT  * \n" +
+                "FROM COST_CALCULATION\n" +
+                "NATURAL  JOIN RESERVATION";
+
+        String query3 = "CREATE VIEW  TEMP_POP AS\n" +
+                "(SELECT Hotel_Location, Room_Category, COUNT( Reservation_ID )  AS COUNT\n" +
+                "FROM  `DATES_COST_CALC` \n" +
+                "WHERE Start_Date >=  \"2015-09-1\"\n" +
+                "AND Start_Date <=  \"2015-09-30\"\n" +
+                "GROUP  BY Hotel_Location, Room_Category)";
+
+        String query4 = "SELECT TEMP_POP.Hotel_Location,TEMP_POP.Room_Category, TEMP_POP.Count\n" +
+                "FROM (\n" +
+                "   SELECT Hotel_Location, MAX( count ) AS maxcount\n" +
+                "   FROM TEMP_POP\n" +
+                "   GROUP BY Hotel_Location\n" +
+                ") as x inner join TEMP_POP on  TEMP_POP.Hotel_Location= x.Hotel_Location and TEMP_POP.Count = x.maxcount\n";
+
+        String query5 = "DROP VIEW TEMP_POP";
+
+        String query6 = "DROP VIEW DATES_COST_CALC";
+
+        String query7 = "DROP VIEW COST_CALCULATION";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement4 = connection.prepareStatement(query4);
+            preparedStatement5 = connection.prepareStatement(query5);
+            preparedStatement6 = connection.prepareStatement(query6);
+            preparedStatement7 = connection.prepareStatement(query7);
+            preparedStatement1.executeUpdate();
+            preparedStatement2.executeUpdate();
+            preparedStatement3.executeUpdate();
+            resultSet = preparedStatement4.executeQuery();
+            preparedStatement5.executeUpdate();
+            preparedStatement6.executeUpdate();
+            preparedStatement7.executeUpdate();
+            return resultSet;
+
+        } catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static ResultSet getAugustRevenueSet() {
+        Connection connection;
+        PreparedStatement preparedStatement1;
+        PreparedStatement preparedStatement2;
+        PreparedStatement preparedStatement3;
+        ResultSet resultSet;
+
+        String query1 = "CREATE VIEW RRESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String query2 = "SELECT Hotel_Location, SUM(Total_Cost) FROM `RRESERVED` \n" +
+                "WHERE Start_Date >= \"2015-08-01\" and Start_Date <= \"2015-08-31\"\n" +
+                "GROUP BY Hotel_Location";
+
+        String query3 = "DROP VIEW RRESERVED";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement1.executeUpdate();
+            resultSet = preparedStatement2.executeQuery();
+            preparedStatement3.executeUpdate();
+            return resultSet;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static ResultSet getSeptemberRevenueSet() {
+        Connection connection;
+        PreparedStatement preparedStatement1;
+        PreparedStatement preparedStatement2;
+        PreparedStatement preparedStatement3;
+        ResultSet resultSet;
+
+        String query1 = "CREATE VIEW RRESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String query2 = "SELECT Hotel_Location, SUM(Total_Cost) FROM `RRESERVED` \n" +
+                "WHERE Start_Date >= \"2015-09-01\" and Start_Date <= \"2015-09-30\"\n" +
+                "GROUP BY Hotel_Location";
+
+        String query3 = "DROP VIEW RRESERVED";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement1.executeUpdate();
+            resultSet = preparedStatement2.executeQuery();
+            preparedStatement3.executeUpdate();
+            return resultSet;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
