@@ -423,15 +423,28 @@ public class ReservationController implements Initializable, ControlledScreen {
         boolean card_is_valid = Validator.validate_selected_card(card, error_picked_rooms);
         if (!card_is_valid){ return; }
         int num_rooms = selected_rooms.size();
-        String card_name = "";
-        String card_num = "";
+        String card_num = card.getText();
         String start = start_date_picked.getText();
         String end = end_date_picked.getText();
         String total = total_cost.getText();
-        String new_id = ""; //create new id
-        QuerySender.makeReservationReservationTable(Global.username, new_id, card_num, start, end, total, "0");
+        total = total.replace("$","");
+        total = total.replace(".00","");
+        String new_id = "";
+        ResultSet numReservations = QuerySender.getNumReservations();
+        try {
+            while (numReservations.next()) {
+                new_id = (numReservations.getInt("Max")+1)+"";
+            }
+        }catch(Exception e){e.printStackTrace();}
+        int madeReservation = QuerySender.makeReservationReservationTable(Global.username, new_id, card_num, start, end, total, "0");
+        System.out.println("MADE RESERVATION: "+madeReservation);
         for(int x=0;x<num_rooms;x++){
-            QuerySender.makeReservationHasTable(new_id, selected_rooms.get(x).getRoomNumber(), location.getText(), selected_rooms.get(x).getSelectedBed());
+            int selected_bed = 0;
+            if(selected_rooms.get(x).getSelectedBed().equals("yes")){
+                selected_bed = 1;
+            }
+            int madeHas = QuerySender.makeReservationHasTable(new_id, selected_rooms.get(x).getRoomNumber(), location.getText(), selected_bed+"");
+            System.out.println("MADE HAS: "+madeHas);
         }
         confirmation_reservation_id.setText(new_id);
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);

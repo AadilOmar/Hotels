@@ -435,6 +435,26 @@ public class QuerySender {
         return null;
     }
 
+    public static ResultSet getNumReservations(){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String query = "SELECT MAX(Reservation_ID) as Max FROM RESERVATION";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
     public static int createReview(String username, String review_number, String location, String rating, String comment){
         Connection connection = null;
         System.out.println("LOCATION!! "+location);
