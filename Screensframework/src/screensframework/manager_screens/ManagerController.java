@@ -40,7 +40,11 @@
 package screensframework.manager_screens;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -51,15 +55,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import screensframework.ControlledScreen;
+import screensframework.Global;
 import screensframework.Main;
 import screensframework.ScreensController;
+import screensframework.com.util.ConnectionConfiguration;
+import screensframework.com.util.QuerySender;
 
 /**
  * FXML Controller class
@@ -76,29 +87,25 @@ public class ManagerController implements Initializable, ControlledScreen {
     @FXML private Text plok;
     @FXML private Button mand;
 
-    ObservableList<RoomCategoryItem> pop_category_items =FXCollections.observableArrayList(
-            new RoomCategoryItem("jan", "suite", "ATL", "100"),
-            new RoomCategoryItem("jan", "standard", "ATL", "100"),
-            new RoomCategoryItem("jan", "family", "ATL", "100")
-    );
-    ObservableList<ReservationReportItem> reservation_report_items =FXCollections.observableArrayList(
-            new ReservationReportItem("jan", "ATL", "100"),
-            new ReservationReportItem("feb", "SAV", "1220"),
-            new ReservationReportItem("mar", "MAR", "10")
-    );
+    ObservableList<RoomCategoryItem> pop_category_items =FXCollections.observableArrayList();
+    ObservableList<ReservationReportItem> reservation_report_items =FXCollections.observableArrayList();
     ObservableList<RevenueItem> revenue_items =FXCollections.observableArrayList(
             new RevenueItem("jan", "ATL", "134200"),
             new RevenueItem("feb", "CHA", "11200"),
             new RevenueItem("mar", "MAR", "45100")
     );
+    Scene current;
 
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+
+    @FXML
+    protected void initialize() {
+
     }
 
     public void setScreenParent(ScreensController screenParent){
@@ -107,24 +114,169 @@ public class ManagerController implements Initializable, ControlledScreen {
 
     @FXML
     private void view_reservation_report (ActionEvent event){
+        reservation_report_items = FXCollections.observableArrayList();
+
         myController.setScreen(Main.RESERVATION_REPORT_SCREEN);
-        create_reservation_report_table(all_reservations_table);
-        add_to_table(reservation_report_items,all_reservations_table);
+        GridPane pane = new GridPane();
+        Text header = new Text();
+        header.setText("RESERVATION REPORT");
+        pane.add(header, 0, 0);
+        TableView table = new TableView();
+        pane.add(table, 0, 2);
+        Button b = new Button();
+        b.setText("back");
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Global.primaryStage.setScene(current);
+                myController.setScreen(Main.MANAGER_HOME_SCREEN);
+            }
+        });
+        pane.add(b, 0, 4);
+
+        ResultSet augResultSet = QuerySender.getAugustReservationSet();
+
+        try {
+            while (augResultSet.next()) {
+                String location = augResultSet.getString("Hotel_Location");
+                String numReservations = augResultSet.getString("COUNT(Reservation_ID)");
+                ReservationReportItem r = new ReservationReportItem("August", location, numReservations);
+                reservation_report_items.add(r);
+            }
+            augResultSet.close();
+        } catch (Exception e) {
+            System.out.println("August query failed");
+            e.printStackTrace();
+        }
+
+        ResultSet septResultSet = QuerySender.getSeptemberReservationSet();
+
+        try {
+            while (septResultSet.next()) {
+                String location = septResultSet.getString("Hotel_Location");
+                String numReservations = septResultSet.getString("COUNT(Reservation_ID)");
+                ReservationReportItem r = new ReservationReportItem("September", location, numReservations);
+                reservation_report_items.add(r);
+            }
+            septResultSet.close();
+        } catch (Exception e) {
+            System.out.println("September query failed");
+            e.printStackTrace();
+        }
+
+        create_reservation_report_table(table);
+        add_to_table(reservation_report_items,table);
+        StackPane root = new StackPane();
+        root.getChildren().add(pane);
+        current = Global.primaryStage.getScene();
+        Global.primaryStage.setScene(new Scene(root));
+        Global.primaryStage.show();
     }
 
     @FXML
     private void view_pop_room_category_report (ActionEvent event){
-        myController.setScreen(Main.POP_ROOM_CATEGORY_SCREEN);
-        create_room_category_table(all_pop_category_table);
-        add_to_table(pop_category_items,all_pop_category_table);
+        pop_category_items = FXCollections.observableArrayList();
+
+        GridPane pane = new GridPane();
+        Text header = new Text();
+        header.setText("POPULAR ROOM CATEGORIES REPORT");
+        pane.add(header, 0, 0);
+        TableView table = new TableView();
+        pane.add(table, 0, 2);
+        Button b = new Button();
+        b.setText("back");
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Global.primaryStage.setScene(current);
+                myController.setScreen(Main.MANAGER_HOME_SCREEN);
+            }
+        });
+        pane.add(b, 0, 4);
+
+        ResultSet resultSet = QuerySender.getPopularCategorySet();
+
+        try {
+            while (resultSet.next()) {
+                String location = resultSet.getString("Hotel_Location");
+                String roomCategory = resultSet.getString("Room_Category");
+                String numReservationsForRoom = resultSet.getString("COUNT");
+                RoomCategoryItem r = new RoomCategoryItem("August", location, roomCategory, numReservationsForRoom);
+                pop_category_items.add(r);
+            }
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        create_room_category_table(table);
+        add_to_table(pop_category_items,table);
+        StackPane root = new StackPane();
+        root.getChildren().add(pane);
+        current = Global.primaryStage.getScene();
+        Global.primaryStage.setScene(new Scene(root));
+        Global.primaryStage.show();
     }
 
     @FXML
     private void view_revenue_report (ActionEvent event){
-        myController.setScreen(Main.REVENUE_REPORT_SCREEN);
-        create_revenue_report_table(all_revenue_table);
-        add_to_table(revenue_items,all_revenue_table);
+        revenue_items = FXCollections.observableArrayList();
 
+        myController.setScreen(Main.REVENUE_REPORT_SCREEN);
+        GridPane pane = new GridPane();
+        Text header = new Text();
+        header.setText("REVENUE REPORT");
+        pane.add(header, 0, 0);
+        TableView table = new TableView();
+        pane.add(table, 0, 2);
+        Button b = new Button();
+        b.setText("back");
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Global.primaryStage.setScene(current);
+                myController.setScreen(Main.MANAGER_HOME_SCREEN);
+            }
+        });
+        pane.add(b, 0, 4);
+
+        ResultSet augResultSet = QuerySender.getAugustRevenueSet();
+
+        try {
+            while (augResultSet.next()) {
+                String location = augResultSet.getString("Hotel_Location");
+                String totalCost = augResultSet.getString("SUM(Total_Cost)");
+                RevenueItem r = new RevenueItem("August", location, totalCost);
+                revenue_items.add(r);
+            }
+            augResultSet.close();
+        } catch (Exception e) {
+            System.out.println("August query failed");
+            e.printStackTrace();
+        }
+
+        ResultSet septResultSet = QuerySender.getSeptemberRevenueSet();
+
+        try {
+            while (septResultSet.next()) {
+                String location = septResultSet.getString("Hotel_Location");
+                String totalCost = septResultSet.getString("SUM(Total_Cost)");
+                RevenueItem r = new RevenueItem("September", location, totalCost);
+                revenue_items.add(r);
+            }
+            augResultSet.close();
+        } catch (Exception e) {
+            System.out.println("September query failed");
+            e.printStackTrace();
+        }
+
+        create_revenue_report_table(table);
+        add_to_table(revenue_items,table);
+        StackPane root = new StackPane();
+        root.getChildren().add(pane);
+        current = Global.primaryStage.getScene();
+        Global.primaryStage.setScene(new Scene(root));
+        Global.primaryStage.show();
     }
 
 
@@ -135,25 +287,25 @@ public class ManagerController implements Initializable, ControlledScreen {
         myController.setScreen(Main.MANAGER_HOME_SCREEN);
     }
 
-    private class ReservationReportItem{
-        public SimpleStringProperty month;
-        public SimpleStringProperty location;
-        public SimpleStringProperty totalReservations;
+    public class ReservationReportItem{
+        private SimpleStringProperty month;
+        private SimpleStringProperty location;
+        private SimpleStringProperty totalReservations;
         public ReservationReportItem(String month, String location, String total_reservations){
             this.month = new SimpleStringProperty(month);
             this.location = new SimpleStringProperty(location);
             this.totalReservations = new SimpleStringProperty(total_reservations);
         }
         public String getMonth() {return this.month.get();}
-        public String getLocation() {return this.month.get();}
+        public String getLocation() {return this.location.get();}
         public String getTotalReservations() {return this.totalReservations.get();}
 
     }
-    private class RoomCategoryItem{
-        public SimpleStringProperty month;
-        public SimpleStringProperty location;
-        public SimpleStringProperty topCategory;
-        public SimpleStringProperty totalReservations;
+    public class RoomCategoryItem{
+        private SimpleStringProperty month;
+        private SimpleStringProperty location;
+        private SimpleStringProperty topCategory;
+        private SimpleStringProperty totalReservations;
         public RoomCategoryItem(String month, String location, String top_Category, String total_reservations){
             this.month = new SimpleStringProperty(month);
             this.location = new SimpleStringProperty(location);
@@ -161,15 +313,15 @@ public class ManagerController implements Initializable, ControlledScreen {
             this.totalReservations = new SimpleStringProperty(total_reservations);
         }
         public String getMonth() {return this.month.get();}
-        public String getLocation() {return this.month.get();}
+        public String getLocation() {return this.location.get();}
         public String getTopCategory() {return this.topCategory.get();}
         public String getTotalReservations() {return this.totalReservations.get();}
     }
-    private class RevenueItem{
-        public SimpleStringProperty month;
-        public SimpleStringProperty location;
-        public SimpleStringProperty totalRevenue;
-        public RevenueItem(String month, String location, String total_revenue){
+    public class RevenueItem{
+        private SimpleStringProperty month;
+        private SimpleStringProperty location;
+        private SimpleStringProperty totalRevenue;
+        private RevenueItem(String month, String location, String total_revenue){
             this.month = new SimpleStringProperty(month);
             this.location = new SimpleStringProperty(location);
             this.totalRevenue = new SimpleStringProperty(total_revenue);
@@ -180,7 +332,8 @@ public class ManagerController implements Initializable, ControlledScreen {
     }
 
 
-    private void create_room_category_table(TableView table) {
+    public void create_room_category_table(TableView table) {
+        System.out.println("ASDFASDF");
         TableColumn month = new TableColumn("Month");
         month.setMinWidth(100);
         TableColumn topCategory = new TableColumn("Top Room Category");
@@ -208,9 +361,8 @@ public class ManagerController implements Initializable, ControlledScreen {
 
         month.setCellValueFactory(new PropertyValueFactory<RevenueItem,String>("month"));
         location.setCellValueFactory(new PropertyValueFactory<RevenueItem,String>("location"));
-        totalRevenue.setCellValueFactory(new PropertyValueFactory<RevenueItem,String>("totalReservations"));
+        totalRevenue.setCellValueFactory(new PropertyValueFactory<RevenueItem,String>("totalRevenue"));
         table.getColumns().addAll(month,location,totalRevenue);
-
     }
 
     private void create_reservation_report_table(TableView table){
@@ -225,12 +377,12 @@ public class ManagerController implements Initializable, ControlledScreen {
         totalReservations.setCellValueFactory(new PropertyValueFactory<ReservationReportItem,String>("totalReservations"));
         table.getColumns().addAll(month,location,totalReservations);
 
+
     }
 
     private void add_to_table(ObservableList items, TableView table){
         table.setItems(null);
         table.setItems(items);
-
     }
 
 

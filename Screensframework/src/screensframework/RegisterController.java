@@ -36,7 +36,7 @@
  * and therefore, elected the GPL Version 2 license, then the option applies
  * only if the new code is made subject to such option by the copyright
  * holder.
- */ 
+ */
 
 package screensframework;
 
@@ -46,6 +46,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,14 +82,13 @@ public class RegisterController implements Initializable , ControlledScreen {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
     @FXML
     private void register(ActionEvent event){
-        Customer c = new Customer();
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -94,37 +96,66 @@ public class RegisterController implements Initializable , ControlledScreen {
         try {
             connection = ConnectionConfiguration.getConnection();
 
-            /*PreparedStatement checkCredentials = connection.prepareStatement("SELECT Cnnnn, Email FROM `CUSTOMER` WHERE Cnnnn = ? or Email = ?");
-            checkCredentials.setString(1, username.getText());
-            checkCredentials.setString(2, email.getText());
-            ResultSet resultSet = checkCredentials.executeQuery();
-            while (resultSet.next()) {
-                c.setUsername(resultSet.getString("Cnnnn"));
-                c.setEmail(resultSet.getString("Email"));
-            }*/
-
-            System.out.println("username: " + username.getText() + ", email: " + email.getText() + ", password: " + password.getText());
-
-            String name = username.getText().toString();
+            //check to see if username is valid
+            String name = username.getText();
             boolean validUsername = true;
             if (name.length() != 5) {
                 validUsername = false;
             } else {
                 for (int i = 0; i < name.length(); i++) {
-                    if (!Character.isDigit(name.charAt(i))) {
-
+                    if (i == 0) {
+                        String letter = (String) Character.toString(name.charAt(i));
+                        if (!letter.equalsIgnoreCase("c")) {
+                            validUsername = false;
+                            break;
+                        }
+                    } else {
+                        if (!Character.isDigit(name.charAt(i))) {
+                            validUsername = false;
+                            break;
+                        }
                     }
                 }
             }
 
-            preparedStatement = connection.prepareStatement("INSERT INTO `cs4400_Group_12`.`CUSTOMER` (`Cnnnn`, `Email`, `Password`) VALUES (?, ?, ?)");
-            preparedStatement.setString(1, username.getText());
-            preparedStatement.setString(2, email.getText());
-            preparedStatement.setString(3, password.getText());
-            preparedStatement.executeUpdate();
+            //check to see if the passwords match
+            boolean passwordsMatch = true;
+            if (!password.getText().equals(confirm_password.getText())) {
+                passwordsMatch = false;
+            }
 
+            //check to see if the email is valid
+            String emailInput = email.getText();
+            boolean validEmail;
+            final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+            Matcher matcher = pattern.matcher(emailInput);
+            validEmail = matcher.matches();
+
+            if (!validUsername) {
+                errorText.setText("Error:\ninvalid Username\nUsername must consist of the letter 'c' followed by 4 numbers");
+            } else if (!passwordsMatch) {
+                errorText.setText("Error:\nentered passwords do not match");
+            } else if (!validEmail) {
+                errorText.setText("Error:\ninvalid Email");
+            } else {
+                preparedStatement = connection.prepareStatement("INSERT INTO `cs4400_Group_12`.`CUSTOMER` (`Cnnnn`, `Email`, `Password`) VALUES (?, ?, ?)");
+                preparedStatement.setString(1, username.getText());
+                preparedStatement.setString(2, email.getText());
+                preparedStatement.setString(3, password.getText());
+                preparedStatement.executeUpdate();
+
+                //put new user in database
+                if (Global.user_type.equals("customer")) {
+                    myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+                } else {
+                    myController.setScreen(Main.MANAGER_HOME_SCREEN);
+                }
+            }
 
         } catch (Exception e) {
+            errorText.setText("Error:\nUsername or Email already taken. Please choose another");
             System.out.println("Connection FAILED");
             e.printStackTrace();
 
@@ -144,41 +175,7 @@ public class RegisterController implements Initializable , ControlledScreen {
                     e.printStackTrace();
                 }
             }
-
-            //login credentials were not found in data base so it is valid
-            if (c.getUsername() == null && c.getEmail() == null && c.getPassword() == null) {
-
-            }
         }
-
-        /*
-        boolean usernameIsUnique = true;
-        boolean passwordsMatch = false;
-        if(password.equals(confirm_password)){
-            passwordsMatch = true ;
-        }
-        for(int x=0;x<numUsers;x++){
-            if(email.getText().equals(emailArray[x])){
-                usernameIsUnique = false;
-            }
-        }
-        if(usernameIsUnique && passwordsMatch){
-            //put new user in database
-            if(Global.user_type.equals("customer")){
-                myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-            }
-            else{
-                myController.setScreen(Main.MANAGER_HOME_SCREEN);
-            }
-        }
-        else if(!usernameIsUnique){
-            errorText.setText("Error: username is already taken");
-        }
-        else if(!passwordsMatch){
-            errorText.setText("Error: passwords don't match");
-
-        }
-        */
     }
 
     @FXML
