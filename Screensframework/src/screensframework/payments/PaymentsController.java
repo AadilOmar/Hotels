@@ -40,7 +40,10 @@
 package screensframework.payments;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -52,6 +55,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import screensframework.*;
+import screensframework.com.util.QuerySender;
 
 /**
  * FXML Controller class
@@ -79,10 +83,13 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //saves the card info
     public void save(ActionEvent event) {
-        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
-        if(!card_fields_are_valid){
-            return;
-        }
+//        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
+//        if(!card_fields_are_valid){
+//            return;
+//        }
+
+        int result = QuerySender.addCreditCard("c1001", card_number.getText(), card_name.getText(), cvv.getText(), exp_date.getText());
+        System.out.println("ASDFASDFADSF "+result);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
 

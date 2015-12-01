@@ -72,8 +72,8 @@ public class Validator {
     }
 
     public static boolean validate_adding_card(TextField card_name, TextField card_number, TextField exp_date, TextField cvv, Text errorText) {
-        String validExp = "([0-9]{2})/[0-9]{4}";
-        String validCvv = "([0-9]{3})||([0-9]{4})||([0-9]{5})";
+        String validExp = "([0-9]{4})-[0-9]{2}";
+        String validCvv = "([0-9]{3})||([0-9]{4})||([0-9]{2})";
         String validCardNumber = "([0-9]{16})";
 
         if(card_name.getText().equals("") || card_number.getText().equals("") || exp_date.getText().equals("") || cvv.getText().equals("")){
@@ -89,11 +89,11 @@ public class Validator {
             return false;
         }
         if(!exp_date.getText().matches(validExp)){
-            errorText.setText("expiration is not in the form mm/yyyy");
+            errorText.setText("expiration is not in the form yyyy-mm");
             return false;
         }
         if(!cvv.getText().matches(validCvv)){
-            errorText.setText("ccv must have between 3 and 5 digits");
+            errorText.setText("ccv must have between 2 and 4 digits");
             return false;
         }
         errorText.setText("");

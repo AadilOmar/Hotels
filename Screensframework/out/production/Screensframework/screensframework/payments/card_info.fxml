@@ -18,7 +18,7 @@
     <TextField
             GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="card_number"/>
 
-    <Label text="Expiration Date(mm/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Expiration Date(yyyy-mm):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <TextField
             GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="exp_date"/>
 

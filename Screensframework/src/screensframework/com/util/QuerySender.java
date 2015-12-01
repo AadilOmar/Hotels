@@ -1,10 +1,15 @@
 package screensframework.com.util;
 
+import com.sun.org.apache.bcel.internal.ExceptionConstants;
+
 import javax.management.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by aadil on 11/30/15.
@@ -150,5 +155,66 @@ public class QuerySender {
             }
         }
         return null;
+    }
+
+    public static int addCreditCard(String username, String card_number, String card_name, String ccv, String exp_date){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+        String q = "INSERT INTO `cs4400_Group_12`.`PAYMENT_INFORMATION` (`Username`, `Card_Number`, `Name`, `CCV`, `Expiration_Date`) VALUES ('c1001', '40asdf', 'carafddx', '4dfs', '2015-11-30');";
+        String query = "INSERT INTO `cs4400_Group_12`.`PAYMENT_INFORMATION` (`Username`, `Card_Number`, `Name`, `CCV`, `Expiration_Date`) VALUES (?, ?, ?, ?, ?)";
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        java.sql.Date exp = null;
+//        try {
+////            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+////            java.util.Date date = sdf1.parse(startDate);
+////            java.sql.Date sqlStartDate = new Date(date.getTime());
+//            exp = java.sql.Date.valueOf(exp_date+"-01");
+//            System.out.println(exp+" ok");
+////            sqlDate = java.sql.Date.valueOf()
+//        }catch(Exception e){
+//
+//        }
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            System.out.println("_____"+username);
+            preparedStatement.setString(2, card_number);
+            System.out.println("_____"+card_number);
+            preparedStatement.setString(3, card_name);
+            System.out.println("_____"+card_name);
+            preparedStatement.setInt(4, Integer.parseInt(ccv));
+            System.out.println("_____"+ccv);
+            preparedStatement.setString(5, exp_date+"-01");
+            System.out.println("_____"+exp_date+"-01");
+            result = preparedStatement.executeUpdate();
+            System.out.println(result+" RESULT");
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }
