@@ -51,6 +51,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -70,6 +72,7 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML private TextField card_number;
     @FXML private TextField card_name;
     @FXML private TextField cvv;
+    @FXML private SplitMenuButton all_cards;
 
 
     /**
@@ -96,7 +99,15 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //deletes the card
     public void delete(ActionEvent event) {
+        //this shouldnt be here- should be called when the screen is shown
+        ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+        for(int x=0;x<Global.cards.size();x++){
+            list.add(new MenuItem(Global.cards.get(x)));
+        }
+        all_cards.getItems().setAll(list);
+
+        QuerySender.deleteCreditCard(Global.username, all_cards.getText());
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package screensframework;
 
+import java.util.ArrayList;
+
 /**
  * Created by aadil on 11/22/15.
  */
@@ -14,5 +16,6 @@ public class Global {
     public static String newReservationStart;
     public static String newReservationEnd;
     public static String reservationID;
+    public static ArrayList<String>cards;
 
 }

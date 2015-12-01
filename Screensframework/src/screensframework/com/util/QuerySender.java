@@ -1,5 +1,6 @@
 package screensframework.com.util;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard;
 import com.sun.org.apache.bcel.internal.ExceptionConstants;
 import screensframework.Global;
 
@@ -51,85 +52,6 @@ public class QuerySender {
     }
 
 
-    public static ResultSet makeReservationCreateReservation(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        String q = "INSERT INTO `cs4400_Group_12`.`RESERVATION` (`Username`, `Reservation_ID`, `Card_Number`, `Start_Date`, `End_Date`, `Total_Cost`, `Is_Cancelled`) VALUES (\"c1001\", \"1\", \"1\", \"2015-12-04\", \"2015-12-05\", \"260\", \"1\");";
-        String query = "INSERT INTO `cs4400_Group_12`.`RESERVATION` (`Username`, `Reservation_ID`, `Card_Number`, `Start_Date`, `End_Date`, `Total_Cost`, `Is_Cancelled`) VALUES (?, ?, ?, ?, ?, ?, ?);";
-        System.out.println(query);
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, reservation_id);
-            preparedStatement.setString(3, card_number);
-            preparedStatement.setString(4, start);
-            preparedStatement.setString(5, end);
-            preparedStatement.setString(6, total_cost);
-            preparedStatement.setString(7, isCancelled);
-            resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet.toString());
-            return resultSet;
-
-        }catch (Exception e) {
-            System.out.println("Connection FAILED");
-            e.printStackTrace();
-
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }
-
-    public static ResultSet makeReservationCreateHas(String reservation_id, String[] room_numbers, String loc, String include_ex_bed){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        String q = "INSERT INTO `cs4400_Group_12`.`HAS` (`Reservation_ID`, `Room_Number`, `Hotel_Location`, `Include_Extra_Bed`) VALUES (\"28\", \"103\", \"Orlando\", \"0\");";
-        String query = "INSERT INTO `cs4400_Group_12`.`HAS` (`Reservation_ID`, `Room_Number`, `Hotel_Location`, `Include_Extra_Bed`) VALUES (?, ?, ?, ?);";
-        System.out.println(query);
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            preparedStatement.setString(2, room_numbers[0]);
-            preparedStatement.setString(3, loc);
-            preparedStatement.setString(4, include_ex_bed);
-            resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet.toString());
-            return resultSet;
-
-        }catch (Exception e) {
-            System.out.println("Connection FAILED");
-            e.printStackTrace();
-
-        }
-        return null;
-    }
-
     public static int addCreditCard(String username, String card_number, String card_name, String ccv, String exp_date){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -180,6 +102,7 @@ public class QuerySender {
         return result;
     }
 
+    //fail
     public static ResultSet getCreditCards() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -223,5 +146,184 @@ public class QuerySender {
             }
         }
         return result;
+    }
+
+    public static int deleteCreditCard(String username, String card_number){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+        String q = "DELETE FROM `cs4400_Group_12`.`PAYMENT_INFORMATION` WHERE (Username = 'c1001' AND Card_Number = '40')";
+        String query = "DELETE FROM `cs4400_Group_12`.`PAYMENT_INFORMATION` WHERE (Username = ? AND Card_Number = ?)";
+
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, Global.username);
+            preparedStatement.setString(1, card_number);
+            result = preparedStatement.executeUpdate();
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+    //fail
+    public static int makeReservationReservationTable(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+        String q = "INSERT INTO `cs4400_Group_12`.`RESERVATION` (`Username`, `Reservation_ID`, `Card_Number`, `Start_Date`, `End_Date`, `Total_Cost`, `Is_Cancelled`) VALUES (\"c1001\", \"1\", \"1\", \"2015-12-04\", \"2015-12-05\", \"260\", \"1\");\n";
+        String query = "INSERT INTO `cs4400_Group_12`.`RESERVATION` (`Username`, `Reservation_ID`, `Card_Number`, `Start_Date`, `End_Date`, `Total_Cost`, `Is_Cancelled`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, reservation_id);
+            preparedStatement.setString(3, card_number);
+            preparedStatement.setString(4, start);
+            preparedStatement.setString(5, end);
+            preparedStatement.setString(6, total_cost);
+            preparedStatement.setString(7, isCancelled);
+            result = preparedStatement.executeUpdate();
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+    //fail
+    public static int makeReservationHasTable(String reservation_id, String room_number, String loc, String include_ex_bed){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int resultSet = 0;
+        String q = "INSERT INTO `cs4400_Group_12`.`HAS` (`Reservation_ID`, `Room_Number`, `Hotel_Location`, `Include_Extra_Bed`) VALUES (\"28\", \"103\", \"Orlando\", \"0\");";
+        String query = "INSERT INTO `cs4400_Group_12`.`HAS` (`Reservation_ID`, `Room_Number`, `Hotel_Location`, `Include_Extra_Bed`) VALUES (?, ?, ?, ?);";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, reservation_id);
+            preparedStatement.setString(2, room_number);
+            preparedStatement.setString(3, loc);
+            preparedStatement.setString(4, include_ex_bed);
+            resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static ResultSet getRoomsOfReservation(String reservation_id){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String q = "SELECT * FROM  `cs4400_Group_12`.`RESERVED` WHERE Reservation_ID = \"26\"\n";
+        String query = "SELECT * FROM  `cs4400_Group_12`.`RESERVED` WHERE Reservation_ID = ?";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, reservation_id);
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+
+    public static ResultSet searchAvailability(String reservation_id, String start, String end){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String q = "SELECT * From URESERVED NATURAL JOIN ROOM WHERE Reservation_ID = '26' AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN ( SELECT ROOM_Number FROM URESERVED r WHERE (r.Start_Date <= '2015-11-06' OR (r.Start_Date >= '2015-11-06' AND r.Start_Date < '2015-11-07') ) AND (r.end_date >= '2015-11-07' OR (r.end_date > '2015-11-06' AND r.end_date <= '2015-11-07') ) AND r.IS_Cancelled = '0' ) )";
+        String query = "SELECT * From URESERVED NATURAL JOIN ROOM WHERE Reservation_ID = ? AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN ( SELECT ROOM_Number FROM URESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.IS_Cancelled = ? ) )";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, reservation_id);
+            preparedStatement.setString(2, start);
+            preparedStatement.setString(3, start);
+            preparedStatement.setString(4, end);
+            preparedStatement.setString(5, end);
+            preparedStatement.setString(6, start);
+            preparedStatement.setString(7, end);
+            preparedStatement.setString(8, "0");
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
     }
 }
