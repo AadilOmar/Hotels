@@ -80,9 +80,7 @@ import screensframework.com.util.QuerySender;
  */
 public class ReservationController implements Initializable, ControlledScreen {
     ObservableList<Room> all_rooms =FXCollections.observableArrayList(
-            new Room("01", "standard", 1, 80, 15, "x", "x"),
-            new Room("02", "family", 4, 130, 30, "x", "x"),
-            new Room("03", "suite", 5, 160, 30, "x", "x")
+
     );
     ObservableList<Room> selected_rooms = FXCollections.observableArrayList(
     );
@@ -97,6 +95,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private TableColumn column;
     @FXML private SplitMenuButton card;
     @FXML private Text confirmation_reservation_id;
+
+    long length_of_stay = 1;
 
     private boolean already_created_all_rooms = false;
     private boolean already_created_checked_rooms = false;
@@ -179,7 +179,7 @@ public class ReservationController implements Initializable, ControlledScreen {
             }
             setCancelledDate();
             add_to_table(all_rooms, all_cancelled_rooms_table);
-            updateTotalCost(all_rooms, total_cost_reserved);
+            updateTotalCost(all_rooms, total_cost_reserved, 0);
             setAmountToBeRefunded(total_cost_reserved.getText());
 
         }
@@ -220,7 +220,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                     already_created_reserved_rooms = true;
                 }
                 add_to_table(all_rooms, all_reserved_rooms_table);
-                updateTotalCost(all_rooms, updated_cost);
+                updateTotalCost(all_rooms, updated_cost, 0);
             }
             else{
                 error_rooms_not_available_for_update.setText("The rooms are not available for this date range");
@@ -249,11 +249,32 @@ public class ReservationController implements Initializable, ControlledScreen {
         String end = end_date.getText();
         String loc = location.getText();
 
-        boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
-        if(!datesAreValid){ return; }
-
+//        boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
+//        if(!datesAreValid){ return; }
+//
         ResultSet result = QuerySender.findAllRooms(start, end, loc);
-
+        try{
+            while(result.next()){
+                String roomNumber = result.getString("Room_Number");
+                System.out.println(roomNumber);
+                String roomCategory = result.getString("Room_Category");
+                System.out.println(roomCategory);
+                String location = result.getString("Hotel_Location");
+                System.out.println(location);
+                int costPerDay = Integer.parseInt(result.getString("Cost"));
+                System.out.println(costPerDay);
+                int costExBedPerDay = Integer.parseInt(result.getString("Cost_Extra_Bed"));
+                System.out.println(costExBedPerDay);
+                int numPeopleAllowed = Integer.parseInt(result.getString("Number_People"));
+                System.out.println(numPeopleAllowed);
+                Room newRoom = new Room(roomNumber, roomCategory, numPeopleAllowed, costPerDay, costExBedPerDay, "x", "x");
+                System.out.println(newRoom.toString());
+                all_rooms.add(newRoom);
+            }
+        }catch(Exception e){
+            System.out.println("lkasflkasjf");
+        }
+//
         Global.newReservationStart = start;
         Global.newReservationEnd = end;
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
@@ -285,8 +306,21 @@ public class ReservationController implements Initializable, ControlledScreen {
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
         //sets the start/end date text to whatever was put in when creating reservation
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = null;
+        Date endDate= null;
+        try {
+            startDate = df.parse(start_date.getText());
+            endDate = df.parse(end_date.getText());
+        }catch(Exception e){
+
+        }
+        length_of_stay = endDate.getTime() - startDate.getTime();
+        length_of_stay = TimeUnit.DAYS.convert(length_of_stay, TimeUnit.MILLISECONDS);
+        System.out.println("LENGTH"+length_of_stay);
         start_date_picked.setText(Global.newReservationStart);
-        updateTotalCost(selected_rooms, total_cost);
+        updateTotalCost(selected_rooms, total_cost, (int)length_of_stay);
         end_date_picked.setText(Global.newReservationEnd);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
         if(!already_created_checked_rooms){
@@ -316,7 +350,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         return rand.nextInt(100000)+"";
     }
 
-    private void updateTotalCost(ObservableList<Room> selectedRooms, Text toUpdate){
+    private void updateTotalCost(ObservableList<Room> selectedRooms, Text toUpdate, int stay_length){
         int total = 0;
         for(int x=0;x<selectedRooms.size();x++){
             Room r = selectedRooms.get(x);
@@ -325,7 +359,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                 total+=r.getCostExtraBedPerDay();
             }
         }
-        toUpdate.setText("$"+total+".00");
+        toUpdate.setText("$"+total*stay_length+".00");
     }
 
     private void setCancelledDate(){
@@ -401,7 +435,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                     else{
                         roomSelected.selectedBed = new SimpleStringProperty("x");
                     }
-                    updateTotalCost(selected_rooms, total_cost);
+                    updateTotalCost(selected_rooms, total_cost, (int)length_of_stay);
                     TableColumn c = (TableColumn)checked_rooms_table.getColumns().get(0);
                     c.setVisible(false);
                     c.setVisible(true);

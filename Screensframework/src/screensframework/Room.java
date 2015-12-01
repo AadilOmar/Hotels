@@ -18,6 +18,7 @@ public class Room {
     public SimpleStringProperty selectedBed;
 
     public Room(String roomNo, String category, int numPpl, int costDay, int costExBed, String selected, String selectedBed){
+
         this.roomNumber = new SimpleStringProperty(roomNo);
         this.roomCategory = new SimpleStringProperty(category);
         this.numPeopleAllowed = new SimpleIntegerProperty(numPpl);

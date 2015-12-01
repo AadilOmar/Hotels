@@ -19,8 +19,9 @@ public class QuerySender {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String q = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION; SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-12-16' OR (r.Start_Date >= '2015-12-16' AND r.Start_Date < '2015-12-18') ) AND (r.end_date >= '2015-12-18' OR (r.end_date > '2015-12-16' AND r.end_date <= '2015-12-18') ) AND r.Hotel_Location='Charlotte' AND r.IS_Cancelled =  '0' ) AND Hotel_Location='Charlotte'";
-        String query = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION; SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.Hotel_Location=? AND r.IS_Cancelled =  '0' ) AND Hotel_Location=?";
+        String q = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION; SELECT * FROM ROOM AS R WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-12-16' OR (r.Start_Date >= '2015-12-16' AND r.Start_Date < '2015-12-18') ) AND (r.end_date >= '2015-12-18' OR (r.end_date > '2015-12-16' AND r.end_date <= '2015-12-18') ) AND r.Hotel_Location='Charlotte' AND r.IS_Cancelled =  '0' ) AND Hotel_Location='Charlotte'";
+        String query = "SELECT * FROM ROOM WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.Hotel_Location=? AND r.IS_Cancelled = ? ) AND Hotel_Location=?";
+        String query1 = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION;";
         System.out.println(query);
         try {
             connection = ConnectionConfiguration.getConnection();
@@ -32,42 +33,18 @@ public class QuerySender {
             preparedStatement.setString(5, start);
             preparedStatement.setString(6, end);
             preparedStatement.setString(7, loc);
-            preparedStatement.setString(8, loc);
+            preparedStatement.setString(8, "0");
+            preparedStatement.setString(9, loc);
             resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet.toString());
+            System.out.println(resultSet);
             return resultSet;
 
         }catch (Exception e) {
             System.out.println("Connection FAILED");
             e.printStackTrace();
 
-        } finally {
-            System.out.println("asdfasdf");
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        return null;
+        return resultSet;
     }
 
 
