@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+
+    <Text text="RESERVATION REPORT" fx:id="plok" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+
+    <TableView fx:id="all_reservations_table" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="3">
+
+
+    </TableView>
+
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <Button onAction="#back" text="Back" fx:id="mand" />
+    </HBox>
+</GridPane>

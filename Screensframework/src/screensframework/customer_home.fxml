@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<GridPane fx:controller="screensframework.CustomerHome"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+  <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+
+  <Text text="CHOOSE FUNCTIONALITY"
+        GridPane.columnIndex="1" GridPane.rowIndex="0"
+        GridPane.columnSpan="2"/>
+
+  <HBox spacing="10" alignment="bottom_right"
+        GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <Button text="Make New Reservation"
+            onAction="#make_new_registration"/>
+  </HBox>
+
+  <HBox spacing="10" alignment="bottom_right"
+        GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <Button text="Update Reservation"
+            onAction="#update_reservation"/>
+  </HBox>
+
+  <HBox spacing="10" alignment="bottom_right"
+        GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <Button text="Provide Feedback"
+            onAction="#provide_feedback"/>
+  </HBox>
+  <HBox spacing="10" alignment="bottom_right"
+        GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <Button text="View Feedback"
+            onAction="#view_feedback"/>
+  </HBox>
+
+  <HBox spacing="10" alignment="bottom_right"
+        GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <Button text="Cancel Reservation"
+            onAction="#cancel_reservation"/>
+  </HBox>
+
+
+
+</GridPane>

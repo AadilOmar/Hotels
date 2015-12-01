@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+
+    <Text text="GIVE REVIEW" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+
+    <SplitMenuButton fx:id="locationMenuGiveReview" mnemonicParsing="false" text="Hotel Location" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Atlanta" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Charlotte" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Savannah" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Orlando" onAction="#updateGiveLocationMenu"/>
+            <MenuItem mnemonicParsing="false" text="Miami" onAction="#updateGiveLocationMenu"/>
+        </items>
+    </SplitMenuButton>
+
+    <SplitMenuButton fx:id="ratingMenu" mnemonicParsing="false" text="Rating" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Excellent" onAction="#updateRatingMenu"/>
+            <MenuItem mnemonicParsing="false" text="Good" onAction="#updateRatingMenu"/>
+            <MenuItem mnemonicParsing="false" text="Neutral" onAction="#updateRatingMenu" />
+            <MenuItem mnemonicParsing="false" text="Bad" onAction="#updateRatingMenu" />
+            <MenuItem mnemonicParsing="false" text="Very Bad" onAction="#updateRatingMenu" />
+        </items>
+    </SplitMenuButton>
+
+    <Label text="Comment" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField
+            GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="comment"/>
+
+    <HBox  alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+        <Button onAction="#submitReview" text="Submit" />
+    </HBox>
+
+
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+        <Button onAction="#back" text="Back" />
+    </HBox>
+
+    <Text fx:id="error_giving_review" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5"/>
+
+
+</GridPane>

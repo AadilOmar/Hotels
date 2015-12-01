@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+
+    <Text text="CONFIRMATION SCREEN" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+    <Label text="Your Reservation ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Text GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="confirmation_reservation_id" />
+    <Label text="Please save this reservation ID for all further communication" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+
+
+    <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+        <Button onAction="#back" text="Back" />
+    </HBox>
+
+</GridPane>
