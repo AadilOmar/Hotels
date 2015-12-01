@@ -39,7 +39,6 @@
         <Button onAction="#submitReview" text="Submit" />
     </HBox>
 
-
     <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button onAction="#back" text="Back" />
     </HBox>

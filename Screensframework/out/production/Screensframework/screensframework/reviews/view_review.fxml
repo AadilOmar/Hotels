@@ -25,9 +25,7 @@
         <Button onAction="#seeReviews" text="Search" />
     </HBox>
 
-    <TableView GridPane.columnIndex="0" fx:id="reviews_table" GridPane.columnSpan="6" GridPane.rowIndex="3">
 
-    </TableView>
 
     <HBox  alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button onAction="#back" text="Back" />

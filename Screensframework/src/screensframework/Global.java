@@ -1,5 +1,8 @@
 package screensframework;
 
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 /**
@@ -17,5 +20,6 @@ public class Global {
     public static String newReservationEnd;
     public static String reservationID;
     public static ArrayList<String>cards;
+    public static Stage primaryStage;
 
 }

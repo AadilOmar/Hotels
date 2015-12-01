@@ -178,7 +178,6 @@ public class ReservationController implements Initializable, ControlledScreen {
             cols.get(0).setVisible(false);
             cols.get(0).setVisible(true);
             all_rooms.removeAll();
-
         }
 
         String reservationId = reservation_id_cancel.getText().toString();

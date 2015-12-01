@@ -473,9 +473,9 @@ public class QuerySender {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, review_number);
-            preparedStatement.setString(3, location);
-            preparedStatement.setString(4, rating);
-            preparedStatement.setString(5, comment);
+            preparedStatement.setString(3, rating);
+            preparedStatement.setString(4, comment);
+            preparedStatement.setString(5, location);
             resultSet = preparedStatement.executeUpdate();
             return resultSet;
 
@@ -503,5 +503,27 @@ public class QuerySender {
         }
         return 0;
     }
+
+    public static ResultSet viewReviews(String location){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String query = "SELECT `Rating`,`Comment` FROM  `cs4400_Group_12`.`REVIEW` WHERE Hotel_Location = ?";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, location);
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
 
 }
