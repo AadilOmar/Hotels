@@ -79,34 +79,31 @@ public class ReviewController implements Initializable, ControlledScreen {
             }catch(Exception e){
                 e.printStackTrace();
             }
-            if(!already_created_reviews) {
 
-                GridPane pane = new GridPane();
-                Text header = new Text();
-                header.setText("VIEW REVIEWS");
-                pane.add(header, 0, 0);
-                table = new TableView();
-                pane.add(table, 0, 2);
-                Button b = new Button();
-                b.setText("back");
-                b.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        Global.primaryStage.setScene(current);
-                        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-                    }
-                });
-                pane.add(b, 0, 4);
-                create_table(table);
-                StackPane root = new StackPane();
-                root.getChildren().add(pane);
-                current = Global.primaryStage.getScene();
-                Global.primaryStage.setScene(new Scene(root));
-                Global.primaryStage.show();
+            GridPane pane = new GridPane();
+            Text header = new Text();
+            header.setText("VIEW REVIEWS");
+            pane.add(header, 0, 0);
+            table = new TableView();
+            pane.add(table, 0, 2);
+            Button b = new Button();
+            b.setText("back");
+            b.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    Global.primaryStage.setScene(current);
+                    myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+                }
+            });
+            pane.add(b, 0, 4);
+            create_table(table);
+            StackPane root = new StackPane();
+            root.getChildren().add(pane);
+            current = Global.primaryStage.getScene();
+            Global.primaryStage.setScene(new Scene(root));
+            Global.primaryStage.show();
 
-                System.out.println("FINISHED ADDING TO TABLE");
-//                already_created_reviews = true;
-            }
+            System.out.println("FINISHED ADDING TO TABLE");
             add_to_table(all_reviews,table);
 
         }

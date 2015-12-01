@@ -103,47 +103,21 @@ public class QuerySender {
     }
 
     //fail
-    public static ResultSet getCreditCards() {
+    public static ResultSet getCreditCards(String username) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         String query = "SELECT Card_Number FROM PAYMENT_INFORMATION LEFT JOIN CUSTOMER ON PAYMENT_INFORMATION.Username = CUSTOMER.Cnnnn  WHERE Username = ?;";
-
         System.out.println(query);
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement =  connection.prepareStatement(query);
-            preparedStatement.setString(1, Global.username);
+            preparedStatement.setString(1, username);
             result = preparedStatement.executeQuery();
-            System.out.println(result.findColumn("Card_Number"));
             return result;
         } catch (Exception e) {
             System.out.println("FAILURE");
             e.printStackTrace();
-
-        } finally {
-            System.out.println("asdfasdf");
-            if (result != null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return result;
     }

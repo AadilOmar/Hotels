@@ -100,6 +100,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     private boolean already_created_reserved_rooms = false;
     private boolean already_created_cancelled_rooms = false;
 
+
     //error texts for each of the views that need one
     @FXML private Text error_search_all;
     @FXML private Text error_picked_rooms;
@@ -448,13 +449,19 @@ public class ReservationController implements Initializable, ControlledScreen {
         //sets the start/end date text to whatever was put in when creating reservation
         ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         ArrayList<String> stringList = new ArrayList<String>();
-        ResultSet result = QuerySender.getCreditCards();
+        ResultSet result = QuerySender.getCreditCards(Global.username);
         try {
             while (result.next()) {
-                System.out.println("_________________");
                 String card_number = result.getString("Card_Number");
-                card_number = card_number.substring(card_number.length() - 5);
-                MenuItem item = new MenuItem("cw");
+                System.out.println("_________________" + card_number);
+                MenuItem item = new MenuItem(card_number);
+                item.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        MenuItem i = (MenuItem)actionEvent.getSource();
+                        card.setText(i.getText());
+                    }
+                });
                 stringList.add(card_number);
                 list.add(item);
                 System.out.println(list+" l");
@@ -465,17 +472,16 @@ public class ReservationController implements Initializable, ControlledScreen {
         }
         Global.cards = stringList;
         card.getItems().addAll(list);
-//        card.getItems().addAll(new MenuItem("Logout"), new MenuItem("Sleep"));
         System.out.println("+++"+list);
-//        card.getItems().addAll(list);
+        card.getItems().addAll(list);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = null;
         Date endDate= null;
         try {
-            startDate = df.parse(start_date.getText());
-            endDate = df.parse(end_date.getText());
+            startDate = df.parse(Global.newReservationStart);
+            endDate = df.parse(Global.newReservationEnd);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
         length_of_stay = endDate.getTime() - startDate.getTime();
         length_of_stay = TimeUnit.DAYS.convert(length_of_stay, TimeUnit.MILLISECONDS);
