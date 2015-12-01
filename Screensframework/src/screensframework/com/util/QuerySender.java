@@ -148,6 +148,7 @@ public class QuerySender {
         return result;
     }
 
+    //fail
     public static int deleteCreditCard(String username, String card_number){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -275,6 +276,7 @@ public class QuerySender {
         return 0;
     }
 
+
     public static ResultSet getRoomsOfReservation(String reservation_id){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -297,7 +299,7 @@ public class QuerySender {
         return null;
     }
 
-
+    //gets availability of rooms (for updating)
     public static ResultSet searchAvailability(String reservation_id, String start, String end){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -326,4 +328,41 @@ public class QuerySender {
         }
         return null;
     }
+
+    //still todo
+    public static int updateReservation(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled){
+        return 0;
+    }
+
+    //gets if rooms are available to be cancelled
+    public static ResultSet searchAvailabilityToCancel(String reservation_id, String start, String end){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String q = "SELECT * From RESERVED NATURAL JOIN ROOM WHERE Reservation_ID = '26' AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number IN ( SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-11-06' OR (r.Start_Date >= '2015-11-06' AND r.Start_Date < '2015-11-07') ) AND (r.end_date >= '2015-11-07' OR (r.end_date > '2015-11-06' AND r.end_date <= '2015-11-07') ) AND r.IS_Cancelled = '0' ) )";
+        String query = "SELECT * From RESERVED NATURAL JOIN ROOM WHERE Reservation_ID = ? AND Room_Number In ( SELECT ROOM_Number FROM RESERVED r WHERE ((r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?)) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.IS_Cancelled = ? AND (r.start_date > CAST(CURRENT_TIMESTAMP AS DATE)) ) )";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, reservation_id);
+            preparedStatement.setString(2, start);
+            preparedStatement.setString(3, start);
+            preparedStatement.setString(4, end);
+            preparedStatement.setString(5, end);
+            preparedStatement.setString(6, start);
+            preparedStatement.setString(7, end);
+            preparedStatement.setString(8, "0");
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+
 }

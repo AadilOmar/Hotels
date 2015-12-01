@@ -134,12 +134,12 @@ public class ReservationController implements Initializable, ControlledScreen {
     int availablerooms = 0;
 
     //for canceling reservation
-
     @FXML private Text total_cost_reserved;
     @FXML private Text cancellation_date;
     @FXML private Text amount_refunded;
     @FXML private Text start_date_cancelled;
     @FXML private Text end_date_cancelled;
+    @FXML private TextField reservation_id_cancel;
 
 
 
@@ -161,27 +161,98 @@ public class ReservationController implements Initializable, ControlledScreen {
     //finds if there is a reservation by the ID given. updates the dates of original reservation
     @FXML
     public void searchReservationCancel(ActionEvent event){
+        all_rooms.removeAll();
+        all_rooms = FXCollections.observableArrayList();
+        all_cancelled_rooms_table.getItems().removeAll();
+        if(all_cancelled_rooms_table.getColumns().size() != 0){
+            System.out.println("Asdfasdf");
+            ObservableList<TableColumn> cols = (all_cancelled_rooms_table.getColumns());
+            cols.get(0).setVisible(false);
+            cols.get(0).setVisible(true);
+            all_rooms.removeAll();
 
-        String reservationId = reservation_id.getText().toString();
+        }
+
+        String reservationId = reservation_id_cancel.getText().toString();
 
         //check if reservations exist by that reservation id
+        System.out.println("11111");
+        boolean validId = false;
+        String start = "";
+        String end = "";
+        ResultSet roomsInReservation = QuerySender.getRoomsOfReservation(reservationId);
+        try{
+            System.out.println("2222");
+            while(roomsInReservation.next()){
+                System.out.println("-------");
+                String isCancelled = roomsInReservation.getString("is_Cancelled");
+                start = roomsInReservation.getString("Start_Date");
+                end = roomsInReservation.getString("End_Date");
+                System.out.println(start);
+                System.out.println(end);
+                if(isCancelled.equals("0")){
+                    validId = true;
+                }
+            }
+            roomsInReservation.close();
+        }catch(Exception e){
+            System.out.println("lkasflkasjf");
+        }
+        if(validId){
+            System.out.println("5555");
+            start_date_cancelled.setText(start);
+            end_date_cancelled.setText(end);
+            error_invalid_reservaion_id_cancel.setText("");
+        }
+        else{
+            error_invalid_reservaion_id_cancel.setText("An existing reservation with that ID could not be found");
+            return;
+        }
+        ResultSet result = QuerySender.searchAvailabilityToCancel(reservationId, start, end);
+        System.out.println("RESULT!!! "+result);
+        try {
+            while (result.next()) {
+                String roomNumber = result.getString("Room_Number");
+                String roomCategory = result.getString("Room_Category");
+                String location = result.getString("Hotel_Location");
+                int costPerDay = Integer.parseInt(result.getString("Cost"));
+                int costExBedPerDay = Integer.parseInt(result.getString("Cost_Extra_Bed"));
+                int numPeopleAllowed = Integer.parseInt(result.getString("Number_People"));
+                String selectedBed = result.getString("Include_Extra_Bed");
+                Room newRoom = new Room(roomNumber, roomCategory, numPeopleAllowed, costPerDay, costExBedPerDay, "x", selectedBed);
+                System.out.println("NEW ROOM"+newRoom.toString());
+                all_rooms.add(newRoom);
+            }
 
-
-        boolean idIsValid = Validator.validate_reservation_id(reservationId, error_invalid_reservaion_id_cancel);
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("fuck me");
+        }
 
         if(!already_created_cancelled_rooms){
 
             create_table(all_cancelled_rooms_table);
             createTableListener();
             already_created_cancelled_rooms = true;
+            all_cancelled_rooms_table.setItems(all_rooms);
         }
-        setCancelledDate();
         add_to_table(all_rooms, all_cancelled_rooms_table);
-        updateTotalCost(all_rooms, total_cost_reserved, 0);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = null;
+        Date endDate= null;
+        try {
+            startDate = df.parse(start_date_cancelled.getText());
+            endDate = df.parse(end_date_cancelled.getText());
+        }catch(Exception e){
+            System.out.println("DAMN!!");
+            e.printStackTrace();
+        }
+        length_of_stay = endDate.getTime() - startDate.getTime();
+        length_of_stay = TimeUnit.DAYS.convert(length_of_stay, TimeUnit.MILLISECONDS);
+        updateTotalCost(all_rooms, total_cost_reserved, (int)length_of_stay);
+        setCancelledDate();
         setAmountToBeRefunded(total_cost_reserved.getText());
-
-
-
     }
 
     //finds if there is a reservation by the ID given. updates the dates of original reservation
@@ -216,10 +287,10 @@ public class ReservationController implements Initializable, ControlledScreen {
             System.out.println("5555");
             current_start_date.setText(start);
             current_end_date.setText(end);
-            error_invalid_reservaion_id_cancel.setText("");
+            error_invalid_reservaion_id.setText("");
         }
         else{
-            error_invalid_reservaion_id_cancel.setText("A reservation with that ID could not be found");
+            error_invalid_reservaion_id.setText("A reservation with that ID could not be found");
         }
 
 
@@ -293,7 +364,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     //updates the reservation in the database based on what dates were selected
     @FXML
     public void update_reservation(ActionEvent event){
-        //QUERY TO UPDATE RESERVATION
+//        QuerySender.updateReservation();
         confirmation_reservation_id.setText(reservation_id.getText());
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
@@ -445,28 +516,31 @@ public class ReservationController implements Initializable, ControlledScreen {
     }
 
     private void setCancelledDate(){
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         cancellation_date.setText(dateFormat.format(date));
 
     }
     private void setAmountToBeRefunded(String totalCost){
         NumberFormat format = NumberFormat.getCurrencyInstance();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.println("nigga yes");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
         Date startDate = new Date();
         int total = 0;
         try{
             total = Integer.parseInt(format.parse(totalCost).toString());
+            System.out.println(total);
             startDate = sdf.parse(start_date_cancelled.getText());
             currentDate = sdf.parse(sdf.format(currentDate));
         }catch(ParseException e){
-
+            e.printStackTrace();
         }
         long diff = startDate.getTime() - currentDate.getTime();
         long daysAway = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
+        System.out.println(startDate);
+        System.out.println(currentDate);
+        System.out.println(daysAway);
         int refund = 0;
         if(daysAway > 3){
             refund = total;
@@ -586,8 +660,13 @@ public class ReservationController implements Initializable, ControlledScreen {
     }
 
     private void add_to_table(ObservableList<Room> rooms, TableView table){
-        table.setItems(null);
+        System.out.println("NOOOOOOOOOOOOO");
         table.setItems(rooms);
+        ObservableList<TableColumn> cols = (table.getColumns());
+        cols.get(0).setVisible(false);
+        cols.get(0).setVisible(true);
+        System.out.println("WTF-  DLETE!!"+rooms.size());
+
 
     }
 }

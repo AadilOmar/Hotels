@@ -10,7 +10,7 @@
 
     <Label text="Reservation ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="reservation_id_c"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="reservation_id_cancel"/>
 
     <HBox  alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <Button onAction="#searchReservationCancel" text="Search" />
