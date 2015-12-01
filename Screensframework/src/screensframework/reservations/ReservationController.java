@@ -40,15 +40,13 @@
 package screensframework.reservations;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import com.sun.org.apache.bcel.internal.ExceptionConstants;
@@ -154,7 +152,17 @@ public class ReservationController implements Initializable, ControlledScreen {
     //removes the reservation from the database
     @FXML
     public void cancelReservation(ActionEvent event){
-        //have confirmation screen maybe?...if time
+
+        ArrayList<Room> rooms= new ArrayList<Room>();
+        String id = reservation_id_cancel.getText();
+
+        int result = QuerySender.deleteReservationReservationTable(id);
+        System.out.println("DLETED RESERVATION: "+result);
+        for(int x=0;x<all_rooms.size();x++){
+            Room curr = all_rooms.get(x);
+            int result1 = QuerySender.deleteReservationHasTable(id, curr.getRoomNumber());
+            System.out.println("DLETED HAS: "+result1);
+        }
         myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
     }
 
@@ -212,6 +220,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         System.out.println("RESULT!!! "+result);
         try {
             while (result.next()) {
+                System.out.println("IN LOOP!!");
                 String roomNumber = result.getString("Room_Number");
                 String roomCategory = result.getString("Room_Category");
                 String location = result.getString("Hotel_Location");

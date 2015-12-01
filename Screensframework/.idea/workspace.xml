@@ -52,21 +52,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35714287">
-              <caret line="160" column="16" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="218" column="71" selection-start-line="218" selection-start-column="71" selection-end-line="218" selection-end-column="71" />
               <folding>
-                <element signature="e#14454#14455#0" expanded="true" />
-                <element signature="e#14519#14520#0" expanded="true" />
+                <element signature="e#5734#5740#0" expanded="true" />
+                <element signature="e#14857#14858#0" expanded="true" />
+                <element signature="e#14922#14923#0" expanded="true" />
                 <element signature="method#update_reservation#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#submit#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#updateCardMenu#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#updateLocationMenu#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
                 <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
               </folding>
@@ -118,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuerySender.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QuerySender.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="348" column="21" selection-start-line="348" selection-start-column="21" selection-end-line="348" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.18095239">
+              <caret line="410" column="13" selection-start-line="410" selection-start-column="13" selection-end-line="410" selection-end-column="13" />
               <folding>
                 <element signature="method#addCreditCard#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#getCreditCards#0;class#QuerySender#0" expanded="false" />
@@ -132,6 +131,8 @@
                 <element signature="method#getRoomsOfReservation#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#searchAvailability#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#updateReservation#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#searchAvailabilityToCancel#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#deleteReservationReservationTable#0;class#QuerySender#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -140,8 +141,8 @@
       <file leaf-file-name="cancel_reservation.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0689654">
-              <caret line="39" column="81" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="81" />
+            <state vertical-scroll-proportion="-3.9310346">
+              <caret line="48" column="44" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -642,12 +643,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>524</line>
+          <line>533</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -684,23 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="348" column="21" selection-start-line="348" selection-start-column="21" selection-end-line="348" selection-end-column="21" />
-          <folding>
-            <element signature="method#addCreditCard#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#getCreditCards#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#deleteCreditCard#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#makeReservationReservationTable#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#makeReservationHasTable#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#getRoomsOfReservation#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#searchAvailability#0;class#QuerySender#0" expanded="false" />
-            <element signature="method#updateReservation#0;class#QuerySender#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/Room.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -711,28 +695,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0689654">
-          <caret line="39" column="81" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="81" />
+        <state vertical-scroll-proportion="-3.9310346">
+          <caret line="48" column="44" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35714287">
-          <caret line="160" column="16" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="218" column="71" selection-start-line="218" selection-start-column="71" selection-end-line="218" selection-end-column="71" />
           <folding>
-            <element signature="e#14454#14455#0" expanded="true" />
-            <element signature="e#14519#14520#0" expanded="true" />
+            <element signature="e#5734#5740#0" expanded="true" />
+            <element signature="e#14857#14858#0" expanded="true" />
+            <element signature="e#14922#14923#0" expanded="true" />
             <element signature="method#update_reservation#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#submit#0;class#ReservationController#0" expanded="false" />
             <element signature="method#updateCardMenu#0;class#ReservationController#0" expanded="false" />
             <element signature="method#updateLocationMenu#0;class#ReservationController#0" expanded="false" />
             <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
             <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
             <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
             <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18095239">
+          <caret line="410" column="13" selection-start-line="410" selection-start-column="13" selection-end-line="410" selection-end-column="13" />
+          <folding>
+            <element signature="method#addCreditCard#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#getCreditCards#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#deleteCreditCard#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#makeReservationReservationTable#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#makeReservationHasTable#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#getRoomsOfReservation#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#searchAvailability#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#updateReservation#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#searchAvailabilityToCancel#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#deleteReservationReservationTable#0;class#QuerySender#0" expanded="false" />
           </folding>
         </state>
       </provider>
