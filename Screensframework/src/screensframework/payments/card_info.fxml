@@ -33,7 +33,7 @@
     <Text text="DELETE CARD" GridPane.columnIndex="5" GridPane.rowIndex="0" />
 
     <Label text="Delete:" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-    <SplitMenuButton mnemonicParsing="false"  fx:id="all_cards" text="card" GridPane.columnIndex="6" GridPane.rowIndex="1">
+    <SplitMenuButton mnemonicParsing="false"  onAction="#showCards" fx:id="all_cards" text="card" GridPane.columnIndex="6" GridPane.rowIndex="1">
         <items>
         </items>
     </SplitMenuButton>

@@ -49,12 +49,10 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import screensframework.*;
 import screensframework.com.util.QuerySender;
@@ -84,6 +82,27 @@ public class PaymentsController implements Initializable, ControlledScreen {
     }
 
     @FXML
+    public void showCards(ActionEvent event) {
+        if(all_cards.getItems()!=null) {
+            all_cards.getItems().removeAll();
+        }
+
+        ArrayList<MenuItem> list = new ArrayList<MenuItem>();
+        for(int x=0;x<Global.cards.size();x++){
+            MenuItem i = new MenuItem(Global.cards.get(x));
+            i.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    all_cards.setText(((MenuItem)actionEvent.getSource()).getText());
+                }
+            });
+            list.add(i);
+        }
+        all_cards.getItems().setAll(list);
+    }
+
+
+    @FXML
     //saves the card info
     public void save(ActionEvent event) {
 //        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
@@ -99,14 +118,14 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //deletes the card
     public void delete(ActionEvent event) {
-        //this shouldnt be here- should be called when the screen is shown
-        ArrayList<MenuItem> list = new ArrayList<MenuItem>();
-        myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+        int index_to_delete = 0;
         for(int x=0;x<Global.cards.size();x++){
-            list.add(new MenuItem(Global.cards.get(x)));
+            if(Global.cards.get(x).equals("all_cards.getText()")){
+                index_to_delete = x;
+            }
         }
-        all_cards.getItems().setAll(list);
-
+        Global.cardItems.remove(index_to_delete);
+        Global.cards.remove(index_to_delete);
         QuerySender.deleteCreditCard(Global.username, all_cards.getText());
     }
 

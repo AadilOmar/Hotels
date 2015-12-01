@@ -102,7 +102,6 @@ public class QuerySender {
         return result;
     }
 
-    //fail
     public static ResultSet getCreditCards(String username) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -122,7 +121,7 @@ public class QuerySender {
         return result;
     }
 
-    //fail
+
     public static int deleteCreditCard(String username, String card_number){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -135,7 +134,7 @@ public class QuerySender {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, Global.username);
-            preparedStatement.setString(1, card_number);
+            preparedStatement.setString(2, card_number);
             result = preparedStatement.executeUpdate();
         }catch (Exception e) {
             System.out.println("FAILURE");
@@ -162,7 +161,7 @@ public class QuerySender {
         return result;
     }
 
-    //fail
+
     public static int makeReservationReservationTable(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -207,7 +206,7 @@ public class QuerySender {
         return result;
     }
 
-    //fail
+
     public static int makeReservationHasTable(String reservation_id, String room_number, String loc, String include_ex_bed){
         Connection connection = null;
         PreparedStatement preparedStatement = null;

@@ -462,28 +462,35 @@ public class ReservationController implements Initializable, ControlledScreen {
         //sets the start/end date text to whatever was put in when creating reservation
         ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         ArrayList<String> stringList = new ArrayList<String>();
-        ResultSet result = QuerySender.getCreditCards(Global.username);
-        try {
-            while (result.next()) {
-                String card_number = result.getString("Card_Number");
-                System.out.println("_________________" + card_number);
-                MenuItem item = new MenuItem(card_number);
-                item.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        MenuItem i = (MenuItem)actionEvent.getSource();
-                        card.setText(i.getText());
-                    }
-                });
-                stringList.add(card_number);
-                list.add(item);
-                System.out.println(list+" l");
+        if(Global.cards == null) {
+            try {
+                ResultSet result = QuerySender.getCreditCards(Global.username);
+                while (result.next()) {
+                    String card_number = result.getString("Card_Number");
+                    System.out.println("_________________" + card_number);
+                    MenuItem item = new MenuItem(card_number);
+                    item.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            MenuItem i = (MenuItem) actionEvent.getSource();
+                            card.setText(i.getText());
+                        }
+                    });
+                    stringList.add(card_number);
+                    list.add(item);
+                    System.out.println(list + " l");
+                }
+            } catch (Exception e) {
+                //            e.printStackTrace();
+                System.out.println("NOOO");
             }
-        }catch(Exception e){
-//            e.printStackTrace();
-            System.out.println("NOOO");
+            Global.cards = stringList;
+            Global.cardItems = list;
         }
-        Global.cards = stringList;
+        else {
+            stringList = Global.cards;
+            list = Global.cardItems;
+        }
         card.getItems().addAll(list);
         System.out.println("+++"+list);
         card.getItems().addAll(list);
