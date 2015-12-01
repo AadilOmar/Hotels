@@ -10,12 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import screensframework.ControlledScreen;
-import screensframework.Main;
-import screensframework.ScreensController;
-import screensframework.Validator;
+import screensframework.*;
+import screensframework.com.util.QuerySender;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadFactory;
 
@@ -39,6 +38,7 @@ public class ReviewController implements Initializable, ControlledScreen {
     @FXML private TableView<ReviewItem> reviews_table;
     @FXML private TableColumn ratingCol;
     @FXML private TableColumn commentCol;
+    @FXML private TextField comment;
 
 
     private boolean already_created_reviews = false;
@@ -80,9 +80,21 @@ public class ReviewController implements Initializable, ControlledScreen {
         if(!all_menus_selected){
             return;
         }
+        ResultSet set;
+        int numReviews = 0;
+        try {
+            set = QuerySender.getNumReviews();
+            while(set.next()) {
+                numReviews = set.getInt("Max");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         //maybe have confirmation screen...
         myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-        //DATABASE ADD A REVIEW
+        int result = QuerySender.createReview(Global.username, (numReviews+1)+"", locationMenuGiveReview.getText(), ratingMenu.getText(), comment.getText());
+        System.out.println("REVIEW RESULT!! "+result);
     }
 
     @FXML

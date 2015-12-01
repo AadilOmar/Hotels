@@ -31,6 +31,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" afterPath="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml" afterPath="$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reservations/view_checked_rooms.fxml" afterPath="$PROJECT_DIR$/src/screensframework/reservations/view_checked_rooms.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" afterPath="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" />
     </list>
     <ignored path="Screensframework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -117,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuerySender.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="QuerySender.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18095239">
-              <caret line="410" column="13" selection-start-line="410" selection-start-column="13" selection-end-line="410" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="467" column="26" selection-start-line="467" selection-start-column="26" selection-end-line="467" selection-end-column="26" />
               <folding>
                 <element signature="method#addCreditCard#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#getCreditCards#0;class#QuerySender#0" expanded="false" />
@@ -133,6 +134,31 @@
                 <element signature="method#updateReservation#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#searchAvailabilityToCancel#0;class#QuerySender#0" expanded="false" />
                 <element signature="method#deleteReservationReservationTable#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#deleteReservationHasTable#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#getNumReviews#0;class#QuerySender#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="give_review.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/give_review.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41221374">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReviewController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+              <folding>
+                <element signature="e#3340#3341#0" expanded="true" />
+                <element signature="e#3405#3406#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -164,8 +190,9 @@
         <option value="$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/Validator.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" />
-        <option value="$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java" />
       </list>
     </option>
   </component>
@@ -236,6 +263,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reviews" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -648,7 +697,7 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -657,14 +706,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/ConnectionConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/Validator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -674,14 +715,6 @@
             <element signature="method#validate_selected_card#0;class#Validator#0" expanded="false" />
             <element signature="method#validate_adding_card#0;class#Validator#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.259259">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -697,6 +730,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.9310346">
           <caret line="48" column="44" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.259259">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -720,10 +761,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/ConnectionConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18095239">
-          <caret line="410" column="13" selection-start-line="410" selection-start-column="13" selection-end-line="410" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="467" column="26" selection-start-line="467" selection-start-column="26" selection-end-line="467" selection-end-column="26" />
           <folding>
             <element signature="method#addCreditCard#0;class#QuerySender#0" expanded="false" />
             <element signature="method#getCreditCards#0;class#QuerySender#0" expanded="false" />
@@ -735,7 +784,28 @@
             <element signature="method#updateReservation#0;class#QuerySender#0" expanded="false" />
             <element signature="method#searchAvailabilityToCancel#0;class#QuerySender#0" expanded="false" />
             <element signature="method#deleteReservationReservationTable#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#deleteReservationHasTable#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#getNumReviews#0;class#QuerySender#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding>
+            <element signature="e#3340#3341#0" expanded="true" />
+            <element signature="e#3405#3406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/give_review.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41221374">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

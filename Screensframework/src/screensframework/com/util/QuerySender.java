@@ -441,5 +441,67 @@ public class QuerySender {
         return 0;
     }
 
+    public static ResultSet getNumReviews(){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String query = "SELECT MAX(Review_Number) as Max FROM REVIEW";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            result = preparedStatement.executeQuery();
+            return result;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    public static int createReview(String username, String review_number, String location, String rating, String comment){
+        Connection connection = null;
+        System.out.println("LOCATION!! "+location);
+        PreparedStatement preparedStatement = null;
+        int resultSet = 0;
+        String query = "INSERT INTO `cs4400_Group_12`.`REVIEW` (`Username`, `Review_Number`, `Rating`, `Comment`, `Hotel_Location`) VALUES (?, ?, ?, ?, ?);";
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, review_number);
+            preparedStatement.setString(3, location);
+            preparedStatement.setString(4, rating);
+            preparedStatement.setString(5, comment);
+            resultSet = preparedStatement.executeUpdate();
+            return resultSet;
+
+        }catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
 
 }
