@@ -303,7 +303,40 @@ public class QuerySender {
     }
 
     //still todo
-    public static int updateReservation(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled){
+    public static int updateReservation(String reservation_id, String start, String end, int total_cost){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String query = "UPDATE RESERVATION SET Start_Date= ?, End_Date= ?, Total_Cost= ?" +
+                "WHERE Reservation_ID=?";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, start);
+            preparedStatement.setString(2, end);
+            preparedStatement.setInt(3, total_cost);
+            preparedStatement.setString(4, reservation_id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Failed update");
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return 0;
     }
 
