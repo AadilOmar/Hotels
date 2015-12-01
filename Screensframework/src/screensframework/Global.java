@@ -1,11 +1,13 @@
 package screensframework;
 
+import javafx.stage.Stage;
+
 /**
  * Created by aadil on 11/22/15.
  */
 public class Global {
 
-    public static String user_type = "customer";
+    public static String user_type = "manager";
     public static String username;
     public static String password;
     public static String email;
@@ -14,5 +16,8 @@ public class Global {
     public static String newReservationStart;
     public static String newReservationEnd;
     public static String reservationID;
+
+    public static Stage primaryStage;
+
 
 }

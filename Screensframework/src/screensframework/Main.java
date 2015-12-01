@@ -129,6 +129,7 @@ public class Main extends Application {
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
+        Global.primaryStage = primaryStage;
         primaryStage.setScene(scene);
         primaryStage.show();
     }
