@@ -82,13 +82,15 @@ public class PaymentsController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    public void showCards(ActionEvent event) {
+    public void update_cards(ActionEvent event) {
+        System.out.println("UPADTING");
         if(all_cards.getItems()!=null) {
             all_cards.getItems().removeAll();
         }
 
         ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         for(int x=0;x<Global.cards.size();x++){
+            System.out.println("A CARD");
             MenuItem i = new MenuItem(Global.cards.get(x));
             i.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -98,7 +100,10 @@ public class PaymentsController implements Initializable, ControlledScreen {
             });
             list.add(i);
         }
+        all_cards.getItems().removeAll();
         all_cards.getItems().setAll(list);
+        all_cards.setVisible(false);
+        all_cards.setVisible(true);
     }
 
 
@@ -111,6 +116,11 @@ public class PaymentsController implements Initializable, ControlledScreen {
 //        }
 
         int result = QuerySender.addCreditCard("c1001", card_number.getText(), card_name.getText(), cvv.getText(), exp_date.getText());
+        if(result == 1) {
+            Global.cardItems.add(new MenuItem(card_number.getText()));
+            Global.cards.add(card_number.getText());
+        }
+
         System.out.println("ASDFASDFADSF "+result);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
@@ -118,15 +128,19 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //deletes the card
     public void delete(ActionEvent event) {
-        int index_to_delete = 0;
-        for(int x=0;x<Global.cards.size();x++){
-            if(Global.cards.get(x).equals("all_cards.getText()")){
-                index_to_delete = x;
+
+        int result = QuerySender.deleteCreditCard(Global.username, all_cards.getText());
+        if(result == 1){
+            int index_to_delete = 0;
+            for(int x=0;x<Global.cards.size();x++){
+                if(Global.cards.get(x).equals("all_cards.getText()")){
+                    index_to_delete = x;
+                }
             }
+            Global.cardItems.remove(index_to_delete);
+            Global.cards.remove(index_to_delete);
         }
-        Global.cardItems.remove(index_to_delete);
-        Global.cards.remove(index_to_delete);
-        QuerySender.deleteCreditCard(Global.username, all_cards.getText());
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
     }
 
     @FXML

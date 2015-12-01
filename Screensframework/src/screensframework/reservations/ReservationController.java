@@ -459,8 +459,11 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
+        card.getItems().removeAll();
+
         //sets the start/end date text to whatever was put in when creating reservation
         ArrayList<MenuItem> list = new ArrayList<MenuItem>();
+        card.getItems().addAll(list);
         ArrayList<String> stringList = new ArrayList<String>();
         if(Global.cards == null) {
             try {
@@ -489,11 +492,14 @@ public class ReservationController implements Initializable, ControlledScreen {
         }
         else {
             stringList = Global.cards;
+            System.out.println("ASDFASDF"+stringList);
             list = Global.cardItems;
         }
-        card.getItems().addAll(list);
+        card.setVisible(false);
+        card.setVisible(true);
         System.out.println("+++"+list);
-        card.getItems().addAll(list);
+//        card.getItems().addAll(list);
+        updateCards(stringList);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = null;
         Date endDate= null;
@@ -518,6 +524,28 @@ public class ReservationController implements Initializable, ControlledScreen {
         add_to_table(selected_rooms,checked_rooms_table);
     }
 
+    private void updateCards(ArrayList<String> list){
+        //item was added
+        System.out.println("WAS ADDED");
+        if(card.getItems().size() < list.size()){
+            card.getItems().add(new MenuItem(list.get(list.size()-1)));
+        }
+        //item was removed
+        else if (card.getItems().size() > list.size()){
+            System.out.println("WAS REMOVED");
+            int toRemove = 0;
+            for(int x=0;x<card.getItems().size();x++){
+                //list doesnt contain item
+                if(!list.contains(card.getItems().get(x))){
+                    toRemove = x;
+                }
+            }
+            card.getItems().remove(toRemove);
+        }
+        for(int x=0;x<card.getItems().size();x++){
+
+        }
+    }
     @FXML
     public void updateCardMenu(ActionEvent event){
         MenuItem item = (MenuItem)event.getSource();
