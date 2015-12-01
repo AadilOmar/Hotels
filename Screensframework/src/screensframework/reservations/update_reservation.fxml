@@ -21,17 +21,17 @@
 
     <Text fx:id="error_invalid_reservaion_id" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2"/>
 
-    <Label text="Current Start Date(mm/dd/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Current Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <Text
             GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="current_start_date"/>
 
-    <Label text="Current End Date(mm/dd/yyyy):" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Label text="Current End Date:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
     <Text GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="current_end_date"/>
 
-    <Label text="New Start Date(mm/dd/yyyy):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="New Start Date(yyyy-mm-dd):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="new_start_date"/>
 
-    <Label text="New End Date(mm/dd/yyyy):" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <Label text="New End Date(yyyy-mm-dd):" GridPane.columnIndex="2" GridPane.rowIndex="4" />
     <TextField
             GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="new_end_date"/>
 

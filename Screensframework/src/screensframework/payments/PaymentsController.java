@@ -40,7 +40,10 @@
 package screensframework.payments;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -48,10 +51,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import screensframework.*;
+import screensframework.com.util.QuerySender;
 
 /**
  * FXML Controller class
@@ -66,6 +72,7 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML private TextField card_number;
     @FXML private TextField card_name;
     @FXML private TextField cvv;
+    @FXML private SplitMenuButton all_cards;
 
 
     /**
@@ -79,17 +86,28 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //saves the card info
     public void save(ActionEvent event) {
-        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
-        if(!card_fields_are_valid){
-            return;
-        }
+//        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
+//        if(!card_fields_are_valid){
+//            return;
+//        }
+
+        int result = QuerySender.addCreditCard("c1001", card_number.getText(), card_name.getText(), cvv.getText(), exp_date.getText());
+        System.out.println("ASDFASDFADSF "+result);
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
 
     @FXML
     //deletes the card
     public void delete(ActionEvent event) {
+        //this shouldnt be here- should be called when the screen is shown
+        ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
+        for(int x=0;x<Global.cards.size();x++){
+            list.add(new MenuItem(Global.cards.get(x)));
+        }
+        all_cards.getItems().setAll(list);
+
+        QuerySender.deleteCreditCard(Global.username, all_cards.getText());
     }
 
     @FXML

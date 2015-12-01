@@ -41,6 +41,10 @@
 package screensframework;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +52,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import screensframework.com.entities.Customer;
+import screensframework.com.util.ConnectionConfiguration;
 
 /**
  * FXML Controller class
@@ -60,6 +66,7 @@ public class RegisterController implements Initializable , ControlledScreen {
     String[] passwordArray = {"pass1", "pass2", "pass3"};
     int numUsers = 3;
     @FXML private Text errorText;
+    @FXML private TextField username;
     @FXML private TextField email;
     @FXML private PasswordField password;
     @FXML private PasswordField confirm_password;
@@ -79,6 +86,72 @@ public class RegisterController implements Initializable , ControlledScreen {
 
     @FXML
     private void register(ActionEvent event){
+        Customer c = new Customer();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+
+            /*PreparedStatement checkCredentials = connection.prepareStatement("SELECT Cnnnn, Email FROM `CUSTOMER` WHERE Cnnnn = ? or Email = ?");
+            checkCredentials.setString(1, username.getText());
+            checkCredentials.setString(2, email.getText());
+            ResultSet resultSet = checkCredentials.executeQuery();
+            while (resultSet.next()) {
+                c.setUsername(resultSet.getString("Cnnnn"));
+                c.setEmail(resultSet.getString("Email"));
+            }*/
+
+            System.out.println("username: " + username.getText() + ", email: " + email.getText() + ", password: " + password.getText());
+
+            String name = username.getText().toString();
+            boolean validUsername = true;
+            if (name.length() != 5) {
+                validUsername = false;
+            } else {
+                for (int i = 0; i < name.length(); i++) {
+                    if (!Character.isDigit(name.charAt(i))) {
+
+                    }
+                }
+            }
+
+            preparedStatement = connection.prepareStatement("INSERT INTO `cs4400_Group_12`.`CUSTOMER` (`Cnnnn`, `Email`, `Password`) VALUES (?, ?, ?)");
+            preparedStatement.setString(1, username.getText());
+            preparedStatement.setString(2, email.getText());
+            preparedStatement.setString(3, password.getText());
+            preparedStatement.executeUpdate();
+
+
+        } catch (Exception e) {
+            System.out.println("Connection FAILED");
+            e.printStackTrace();
+
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            //login credentials were not found in data base so it is valid
+            if (c.getUsername() == null && c.getEmail() == null && c.getPassword() == null) {
+
+            }
+        }
+
+        /*
         boolean usernameIsUnique = true;
         boolean passwordsMatch = false;
         if(password.equals(confirm_password)){
@@ -105,6 +178,7 @@ public class RegisterController implements Initializable , ControlledScreen {
             errorText.setText("Error: passwords don't match");
 
         }
+        */
     }
 
     @FXML

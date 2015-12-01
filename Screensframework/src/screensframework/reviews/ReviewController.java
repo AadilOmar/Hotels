@@ -4,17 +4,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import screensframework.*;
+import screensframework.ControlledScreen;
+import screensframework.Main;
+import screensframework.ScreensController;
+import screensframework.Validator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +24,7 @@ import java.util.concurrent.ThreadFactory;
  */
 public class ReviewController implements Initializable, ControlledScreen {
 
-    Scene current;
+
     ObservableList<ReviewItem> all_reviews = FXCollections.observableArrayList(
             new ReviewItem("Good", "it was alright of a place"),
             new ReviewItem("Very Good", "omg I loved it"),
@@ -62,35 +61,16 @@ public class ReviewController implements Initializable, ControlledScreen {
     public void seeReviews(ActionEvent event){
         boolean menu_is_selected = Validator.validate_all_menus_checked(locationMenuSeeReview, null, error_seeing_review);
         if(menu_is_selected){
+            System.out.println("MENU SELECTED");
             if(!already_created_reviews) {
+                System.out.println("CREATING TABLE");
+                System.out.println("ADDING TO TABLE");
+                create_table(reviews_table);
 
-                GridPane pane = new GridPane();
-                Text header = new Text();
-                header.setText("VIEW REVIEWS");
-                pane.add(header, 0, 0);
-                TableView table = new TableView();
-                pane.add(table, 0, 2);
-                Button b = new Button();
-                b.setText("back");
-                b.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        Global.primaryStage.setScene(current);
-                        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-                    }
-                });
-                pane.add(b, 0, 4);
-                create_table(table);
-                add_to_table(all_reviews,table);
-                StackPane root = new StackPane();
-                root.getChildren().add(pane);
-                current = Global.primaryStage.getScene();
-                Global.primaryStage.setScene(new Scene(root));
-                Global.primaryStage.show();
-                
                 System.out.println("FINISHED ADDING TO TABLE");
                 already_created_reviews = true;
             }
+            add_to_table(all_reviews, reviews_table);
         }
     }
 
@@ -136,6 +116,7 @@ public class ReviewController implements Initializable, ControlledScreen {
         TableColumn comment = new TableColumn("Comment");
         comment.setMinWidth(100);
 
+
         rating.setCellValueFactory(
                 new PropertyValueFactory<ReviewItem,String>("rating")
         );
@@ -147,12 +128,14 @@ public class ReviewController implements Initializable, ControlledScreen {
 
     private void add_to_table(ObservableList<ReviewItem> reviews, TableView table){
         table.setItems(null);
-        table.setItems(reviews);
+        if(reviews!=null) {
+            table.getItems().setAll(reviews);
+        }
     }
 
-    public class ReviewItem{
-        private String rating;
-        private String comment;
+    private class ReviewItem{
+        public String rating;
+        public String comment;
 
         public ReviewItem(String rating, String comment){
             this.rating = new String(rating);
