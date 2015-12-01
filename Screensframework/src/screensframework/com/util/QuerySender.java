@@ -1,12 +1,10 @@
 package screensframework.com.util;
 
 import com.sun.org.apache.bcel.internal.ExceptionConstants;
+import screensframework.Global;
 
 import javax.management.Query;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -128,31 +126,6 @@ public class QuerySender {
             System.out.println("Connection FAILED");
             e.printStackTrace();
 
-        } finally {
-            System.out.println("asdfasdf");
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return null;
     }
@@ -163,18 +136,7 @@ public class QuerySender {
         int result = 0;
         String q = "INSERT INTO `cs4400_Group_12`.`PAYMENT_INFORMATION` (`Username`, `Card_Number`, `Name`, `CCV`, `Expiration_Date`) VALUES ('c1001', '40asdf', 'carafddx', '4dfs', '2015-11-30');";
         String query = "INSERT INTO `cs4400_Group_12`.`PAYMENT_INFORMATION` (`Username`, `Card_Number`, `Name`, `CCV`, `Expiration_Date`) VALUES (?, ?, ?, ?, ?)";
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//        java.sql.Date exp = null;
-//        try {
-////            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-////            java.util.Date date = sdf1.parse(startDate);
-////            java.sql.Date sqlStartDate = new Date(date.getTime());
-//            exp = java.sql.Date.valueOf(exp_date+"-01");
-//            System.out.println(exp+" ok");
-////            sqlDate = java.sql.Date.valueOf()
-//        }catch(Exception e){
-//
-//        }
+
         System.out.println(query);
         try {
             connection = ConnectionConfiguration.getConnection();
@@ -207,6 +169,51 @@ public class QuerySender {
                 }
             }
 
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+    public static ResultSet getCreditCards() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        String query = "SELECT Card_Number FROM PAYMENT_INFORMATION LEFT JOIN CUSTOMER ON PAYMENT_INFORMATION.Username = CUSTOMER.Cnnnn  WHERE Username = ?;";
+
+        System.out.println(query);
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement =  connection.prepareStatement(query);
+            preparedStatement.setString(1, Global.username);
+            result = preparedStatement.executeQuery();
+            System.out.println(result.findColumn("Card_Number"));
+            return result;
+        } catch (Exception e) {
+            System.out.println("FAILURE");
+            e.printStackTrace();
+
+        } finally {
+            System.out.println("asdfasdf");
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             if (connection != null) {
                 try {
                     connection.close();

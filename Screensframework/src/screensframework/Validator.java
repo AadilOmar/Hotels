@@ -27,13 +27,13 @@ public class Validator {
     //returns String error if there is issues with the date. Returns null if no errors
     public static boolean validate_reservation_date(String start, String end, Text errorText) {
 
-        String validDate = "([0-9]{2})/([0-9]{2})/[0-9]{4}";
+        String validDate = "([0-9]{4})-([0-9]{2})/[0-9]{2}";
         if (!(start.matches(validDate) && end.matches(validDate))) {
-            errorText.setText("Date not in the format mm/dd/yyy");
+            errorText.setText("Date not in the format yyyy-MM-dd");
             return false;
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
         Date startDate = new Date();
         Date endDate = new Date();

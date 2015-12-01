@@ -48,10 +48,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import com.sun.org.apache.bcel.internal.ExceptionConstants;
@@ -256,25 +253,19 @@ public class ReservationController implements Initializable, ControlledScreen {
         try{
             while(result.next()){
                 String roomNumber = result.getString("Room_Number");
-                System.out.println(roomNumber);
                 String roomCategory = result.getString("Room_Category");
-                System.out.println(roomCategory);
                 String location = result.getString("Hotel_Location");
-                System.out.println(location);
                 int costPerDay = Integer.parseInt(result.getString("Cost"));
-                System.out.println(costPerDay);
                 int costExBedPerDay = Integer.parseInt(result.getString("Cost_Extra_Bed"));
-                System.out.println(costExBedPerDay);
                 int numPeopleAllowed = Integer.parseInt(result.getString("Number_People"));
-                System.out.println(numPeopleAllowed);
                 Room newRoom = new Room(roomNumber, roomCategory, numPeopleAllowed, costPerDay, costExBedPerDay, "x", "x");
-                System.out.println(newRoom.toString());
                 all_rooms.add(newRoom);
             }
+            result.close();
         }catch(Exception e){
             System.out.println("lkasflkasjf");
         }
-//
+
         Global.newReservationStart = start;
         Global.newReservationEnd = end;
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);
@@ -306,7 +297,28 @@ public class ReservationController implements Initializable, ControlledScreen {
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
         //sets the start/end date text to whatever was put in when creating reservation
-
+        ArrayList<MenuItem> list = new ArrayList<MenuItem>();
+        Collection<MenuItem> coll = new ArrayList<MenuItem>();
+        ResultSet result = QuerySender.getCreditCards();
+        try {
+            while (result.next()) {
+                System.out.println("_________________");
+                String card_number = result.getString("Card_Number");
+                card_number = card_number.substring(card_number.length() - 5);
+                MenuItem item = new MenuItem("cw");
+                list.add(item);
+                coll.add(item);
+                System.out.println(list+" l");
+                System.out.println(coll+" c");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("NOOO");
+        }
+        card.getItems().addAll(coll);
+//        card.getItems().addAll(new MenuItem("Logout"), new MenuItem("Sleep"));
+        System.out.println("+++"+list);
+//        card.getItems().addAll(list);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = null;
         Date endDate= null;
