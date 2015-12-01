@@ -40,6 +40,10 @@
 package screensframework.reservations;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -50,6 +54,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.org.apache.bcel.internal.ExceptionConstants;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -65,6 +70,8 @@ import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import screensframework.*;
+import screensframework.com.util.ConnectionConfiguration;
+import screensframework.com.util.QuerySender;
 
 /**
  * FXML Controller class
@@ -89,7 +96,6 @@ public class ReservationController implements Initializable, ControlledScreen {
 
     @FXML private TableColumn column;
     @FXML private SplitMenuButton card;
-    @FXML private SplitMenuButton location;
     @FXML private Text confirmation_reservation_id;
 
     private boolean already_created_all_rooms = false;
@@ -110,6 +116,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     //for searching all rooms
     @FXML private TextField start_date;
     @FXML private TextField end_date;
+    @FXML private SplitMenuButton location;
+
 
     //for looking at selected rooms
     @FXML private Text start_date_picked;
@@ -164,7 +172,7 @@ public class ReservationController implements Initializable, ControlledScreen {
             end_date_cancelled.setText(old_end);
 
             error_invalid_reservaion_id_cancel.setText("");
-            if(!already_created_cancelled_rooms){
+            if(!already_created_cancelled_rooms){//
                 create_table(all_cancelled_rooms_table);
                 createTableListener();
                 already_created_cancelled_rooms = true;
@@ -199,6 +207,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     //searches if the rooms have availability in the dates specified. Returns no rooms if they dont
     @FXML
     public void searchAvailability(ActionEvent event){
+
         boolean datesAreValid = Validator.validate_reservation_date(new_start_date.getText(), new_end_date.getText(), error_search_reservation);
         if(datesAreValid){
             boolean allRoomsAvailable = true;
@@ -236,12 +245,15 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms it finds from the database
     public void search_all_rooms(ActionEvent event){
-        String start = start_date.getText().toString();
-        String end = end_date.getText().toString();
-//        String start = "09/29/2016";
-//        String end =  "09/30/2016";
+        String start = start_date.getText();
+        String end = end_date.getText();
+        String loc = location.getText();
+
         boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
         if(!datesAreValid){ return; }
+
+        ResultSet result = QuerySender.findAllRooms(start, end, loc);
+
         Global.newReservationStart = start;
         Global.newReservationEnd = end;
         myController.setScreen(Main.VIEW_ALL_ROOMS_SCREEN);

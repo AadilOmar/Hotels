@@ -41,7 +41,14 @@
 package screensframework;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import screensframework.com.entities.Customer;
+import screensframework.com.util.ConnectionConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -85,6 +92,78 @@ public class LoginController implements Initializable, ControlledScreen {
 
     @FXML
     protected void login(ActionEvent event) {
+//
+//        Customer c = new Customer();
+//
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet resultSet = null;
+//
+//        try {
+//            connection = ConnectionConfiguration.getConnection();
+//            preparedStatement = connection.prepareStatement("SELECT * FROM `CUSTOMER` WHERE Cnnnn = ? and Password = ?");
+//            preparedStatement.setString(1, username.getText());
+//            preparedStatement.setString(2, password.getText());
+//            resultSet = preparedStatement.executeQuery();
+//
+//            while (resultSet.next()) {
+//                c.setUsername(resultSet.getString("Cnnnn"));
+//                c.setEmail(resultSet.getString("Email"));
+//                c.setPassword(resultSet.getString("Password"));
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("Connection FAILED");
+//            e.printStackTrace();
+//
+//            } finally {
+//                if (resultSet != null) {
+//                    try {
+//                        resultSet.close();
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                if (preparedStatement != null) {
+//                    try {
+//                        preparedStatement.close();
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            if (connection != null) {
+//                try {
+//                    connection.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//
+//        System.out.println("username: " + c.getUsername() + ", email: " + c.getEmail() + ", password: " + c.getPassword());
+//
+//        //the login credentials were found in the database
+//        if (c.getUsername() != null && c.getEmail() != null && c.getPassword() != null) {
+//            //go to next screenParent.
+//            errorText.setText("good");
+//            if(Global.user_type.equals("customer")){
+//                myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+//            }
+//            else{
+//                myController.setScreen(Main.MANAGER_HOME_SCREEN);
+//            }
+//        }
+//        else {
+//            //show error message
+//            errorText.setText("Error: username or password incorrect");
+//
+//        }
+        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+    }
+
+        /*
         //go through database and find if usrname and password match anywhere
         for(int x=0;x<numUsers;x++){
             System.out.println( username.getText() + " "+ usernameArray[x]);
@@ -108,6 +187,7 @@ public class LoginController implements Initializable, ControlledScreen {
             errorText.setText("Error: username or password incorrect");
 
         }
-    }
 
+    }
+    */
 }

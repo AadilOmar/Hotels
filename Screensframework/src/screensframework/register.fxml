@@ -30,7 +30,7 @@
 
   <Label text="Email:"
          GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-  <PasswordField fx:id="email"
+  <TextField fx:id="email"
                  GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
 

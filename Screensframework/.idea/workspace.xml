@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/LoginController.class" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/LoginController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/RegisterController.class" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/RegisterController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController$1.class" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController$2.class" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController.class" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/reservations/ReservationController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/Global.java" afterPath="$PROJECT_DIR$/src/screensframework/Global.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/Main.java" afterPath="$PROJECT_DIR$/src/screensframework/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java" afterPath="$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/manager_screens/revenue_report.fxml" afterPath="$PROJECT_DIR$/src/screensframework/manager_screens/revenue_report.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" afterPath="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml" afterPath="$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Screensframework/screensframework/register.fxml" afterPath="$PROJECT_DIR$/out/production/Screensframework/screensframework/register.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/LoginController.java" afterPath="$PROJECT_DIR$/src/screensframework/LoginController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/RegisterController.java" afterPath="$PROJECT_DIR$/src/screensframework/RegisterController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/register.fxml" afterPath="$PROJECT_DIR$/src/screensframework/register.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" afterPath="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,34 +73,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/Main.java">
+      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+              <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#8930#8931#0" expanded="true" />
+                <element signature="e#8995#8996#0" expanded="true" />
+                <element signature="e#10628#10629#0" expanded="true" />
+                <element signature="e#10688#10689#0" expanded="true" />
+                <element signature="e#13680#13681#0" expanded="true" />
+                <element signature="e#13723#13724#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReservationController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
+      <file leaf-file-name="QuerySender.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
-                <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
+                <element signature="method#findAllRooms#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#makeReservationCreateReservation#0;class#QuerySender#0" expanded="false" />
+                <element signature="method#makeReservationCreateHas#0;class#QuerySender#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search_rooms.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/search_rooms.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.11948052">
+              <caret line="15" column="58" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="104" column="65" selection-start-line="104" selection-start-column="65" selection-end-line="104" selection-end-column="65" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,12 +131,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding>
-                <element signature="e#2735#2736#0" expanded="true" />
-                <element signature="e#2776#2777#0" expanded="true" />
-                <element signature="e#2867#2868#0" expanded="true" />
-                <element signature="e#2907#2908#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -119,24 +140,8 @@
         <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="14" selection-start-line="150" selection-start-column="14" selection-end-line="150" selection-end-column="14" />
-              <folding>
-                <element signature="method#view_reservation_report#0;class#ManagerController#0" expanded="false" />
-                <element signature="e#4868#5126#0" expanded="true" />
-                <element signature="e#5125#5126#0" expanded="true" />
-                <element signature="e#5949#6207#0" expanded="true" />
-                <element signature="e#6206#6207#0" expanded="true" />
-                <element signature="method#view_revenue_report#0;class#ManagerController#0" expanded="false" />
-                <element signature="e#6988#7246#0" expanded="true" />
-                <element signature="e#7245#7246#0" expanded="true" />
-                <element signature="method#back#0;class#ManagerController#0" expanded="false" />
-                <element signature="class#ReservationReportItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="class#RoomCategoryItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="class#RevenueItem#0;class#ManagerController#0" expanded="false" />
-                <element signature="method#create_room_category_table#0;class#ManagerController#0" expanded="false" />
-                <element signature="method#create_revenue_report_table#0;class#ManagerController#0" expanded="false" />
-                <element signature="method#create_reservation_report_table#0;class#ManagerController#0" expanded="false" />
-              </folding>
+              <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,34 +150,33 @@
         <entry file="file://$PROJECT_DIR$/src/screensframework/Global.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReviewController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReviewController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5695538">
-              <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2452#2759#0" expanded="true" />
-                <element signature="e#2758#2759#0" expanded="true" />
-                <element signature="method#updateGiveLocationMenu#0;class#ReviewController#0" expanded="false" />
-                <element signature="method#updateSeeLocationMenu#0;class#ReviewController#0" expanded="false" />
-                <element signature="method#updateRatingMenu#0;class#ReviewController#0" expanded="false" />
+                <element signature="e#1747#1748#0" expanded="true" />
+                <element signature="e#1790#1791#0" expanded="true" />
+                <element signature="e#2893#2894#0" expanded="true" />
+                <element signature="e#2958#2959#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaymentsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/payments/PaymentsController.java">
+      <file leaf-file-name="ConnectionConfiguration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/ConnectionConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -181,28 +185,8 @@
       <file leaf-file-name="view_review.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.259259">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="revenue_report.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/revenue_report.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.3333335">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update_reservation.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0">
-              <caret line="21" column="38" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -255,8 +239,6 @@
         <option value="$PROJECT_DIR$/src/screensframework/ManagerHome.java" />
         <option value="$PROJECT_DIR$/src/screensframework/ManagerController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/reservation_report.fxml" />
-        <option value="$PROJECT_DIR$/src/screensframework/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/screensframework/RegisterController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/view_rooms.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/search_rooms.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/view_checked_rooms.fxml" />
@@ -269,13 +251,16 @@
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/popular_room_category.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/ScreensController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reservations/cancel_reservation.fxml" />
-        <option value="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/Main.java" />
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/revenue_report.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java" />
         <option value="$PROJECT_DIR$/src/screensframework/Global.java" />
         <option value="$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml" />
         <option value="$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/RegisterController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java" />
+        <option value="$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java" />
       </list>
     </option>
   </component>
@@ -316,6 +301,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -451,14 +438,64 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Screensframework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -786,7 +823,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985073" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26119402" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -832,13 +869,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>359</line>
+          <line>371</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>402</line>
+          <line>414</line>
           <properties />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
@@ -856,20 +893,20 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java</url>
-          <line>125</line>
-          <properties class="screensframework.reviews.ReviewController" method="updateRatingMenu" />
+          <line>105</line>
+          <properties class="screensframework.reviews.ReviewController" />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java</url>
-          <line>306</line>
+          <line>318</line>
           <properties class="screensframework.reservations.ReservationController" method="updateTotalCost" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java</url>
-          <line>117</line>
-          <properties class="screensframework.manager_screens.ManagerController" method="view_reservation_report" />
+          <line>66</line>
+          <properties class="screensframework.manager_screens.ManagerController" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
@@ -885,53 +922,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/manager_home.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding>
-            <element signature="method#view_reservation_report#0;class#ManagerController#0" expanded="false" />
-            <element signature="e#4868#5126#0" expanded="true" />
-            <element signature="e#5125#5126#0" expanded="true" />
-            <element signature="e#5949#6207#0" expanded="true" />
-            <element signature="e#6206#6207#0" expanded="true" />
-            <element signature="method#view_revenue_report#0;class#ManagerController#0" expanded="false" />
-            <element signature="e#6988#7246#0" expanded="true" />
-            <element signature="e#7245#7246#0" expanded="true" />
-            <element signature="method#back#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#ReservationReportItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#RoomCategoryItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#RevenueItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_room_category_table#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_revenue_report_table#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_reservation_report_table#0;class#ManagerController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -941,6 +936,7 @@
           <caret line="58" column="58" selection-start-line="58" selection-start-column="58" selection-end-line="58" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7903#7904#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -965,12 +961,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
-          <folding>
-            <element signature="e#2735#2736#0" expanded="true" />
-            <element signature="e#2776#2777#0" expanded="true" />
-            <element signature="e#2867#2868#0" expanded="true" />
-            <element signature="e#2907#2908#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -999,7 +990,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="3" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1090,7 +1080,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="3" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1143,22 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5925927">
           <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/RegisterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7475728">
-          <caret line="90" column="9" selection-start-line="90" selection-start-column="9" selection-end-line="90" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9265092">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1237,17 +1210,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/search_rooms.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.0">
-          <caret line="42" column="20" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/update_reservation.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="21" column="38" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
@@ -1279,8 +1244,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/revenue_report.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3333335">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1288,48 +1253,26 @@
     <entry file="file://$PROJECT_DIR$/src/screensframework/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7903#7904#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="51" selection-start-line="147" selection-start-column="51" selection-end-line="147" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#searchReservation#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#create_reservation_id#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#updateTotalCost#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#setCancelledDate#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#setAmountToBeRefunded#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#createTableListener#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#create_table#0;class#ReservationController#0" expanded="false" />
-            <element signature="method#add_to_table#0;class#ReservationController#0" expanded="false" />
-          </folding>
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/ScreensController.java">
+    <entry file="file://$PROJECT_DIR$/src/screensframework/RegisterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="e#2735#2736#0" expanded="true" />
-            <element signature="e#2776#2777#0" expanded="true" />
-            <element signature="e#2867#2868#0" expanded="true" />
-            <element signature="e#2907#2908#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/Global.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.578125">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1337,47 +1280,91 @@
     <entry file="file://$PROJECT_DIR$/src/screensframework/manager_screens/ManagerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="14" selection-start-line="150" selection-start-column="14" selection-end-line="150" selection-end-column="14" />
-          <folding>
-            <element signature="method#view_reservation_report#0;class#ManagerController#0" expanded="false" />
-            <element signature="e#4868#5126#0" expanded="true" />
-            <element signature="e#5125#5126#0" expanded="true" />
-            <element signature="e#5949#6207#0" expanded="true" />
-            <element signature="e#6206#6207#0" expanded="true" />
-            <element signature="method#view_revenue_report#0;class#ManagerController#0" expanded="false" />
-            <element signature="e#6988#7246#0" expanded="true" />
-            <element signature="e#7245#7246#0" expanded="true" />
-            <element signature="method#back#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#ReservationReportItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#RoomCategoryItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="class#RevenueItem#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_room_category_table#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_revenue_report_table#0;class#ManagerController#0" expanded="false" />
-            <element signature="method#create_reservation_report_table#0;class#ManagerController#0" expanded="false" />
-          </folding>
+          <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/view_review.fxml">
+    <entry file="file://$PROJECT_DIR$/src/screensframework/Global.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.259259">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/ScreensController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="65" selection-start-line="104" selection-start-column="65" selection-end-line="104" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/screensframework/reviews/ReviewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5695538">
-          <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2452#2759#0" expanded="true" />
-            <element signature="e#2758#2759#0" expanded="true" />
-            <element signature="method#updateGiveLocationMenu#0;class#ReviewController#0" expanded="false" />
-            <element signature="method#updateSeeLocationMenu#0;class#ReviewController#0" expanded="false" />
-            <element signature="method#updateRatingMenu#0;class#ReviewController#0" expanded="false" />
+            <element signature="e#1747#1748#0" expanded="true" />
+            <element signature="e#1790#1791#0" expanded="true" />
+            <element signature="e#2893#2894#0" expanded="true" />
+            <element signature="e#2958#2959#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/ReservationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8930#8931#0" expanded="true" />
+            <element signature="e#8995#8996#0" expanded="true" />
+            <element signature="e#10628#10629#0" expanded="true" />
+            <element signature="e#10688#10689#0" expanded="true" />
+            <element signature="e#13680#13681#0" expanded="true" />
+            <element signature="e#13723#13724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/ConnectionConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/com/util/QuerySender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#findAllRooms#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#makeReservationCreateReservation#0;class#QuerySender#0" expanded="false" />
+            <element signature="method#makeReservationCreateHas#0;class#QuerySender#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/screensframework/reservations/search_rooms.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11948052">
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
