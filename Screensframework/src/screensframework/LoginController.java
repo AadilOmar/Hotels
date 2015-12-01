@@ -92,10 +92,6 @@ public class LoginController implements Initializable, ControlledScreen {
 
     @FXML
     protected void login(ActionEvent event) {
-        myController.setScreen(Main.MANAGER_HOME_SCREEN);
-        //myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-
-        /*
         Customer c1 = new Customer();
         Customer c2 = new Customer();
 
@@ -190,7 +186,6 @@ public class LoginController implements Initializable, ControlledScreen {
         else {
             //show error message
             errorText.setText("Error: username or password incorrect");
-
-        }*/
+        }
     }
 }
