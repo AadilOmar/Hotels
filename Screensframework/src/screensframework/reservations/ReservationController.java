@@ -375,7 +375,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     public void update_reservation(ActionEvent event){
         if (allRoomsAvailable) {
-            QuerySender.updateReservation(reservation_id.getText(), new_start_date.getText(), new_end_date.getText(), Integer.parseInt(total_cost.getText()));
+            QuerySender.updateReservation(Global.username, reservation_id.getText(), new_start_date.getText(), new_end_date.getText(), updated_cost.getText());
             System.out.println("update");
             confirmation_reservation_id.setText(reservation_id.getText());
             myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);

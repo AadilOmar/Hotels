@@ -79,7 +79,7 @@ public class LoginController implements Initializable, ControlledScreen {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
@@ -92,102 +92,102 @@ public class LoginController implements Initializable, ControlledScreen {
 
     @FXML
     protected void login(ActionEvent event) {
-//
-//        Customer c = new Customer();
-//
-//        Connection connection = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            connection = ConnectionConfiguration.getConnection();
-//            preparedStatement = connection.prepareStatement("SELECT * FROM `CUSTOMER` WHERE Cnnnn = ? and Password = ?");
-//            preparedStatement.setString(1, username.getText());
-//            preparedStatement.setString(2, password.getText());
-//            resultSet = preparedStatement.executeQuery();
-//
-//            while (resultSet.next()) {
-//                c.setUsername(resultSet.getString("Cnnnn"));
-//                c.setEmail(resultSet.getString("Email"));
-//                c.setPassword(resultSet.getString("Password"));
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println("Connection FAILED");
-//            e.printStackTrace();
-//
-//            } finally {
-//                if (resultSet != null) {
-//                    try {
-//                        resultSet.close();
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                if (preparedStatement != null) {
-//                    try {
-//                        preparedStatement.close();
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        System.out.println("username: " + c.getUsername() + ", email: " + c.getEmail() + ", password: " + c.getPassword());
-//
-//        //the login credentials were found in the database
-//        if (c.getUsername() != null && c.getEmail() != null && c.getPassword() != null) {
-//            //go to next screenParent.
-//            errorText.setText("good");
-//            if(Global.user_type.equals("customer")){
-//                myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-//            }
-//            else{
-//                myController.setScreen(Main.MANAGER_HOME_SCREEN);
-//            }
-//        }
-//        else {
-//            //show error message
-//            errorText.setText("Error: username or password incorrect");
-//
-//        }
-        myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-    }
+        Customer c1 = new Customer();
+        Customer c2 = new Customer();
 
-        /*
-        //go through database and find if usrname and password match anywhere
-        for(int x=0;x<numUsers;x++){
-            System.out.println( username.getText() + " "+ usernameArray[x]);
-            System.out.println( password.getText() + " "+ passwordArray[x]);
-            if(username.getText().equals(usernameArray[x]) && password.getText().equals(passwordArray[x])){
-                match = true;
+        Connection connection = null;
+
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        ResultSet resultSet1 = null;
+        ResultSet resultSet2 = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+
+            //query to check customer table
+            preparedStatement1 = connection.prepareStatement("SELECT * FROM CUSTOMER WHERE Cnnnn = ? and Password = ?");
+            preparedStatement1.setString(1, username.getText());
+            preparedStatement1.setString(2, password.getText());
+            resultSet1 = preparedStatement1.executeQuery();
+
+            while (resultSet1.next()) {
+                c1.setUsername(resultSet1.getString("Cnnnn"));
+                c1.setEmail(resultSet1.getString("Email"));
+                c1.setPassword(resultSet1.getString("Password"));
+            }
+
+            //query to check management table
+            preparedStatement2 = connection.prepareStatement("SELECT * FROM MANAGEMENT WHERE Mnnnn = ? and Password = ?");
+            preparedStatement2.setString(1, username.getText());
+            preparedStatement2.setString(2, password.getText());
+            resultSet2 = preparedStatement2.executeQuery();
+
+            while (resultSet2.next()) {
+                c2.setUsername(resultSet2.getString("Mnnnn"));
+                c2.setPassword(resultSet2.getString("Password"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Connection FAILED");
+            e.printStackTrace();
+
+        } finally {
+            if (resultSet1 != null) {
+                try {
+                    resultSet1.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (resultSet2 != null) {
+                try {
+                    resultSet2.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (preparedStatement1 != null) {
+                try {
+                    preparedStatement1.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (preparedStatement2 != null) {
+                try {
+                    preparedStatement2.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        if (match){
-            //go to next screenParent.
+
+        //the login credentials were found in the database
+        if (c1.getUsername() != null && c1.getEmail() != null && c1.getPassword() != null) {
+            //go to next Customer screen.
             errorText.setText("good");
-            if(Global.user_type.equals("customer")){
-                myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
-            }
-            else{
-                myController.setScreen(Main.MANAGER_HOME_SCREEN);
-            }
+            Global.username = c1.getUsername();
+            myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
+        } else if (c2.getUsername() != null && c2.getPassword() != null) {
+            //go to next Manager screen
+            Global.username = c2.getUsername();
+            myController.setScreen(Main.MANAGER_HOME_SCREEN);
         }
-        else{
+        else {
             //show error message
             errorText.setText("Error: username or password incorrect");
-
         }
-
     }
-    */
 }
