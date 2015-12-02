@@ -22,25 +22,37 @@ public class QuerySender {
 
     public static ResultSet findAllRooms(String start, String end, String loc){
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet resultSet = null;
-        String q = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION; SELECT * FROM ROOM AS R WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-12-16' OR (r.Start_Date >= '2015-12-16' AND r.Start_Date < '2015-12-18') ) AND (r.end_date >= '2015-12-18' OR (r.end_date > '2015-12-16' AND r.end_date <= '2015-12-18') ) AND r.Hotel_Location='Charlotte' AND r.IS_Cancelled =  '0' ) AND Hotel_Location='Charlotte'";
-        String query = "SELECT * FROM ROOM WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.Hotel_Location=? AND r.IS_Cancelled = ? ) AND Hotel_Location=?";
-        String query1 = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION;";
-        System.out.println(query);
+
+        String query1 = "CREATE VIEW RRESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String query2 = "SELECT * FROM ROOM WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RRESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.Hotel_Location=? AND r.IS_Cancelled = ? ) AND Hotel_Location=?";
+
+        String query3 = "DROP VIEW RRESERVED";
+
+//        String q = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION; SELECT * FROM ROOM AS R WHERE Room_Number NOT IN (SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-12-16' OR (r.Start_Date >= '2015-12-16' AND r.Start_Date < '2015-12-18') ) AND (r.end_date >= '2015-12-18' OR (r.end_date > '2015-12-16' AND r.end_date <= '2015-12-18') ) AND r.Hotel_Location='Charlotte' AND r.IS_Cancelled =  '0' ) AND Hotel_Location='Charlotte'";
+//        String query1 = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION;";
+        System.out.println(query2);
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, start);
-            preparedStatement.setString(2, start);
-            preparedStatement.setString(3, end);
-            preparedStatement.setString(4, end);
-            preparedStatement.setString(5, start);
-            preparedStatement.setString(6, end);
-            preparedStatement.setString(7, loc);
-            preparedStatement.setString(8, "0");
-            preparedStatement.setString(9, loc);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement2.setString(1, start);
+            preparedStatement2.setString(2, start);
+            preparedStatement2.setString(3, end);
+            preparedStatement2.setString(4, end);
+            preparedStatement2.setString(5, start);
+            preparedStatement2.setString(6, end);
+            preparedStatement2.setString(7, loc);
+            preparedStatement2.setString(8, "0");
+            preparedStatement2.setString(9, loc);
+            preparedStatement1.executeUpdate();
+            resultSet = preparedStatement2.executeQuery();
+            preparedStatement3.executeUpdate();
             System.out.println(resultSet);
             return resultSet;
 
@@ -253,16 +265,26 @@ public class QuerySender {
 
     public static ResultSet getRoomsOfReservation(String reservation_id){
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet result = null;
-        String q = "SELECT * FROM  `cs4400_Group_12`.`RESERVED` WHERE Reservation_ID = \"26\"\n";
-        String query = "SELECT * FROM  `cs4400_Group_12`.`RESERVED` WHERE Reservation_ID = ?";
-        System.out.println(query);
+        String query1 = "CREATE VIEW RRESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String query2 = "SELECT * FROM  `cs4400_Group_12`.`RRESERVED` WHERE Reservation_ID = ?";
+
+        String query3 = "DROP VIEW RRESERVED";
+
+        System.out.println(query2);
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            result = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement2.setString(1, reservation_id);
+            preparedStatement1.executeUpdate();
+            result = preparedStatement2.executeQuery();
+            preparedStatement3.executeUpdate();
             return result;
 
         }catch (Exception e) {
@@ -304,30 +326,67 @@ public class QuerySender {
     }
 
     //still todo
-    public static int updateReservation(String username, String reservation_id, String card_number, String start, String end, String total_cost, String isCancelled){
+    public static int updateReservation(String reservation_id, String start, String end, int total_cost){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String query = "UPDATE RESERVATION SET Start_Date= ?, End_Date= ?, Total_Cost= ?" +
+                "WHERE Reservation_ID=?";
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, start);
+            preparedStatement.setString(2, end);
+            preparedStatement.setInt(3, total_cost);
+            preparedStatement.setString(4, reservation_id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Failed update");
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return 0;
     }
 
     //gets if rooms are available to be cancelled
-    public static ResultSet searchAvailabilityToCancel(String reservation_id, String start, String end){
+    public static ResultSet searchAvailabilityToCancel(String reservation_id){
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet result = null;
-        String q = "SELECT * From RESERVED NATURAL JOIN ROOM WHERE Reservation_ID = '26' AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number IN ( SELECT ROOM_Number FROM RESERVED r WHERE (r.Start_Date <= '2015-11-06' OR (r.Start_Date >= '2015-11-06' AND r.Start_Date < '2015-11-07') ) AND (r.end_date >= '2015-11-07' OR (r.end_date > '2015-11-06' AND r.end_date <= '2015-11-07') ) AND r.IS_Cancelled = '0' ) )";
-        String query = "SELECT * From RESERVED NATURAL JOIN ROOM WHERE Reservation_ID = ? AND Room_Number In ( SELECT ROOM_Number FROM RESERVED r WHERE ((r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?)) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.IS_Cancelled = ? AND (r.start_date > CAST(CURRENT_TIMESTAMP AS DATE)) ) )";
-        System.out.println(query);
+        String query1 = "CREATE VIEW RRESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String query2 = "SELECT * From RRESERVED NATURAL JOIN ROOM WHERE Reservation_ID = ? AND Username = ? AND Is_Cancelled=? AND Start_Date > CAST(CURRENT_TIMESTAMP AS DATE)";
+
+        String query3 = "DROP VIEW RRESERVED";
+        System.out.println(query2);
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            preparedStatement.setString(2, start);
-            preparedStatement.setString(3, start);
-            preparedStatement.setString(4, end);
-            preparedStatement.setString(5, end);
-            preparedStatement.setString(6, start);
-            preparedStatement.setString(7, end);
-            preparedStatement.setString(8, "0");
-            result = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(query1);
+            preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement3 = connection.prepareStatement(query3);
+            preparedStatement2.setString(1, reservation_id);
+            preparedStatement2.setString(2, Global.username );
+            preparedStatement2.setString(3, "0");
+            preparedStatement1.executeUpdate();
+            result = preparedStatement2.executeQuery();
+            preparedStatement3.executeUpdate();
             return result;
 
         }catch (Exception e) {

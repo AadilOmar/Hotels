@@ -94,6 +94,7 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private Text confirmation_reservation_id;
 
     long length_of_stay = 1;
+    boolean allRoomsAvailable;
 
     private boolean already_created_all_rooms = false;
     private boolean already_created_checked_rooms = false;
@@ -160,9 +161,13 @@ public class ReservationController implements Initializable, ControlledScreen {
 
         ResultSet roomsInReservation = QuerySender.getRoomsOfReservation(id);
         String userThatReserved = null;
+        int total_cost_of_reservation = 0;
+        String start_date_of_reservation = null;
         try {
             while (roomsInReservation.next()) {
-                 userThatReserved = roomsInReservation.getString("Username");
+                userThatReserved = roomsInReservation.getString("Username");
+                total_cost_of_reservation =  roomsInReservation.getInt("Total_Cost");
+                start_date_of_reservation =  roomsInReservation.getString("Start_Date");
             }
         }catch(Exception e){e.printStackTrace();}
         if(!Global.username.equals(userThatReserved)){
@@ -172,11 +177,13 @@ public class ReservationController implements Initializable, ControlledScreen {
         else{
             error_no_permission.setText("");
         }
-        int total = Integer.parseInt(total_cost_reserved.getText().replace("$", "").replace(".00","0"));
-        int refund = Integer.parseInt(amount_refunded.getText().replace("$", "").replace(".00","0"));
-        int to_save = total-refund;
-        int result = QuerySender.cancelReservation(id, to_save+"");
 
+//        int refund = Integer.parseInt(amount_refunded.getText().replace("$", "").replace(".00","0"));
+        int refund = setAmountToBeRefunded(total_cost_of_reservation+"", start_date_of_reservation);
+        int to_save = total_cost_of_reservation-refund;
+        int result = QuerySender.cancelReservation(id, to_save+"");
+        total_cost_reserved.setText(total_cost_of_reservation+"");
+        amount_refunded.setText(refund+"");
         System.out.println("DLETED RESERVATION: "+result);
 
 
@@ -204,6 +211,7 @@ public class ReservationController implements Initializable, ControlledScreen {
         boolean validId = false;
         String start = "";
         String end = "";
+        String total = "";
         ResultSet roomsInReservation = QuerySender.getRoomsOfReservation(reservationId);
         try{
             System.out.println("2222");
@@ -212,6 +220,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                 String isCancelled = roomsInReservation.getString("is_Cancelled");
                 start = roomsInReservation.getString("Start_Date");
                 end = roomsInReservation.getString("End_Date");
+                total = roomsInReservation.getString("Total_Cost");
                 System.out.println(start);
                 System.out.println(end);
                 if(isCancelled.equals("0")){
@@ -229,10 +238,10 @@ public class ReservationController implements Initializable, ControlledScreen {
             error_invalid_reservaion_id_cancel.setText("");
         }
         else{
-            error_invalid_reservaion_id_cancel.setText("An existing reservation with that ID could not be found");
+            error_invalid_reservaion_id_cancel.setText("You don't have an existing reservation with the ID you specified");
             return;
         }
-        ResultSet result = QuerySender.searchAvailabilityToCancel(reservationId, start, end);
+        ResultSet result = QuerySender.searchAvailabilityToCancel(reservationId);
         System.out.println("RESULT!!! "+result);
         try {
             while (result.next()) {
@@ -275,9 +284,10 @@ public class ReservationController implements Initializable, ControlledScreen {
         }
         length_of_stay = endDate.getTime() - startDate.getTime();
         length_of_stay = TimeUnit.DAYS.convert(length_of_stay, TimeUnit.MILLISECONDS);
-        updateTotalCost(all_rooms, total_cost_reserved, (int)length_of_stay);
+//        updateTotalCost(all_rooms, total_cost_reserved, (int)length_of_stay);
         setCancelledDate();
-        setAmountToBeRefunded(total_cost_reserved.getText());
+        total_cost_reserved.setText(total);
+        setAmountToBeRefunded(total, start_date_cancelled.getText());
     }
 
     //finds if there is a reservation by the ID given. updates the dates of original reservation
@@ -315,6 +325,7 @@ public class ReservationController implements Initializable, ControlledScreen {
             error_invalid_reservaion_id.setText("");
         }
         else{
+            allRoomsAvailable = false;
             error_invalid_reservaion_id.setText("A reservation with that ID could not be found");
         }
 
@@ -328,8 +339,9 @@ public class ReservationController implements Initializable, ControlledScreen {
 
         boolean datesAreValid = Validator.validate_reservation_date(new_start_date.getText(), new_end_date.getText(), error_search_reservation);
         if(datesAreValid){
-            boolean allRoomsAvailable = true;
-
+            allRoomsAvailable = true;
+            availablerooms = 0;
+            all_rooms = FXCollections.observableArrayList();
             ResultSet result = QuerySender.searchAvailability(reservation_id.getText(), new_start_date.getText(), new_end_date.getText());
             System.out.println("RESULT!!! "+result);
             try {
@@ -389,7 +401,14 @@ public class ReservationController implements Initializable, ControlledScreen {
     //updates the reservation in the database based on what dates were selected
     @FXML
     public void update_reservation(ActionEvent event){
-//        QuerySender.updateReservation();
+        if (allRoomsAvailable) {
+            QuerySender.updateReservation(reservation_id.getText(), new_start_date.getText(), new_end_date.getText(), Integer.parseInt(total_cost.getText()));
+            confirmation_reservation_id.setText(reservation_id.getText());
+            System.out.println("update");
+            myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
+            } else {
+            error_rooms_not_available_for_update.setText("Unable to update reservation since rooms are unavailable");
+            }
         confirmation_reservation_id.setText(reservation_id.getText());
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
     }
@@ -600,17 +619,17 @@ public class ReservationController implements Initializable, ControlledScreen {
         cancellation_date.setText(dateFormat.format(date));
 
     }
-    private void setAmountToBeRefunded(String totalCost){
+    private int setAmountToBeRefunded(String totalCost, String start){
         NumberFormat format = NumberFormat.getCurrencyInstance();
         System.out.println("nigga yes");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
         Date startDate = new Date();
-        int total = 0;
+        String total = null;
         try{
-            total = Integer.parseInt(format.parse(totalCost).toString());
+            total = format.parse(totalCost).toString();
             System.out.println(total);
-            startDate = sdf.parse(start_date_cancelled.getText());
+            startDate = sdf.parse(start);
             currentDate = sdf.parse(sdf.format(currentDate));
         }catch(ParseException e){
             e.printStackTrace();
@@ -622,15 +641,16 @@ public class ReservationController implements Initializable, ControlledScreen {
         System.out.println(daysAway);
         int refund = 0;
         if(daysAway > 3){
-            refund = total;
+            refund = Integer.parseInt(total);
         }
         else if(daysAway > 1 && daysAway <= 3){
-            refund = (int)(total*.8);
+            refund = (int)(Integer.parseInt(total)*.8);
         }
         else if(daysAway <= 1){
             refund = 0;
         }
         amount_refunded.setText("$"+refund+".00");
+        return refund;
     }
 
     public void setScreenParent(ScreensController screenParent){
