@@ -75,12 +75,10 @@ import screensframework.com.util.QuerySender;
  */
 public class ReservationController implements Initializable, ControlledScreen {
     boolean dontAddBedInfo = false;
+    boolean allRoomsAvailable;
 
-    ObservableList<Room> all_rooms =FXCollections.observableArrayList(
-
-    );
-    ObservableList<Room> selected_rooms = FXCollections.observableArrayList(
-    );
+    ObservableList<Room> all_rooms =FXCollections.observableArrayList();
+    ObservableList<Room> selected_rooms = FXCollections.observableArrayList();
     ScreensController myController;
     //for all
     @FXML private TableView all_rooms_table;
@@ -94,7 +92,6 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private Text confirmation_reservation_id;
 
     long length_of_stay = 1;
-    boolean allRoomsAvailable;
 
     private boolean already_created_all_rooms = false;
     private boolean already_created_checked_rooms = false;
@@ -343,6 +340,8 @@ public class ReservationController implements Initializable, ControlledScreen {
             allRoomsAvailable = true;
             availablerooms = 0;
             all_rooms = FXCollections.observableArrayList();
+
+
             ResultSet result = QuerySender.searchAvailability(reservation_id.getText(), new_start_date.getText(), new_end_date.getText());
             System.out.println("RESULT!!! "+result);
             try {
@@ -389,6 +388,7 @@ public class ReservationController implements Initializable, ControlledScreen {
             }
             else{
                 error_rooms_not_available_for_update.setText("The rooms are not available for this date range");
+                allRoomsAvailable = false;
             }
         }
     }
@@ -403,15 +403,13 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     public void update_reservation(ActionEvent event){
         if (allRoomsAvailable) {
-            QuerySender.updateReservation(reservation_id.getText(), new_start_date.getText(), new_end_date.getText(), Integer.parseInt(total_cost.getText()));
-            confirmation_reservation_id.setText(reservation_id.getText());
+            QuerySender.updateReservation(Global.username, reservation_id.getText(), new_start_date.getText(), new_end_date.getText(), updated_cost.getText());
             System.out.println("update");
+            confirmation_reservation_id.setText(reservation_id.getText());
             myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
-            } else {
+        } else {
             error_rooms_not_available_for_update.setText("Unable to update reservation since rooms are unavailable");
-            }
-        confirmation_reservation_id.setText(reservation_id.getText());
-        myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);
+        }
     }
 
     @FXML
@@ -472,14 +470,14 @@ public class ReservationController implements Initializable, ControlledScreen {
             }
         }catch(Exception e){e.printStackTrace();}
         int madeReservation = QuerySender.makeReservationReservationTable(Global.username, new_id, card_num, start, end, total, "0");
-        System.out.println("MADE RESERVATION: "+madeReservation);
+        System.out.println("MADE RESERVATION: " + madeReservation);
         for(int x=0;x<num_rooms;x++){
             int selected_bed = 0;
             if(selected_rooms.get(x).getSelectedBed().equals("yes")){
                 selected_bed = 1;
             }
             int madeHas = QuerySender.makeReservationHasTable(new_id, selected_rooms.get(x).getRoomNumber(), location.getText(), selected_bed+"");
-            System.out.println("MADE HAS: "+madeHas);
+            System.out.println("MADE HAS: " + madeHas);
         }
         confirmation_reservation_id.setText(new_id);
         myController.setScreen(Main.RESERVATION_CONFIRM_SCREEN);

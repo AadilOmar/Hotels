@@ -40,7 +40,8 @@
 package screensframework.manager_screens;
 
 import java.net.URL;
-import java.sql.SQLException;
+
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,7 +70,7 @@ import screensframework.ControlledScreen;
 import screensframework.Global;
 import screensframework.Main;
 import screensframework.ScreensController;
-import screensframework.com.util.ConnectionConfiguration;
+
 import screensframework.com.util.QuerySender;
 
 /**
@@ -255,6 +256,7 @@ public class ManagerController implements Initializable, ControlledScreen {
             e.printStackTrace();
         }
 
+
         ResultSet septResultSet = QuerySender.getSeptemberRevenueSet();
 
         try {
@@ -384,6 +386,5 @@ public class ManagerController implements Initializable, ControlledScreen {
         table.setItems(null);
         table.setItems(items);
     }
-
 
 }

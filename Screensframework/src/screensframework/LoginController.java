@@ -117,7 +117,8 @@ public class LoginController implements Initializable, ControlledScreen {
                 c1.setPassword(resultSet1.getString("Password"));
             }
 
-            //query to check management tablendbsactyuuhgfd
+
+            //query to check management table
             preparedStatement2 = connection.prepareStatement("SELECT * FROM MANAGEMENT WHERE Mnnnn = ? and Password = ?");
             preparedStatement2.setString(1, username.getText());
             preparedStatement2.setString(2, password.getText());
@@ -126,6 +127,7 @@ public class LoginController implements Initializable, ControlledScreen {
             while (resultSet2.next()) {
                 c2.setUsername(resultSet2.getString("Mnnnn"));
                 c2.setPassword(resultSet2.getString("Password"));
+
             }
 
         } catch (Exception e) {
@@ -191,3 +193,4 @@ public class LoginController implements Initializable, ControlledScreen {
         }
     }
 }
+

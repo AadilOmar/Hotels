@@ -284,6 +284,7 @@ public class QuerySender {
             preparedStatement2.setString(1, reservation_id);
             preparedStatement1.executeUpdate();
             result = preparedStatement2.executeQuery();
+
             preparedStatement3.executeUpdate();
             return result;
 
@@ -298,23 +299,33 @@ public class QuerySender {
     //gets availability of rooms (for updating)
     public static ResultSet searchAvailability(String reservation_id, String start, String end){
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet result = null;
         String q = "SELECT * From URESERVED NATURAL JOIN ROOM WHERE Reservation_ID = '26' AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN ( SELECT ROOM_Number FROM URESERVED r WHERE (r.Start_Date <= '2015-11-06' OR (r.Start_Date >= '2015-11-06' AND r.Start_Date < '2015-11-07') ) AND (r.end_date >= '2015-11-07' OR (r.end_date > '2015-11-06' AND r.end_date <= '2015-11-07') ) AND r.IS_Cancelled = '0' ) )";
         String query = "SELECT * From URESERVED NATURAL JOIN ROOM WHERE Reservation_ID = ? AND Room_Number In ( SELECT Room_Number FROM ROOM AS R WHERE Room_Number NOT IN ( SELECT ROOM_Number FROM URESERVED r WHERE (r.Start_Date <= ? OR (r.Start_Date >= ? AND r.Start_Date < ?) ) AND (r.end_date >= ? OR (r.end_date > ? AND r.end_date <= ?) ) AND r.IS_Cancelled = ? ) )";
+        String makeViewQuery = "CREATE VIEW URESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION;";
+        String dropViewQuery = "DROP VIEW URESERVED";
+
         System.out.println(query);
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            preparedStatement.setString(2, start);
-            preparedStatement.setString(3, start);
-            preparedStatement.setString(4, end);
-            preparedStatement.setString(5, end);
-            preparedStatement.setString(6, start);
-            preparedStatement.setString(7, end);
-            preparedStatement.setString(8, "0");
-            result = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(query);
+            preparedStatement2 = connection.prepareStatement(makeViewQuery);
+            preparedStatement3 = connection.prepareStatement(dropViewQuery);
+
+            preparedStatement1.setString(1, reservation_id);
+            preparedStatement1.setString(2, start);
+            preparedStatement1.setString(3, start);
+            preparedStatement1.setString(4, end);
+            preparedStatement1.setString(5, end);
+            preparedStatement1.setString(6, start);
+            preparedStatement1.setString(7, end);
+            preparedStatement1.setString(8, "0");
+            preparedStatement2.executeUpdate();
+            result = preparedStatement1.executeQuery();
+            preparedStatement3.executeUpdate();
             return result;
 
         }catch (Exception e) {
@@ -326,19 +337,37 @@ public class QuerySender {
     }
 
     //still todo
-    public static int updateReservation(String reservation_id, String start, String end, int total_cost){
+
+    public static int updateReservation(String username, String reservation_id, String start, String end, String total_cost){
+        System.out.println("Username: " + username);
+
+        String newCost = "";
+        for (int i = 0; i < total_cost.length(); i++) {
+            if (Character.isDigit(total_cost.charAt(i))) {
+                newCost += total_cost.charAt(i);
+            } else if (Character.toString(total_cost.charAt(i)).equals(".")) {
+                break;
+            }
+        }
+        System.out.println("Cost: " +newCost);
+        System.out.println("Reservation: " +reservation_id);
+        System.out.println("start date: " +start);
+        System.out.println("end date: " +end);
+
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String query = "UPDATE RESERVATION SET Start_Date= ?, End_Date= ?, Total_Cost= ?" +
-                "WHERE Reservation_ID=?";
+                "WHERE Reservation_ID= ? and Username= ?";
 
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, start);
             preparedStatement.setString(2, end);
-            preparedStatement.setInt(3, total_cost);
+            preparedStatement.setString(3, newCost);
             preparedStatement.setString(4, reservation_id);
+            preparedStatement.setString(5, username);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println("Failed update");
@@ -542,37 +571,57 @@ public class QuerySender {
         return null;
     }
 
-
-
     public static ResultSet getAugustReservationSet() {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet augResultSet = null;
+
         String augQuery = "SELECT Hotel_Location, COUNT(Reservation_ID) FROM `RESERVED` WHERE Start_Date >= \"2015-8-1\" and Start_Date <= \"2015-8-31\" GROUP BY Hotel_Location";
+
+        String makeViewQuery = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String dropViewQuery = "DROP VIEW RESERVED";
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(augQuery);
-            augResultSet = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(augQuery);
+            preparedStatement2 = connection.prepareStatement(makeViewQuery);
+            preparedStatement3 = connection.prepareStatement(dropViewQuery);
+            preparedStatement2.executeUpdate();
+            augResultSet = preparedStatement1.executeQuery();
+            preparedStatement3.executeUpdate(dropViewQuery);
             return augResultSet;
         } catch (Exception e) {
             System.out.println("FAILURE");
             e.printStackTrace();
         }
-
-        return null;
+        return  augResultSet;
     }
 
     public static ResultSet getSeptemberReservationSet() {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+
+        PreparedStatement preparedStatement1 = null;
+        PreparedStatement preparedStatement2 = null;
+        PreparedStatement preparedStatement3 = null;
         ResultSet septResultSet = null;
+
         String septQuery = "SELECT Hotel_Location, COUNT(Reservation_ID) FROM `RESERVED` WHERE Start_Date >= \"2015-9-1\" and Start_Date <= \"2015-9-30\" GROUP BY Hotel_Location";
+
+        String makeViewQuery = "CREATE VIEW RESERVED AS SELECT * FROM HAS NATURAL JOIN RESERVATION";
+
+        String dropViewQuery = "DROP VIEW RESERVED";
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(septQuery);
-            septResultSet = preparedStatement.executeQuery();
+            preparedStatement1 = connection.prepareStatement(septQuery);
+            preparedStatement2 = connection.prepareStatement(makeViewQuery);
+            preparedStatement3 = connection.prepareStatement(dropViewQuery);
+            preparedStatement2.executeUpdate();
+            septResultSet = preparedStatement1.executeQuery();
+            preparedStatement3.executeUpdate(dropViewQuery);
             return septResultSet;
         } catch (Exception e) {
             System.out.println("FAILURE");
