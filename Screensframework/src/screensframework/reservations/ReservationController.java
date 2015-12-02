@@ -109,7 +109,8 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML private Text error_rooms_not_available_for_update;
     @FXML private Text error_invalid_reservaion_id_cancel;
     @FXML private Text error_invalid_dates_cancel;
-
+    @FXML private Text error_no_rooms_selected;
+    @FXML private Text error_no_permission;
 
     //for searching all rooms
     @FXML private TextField start_date;
@@ -157,13 +158,28 @@ public class ReservationController implements Initializable, ControlledScreen {
         ArrayList<Room> rooms= new ArrayList<Room>();
         String id = reservation_id_cancel.getText();
 
-        int result = QuerySender.deleteReservationReservationTable(id);
-        System.out.println("DLETED RESERVATION: "+result);
-        for(int x=0;x<all_rooms.size();x++){
-            Room curr = all_rooms.get(x);
-            int result1 = QuerySender.deleteReservationHasTable(id, curr.getRoomNumber());
-            System.out.println("DLETED HAS: "+result1);
+        ResultSet roomsInReservation = QuerySender.getRoomsOfReservation(id);
+        String userThatReserved = null;
+        try {
+            while (roomsInReservation.next()) {
+                 userThatReserved = roomsInReservation.getString("Username");
+            }
+        }catch(Exception e){e.printStackTrace();}
+        if(!Global.username.equals(userThatReserved)){
+            error_no_permission.setText("You do not have permission to cancel this reservation");
+            return;
         }
+        else{
+            error_no_permission.setText("");
+        }
+        int total = Integer.parseInt(total_cost_reserved.getText().replace("$", "").replace(".00","0"));
+        int refund = Integer.parseInt(amount_refunded.getText().replace("$", "").replace(".00","0"));
+        int to_save = total-refund;
+        int result = QuerySender.cancelReservation(id, to_save+"");
+
+        System.out.println("DLETED RESERVATION: "+result);
+
+
         myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
     }
 
@@ -385,9 +401,8 @@ public class ReservationController implements Initializable, ControlledScreen {
         String end = end_date.getText();
         String loc = location.getText();
 
-//        boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
-//        if(!datesAreValid){ return; }
-
+        boolean datesAreValid = Validator.validate_reservation_date(start, end, error_search_all);
+        if(!datesAreValid){ return; }
 
         ResultSet result = QuerySender.findAllRooms(start, end, loc);
         try{
@@ -459,47 +474,49 @@ public class ReservationController implements Initializable, ControlledScreen {
     @FXML
     //should display the rooms that were clicked as well as the start date, end date, and total cost
     public void checkDetails(ActionEvent event){
+        if(selected_rooms.size()==0){
+            error_no_rooms_selected.setText("No rooms were selected");
+            return;
+        }
+        else{
+            error_no_rooms_selected.setText("");
+        }
         card.getItems().removeAll();
 
         //sets the start/end date text to whatever was put in when creating reservation
         ArrayList<MenuItem> list = new ArrayList<MenuItem>();
         card.getItems().addAll(list);
         ArrayList<String> stringList = new ArrayList<String>();
-        if(Global.cards == null) {
-            try {
-                ResultSet result = QuerySender.getCreditCards(Global.username);
-                while (result.next()) {
-                    String card_number = result.getString("Card_Number");
-                    System.out.println("_________________" + card_number);
-                    MenuItem item = new MenuItem(card_number);
-                    item.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            MenuItem i = (MenuItem) actionEvent.getSource();
-                            card.setText(i.getText());
-                        }
-                    });
-                    stringList.add(card_number);
-                    list.add(item);
-                    System.out.println(list + " l");
-                }
-            } catch (Exception e) {
-                //            e.printStackTrace();
-                System.out.println("NOOO");
+        try {
+            ResultSet result = QuerySender.getCreditCards(Global.username);
+            while (result.next()) {
+                String card_number = result.getString("Card_Number");
+                System.out.println("_________________" + card_number);
+                MenuItem item = new MenuItem(card_number);
+                item.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        MenuItem i = (MenuItem) actionEvent.getSource();
+                        card.setText(i.getText());
+                    }
+                });
+                stringList.add(card_number);
+                list.add(item);
+                System.out.println(list + " l");
             }
-            Global.cards = stringList;
-            Global.cardItems = list;
+        } catch (Exception e) {
+            //            e.printStackTrace();
+            System.out.println("NOOO");
         }
-        else {
-            stringList = Global.cards;
-            System.out.println("ASDFASDF"+stringList);
-            list = Global.cardItems;
-        }
+        Global.cards = stringList;
+        Global.cardItems = list;
+        System.out.println("ASDFASDF"+stringList);
+
         card.setVisible(false);
         card.setVisible(true);
         System.out.println("+++"+list);
-//        card.getItems().addAll(list);
-        updateCards(stringList);
+        card.getItems().addAll(list);
+//        updateCards(stringList);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = null;
         Date endDate= null;

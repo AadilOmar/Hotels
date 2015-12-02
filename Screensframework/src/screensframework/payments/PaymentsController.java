@@ -110,12 +110,12 @@ public class PaymentsController implements Initializable, ControlledScreen {
     @FXML
     //saves the card info
     public void save(ActionEvent event) {
-//        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
-//        if(!card_fields_are_valid){
-//            return;
-//        }
+        boolean card_fields_are_valid = Validator.validate_adding_card(card_name, card_number, exp_date, cvv, error_card_detail);
+        if(!card_fields_are_valid){
+            return;
+        }
 
-        int result = QuerySender.addCreditCard("c1001", card_number.getText(), card_name.getText(), cvv.getText(), exp_date.getText());
+        int result = QuerySender.addCreditCard(Global.username, card_number.getText(), card_name.getText(), cvv.getText(), exp_date.getText());
         if(result == 1) {
             Global.cardItems.add(new MenuItem(card_number.getText()));
             Global.cards.add(card_number.getText());
@@ -148,7 +148,6 @@ public class PaymentsController implements Initializable, ControlledScreen {
     public void back(ActionEvent event) {
         myController.setScreen(Main.VIEW_CHECKED_ROOMS_SCREEN);
     }
-
 
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;

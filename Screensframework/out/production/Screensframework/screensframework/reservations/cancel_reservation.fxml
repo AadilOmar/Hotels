@@ -53,4 +53,7 @@
         <Button onAction="#back" text="Back" />
     </HBox>
 
+    <Text fx:id="error_no_permission" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="11"/>
+
+
 </GridPane>

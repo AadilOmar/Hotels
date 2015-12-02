@@ -178,9 +178,11 @@ public class LoginController implements Initializable, ControlledScreen {
         if (c1.getUsername() != null && c1.getEmail() != null && c1.getPassword() != null) {
             //go to next Customer screen.
             errorText.setText("good");
+            Global.username = c1.getUsername();
             myController.setScreen(Main.CUSTOMER_HOME_SCREEN);
         } else if (c2.getUsername() != null && c2.getPassword() != null) {
             //go to next Manager screen
+            Global.username = c2.getUsername();
             myController.setScreen(Main.MANAGER_HOME_SCREEN);
         }
         else {

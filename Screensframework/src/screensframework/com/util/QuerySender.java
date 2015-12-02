@@ -338,55 +338,19 @@ public class QuerySender {
         return null;
     }
 
-    public static int deleteReservationReservationTable(String reservation_id){
+    public static int cancelReservation(String reservation_id, String to_update){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int resultSet = 0;
-        String query = "DELETE From RESERVATION WHERE RESERVATION_ID = ?";
+        String query = "UPDATE RESERVATION SET Is_Cancelled=?, Total_Cost=? WHERE RESERVATION_ID = ? AND Username = ?";
         System.out.println(query);
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            resultSet = preparedStatement.executeUpdate();
-            return resultSet;
-
-        }catch (Exception e) {
-            System.out.println("FAILURE");
-            e.printStackTrace();
-
-        } finally {
-            System.out.println("asdfasdf");
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return 0;
-    }
-
-    public static int deleteReservationHasTable(String reservation_id, String room_number){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int resultSet = 0;
-        String query = "DELETE From HAS WHERE RESERVATION_ID = ? AND Room_Number = ?";
-        System.out.println(query);
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, reservation_id);
-            preparedStatement.setString(2, room_number);
+            preparedStatement.setString(1, "1");
+            preparedStatement.setString(2, to_update);
+            preparedStatement.setString(3, reservation_id);
+            preparedStatement.setString(4, Global.username);
             resultSet = preparedStatement.executeUpdate();
             return resultSet;
 

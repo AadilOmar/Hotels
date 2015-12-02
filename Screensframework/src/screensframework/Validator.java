@@ -76,12 +76,29 @@ public class Validator {
         String validCvv = "([0-9]{3})||([0-9]{4})||([0-9]{2})";
         String validCardNumber = "([0-9]{16})";
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        Date exp = new Date();
+
+        try {
+            currentDate = sdf.parse(sdf.format(currentDate));
+            exp = sdf.parse(exp_date.getText() + "-30");
+        }catch(Exception e){
+            e.printStackTrace();
+            errorText.setText("expiration date is not valid");
+            return false;
+        }
+
         if(card_name.getText().equals("") || card_number.getText().equals("") || exp_date.getText().equals("") || cvv.getText().equals("")){
             errorText.setText("All fields must be filled");
             return false;
         }
         if(card_name.getText().length()<3){
             errorText.setText("name on card must be longer");
+            return false;
+        }
+        if (currentDate.compareTo(exp) > 0 ) {
+            errorText.setText("Card Has Expired. Choose another");
             return false;
         }
         if(!card_number.getText().matches(validCardNumber)){

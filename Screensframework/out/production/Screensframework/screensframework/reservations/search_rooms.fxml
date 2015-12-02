@@ -23,11 +23,11 @@
     </items>
   </SplitMenuButton>
 
-    <Label text="Start Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="Start Date(yyyy/mm/dd):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <TextField
             GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="start_date"/>
 
-    <Label text="End Date(m/d/yr):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label text="End Date(yyyy/mm/dd):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
     <TextField
             GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="end_date"/>
 
