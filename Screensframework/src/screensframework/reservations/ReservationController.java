@@ -223,6 +223,7 @@ public class ReservationController implements Initializable, ControlledScreen {
                 total = roomsInReservation.getString("Total_Cost");
                 System.out.println(start);
                 System.out.println(end);
+                System.out.println("WHAT THE FUCK "+total);
                 if(isCancelled.equals("0")){
                     validId = true;
                 }
@@ -625,10 +626,8 @@ public class ReservationController implements Initializable, ControlledScreen {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
         Date startDate = new Date();
-        String total = null;
         try{
-            total = format.parse(totalCost).toString();
-            System.out.println(total);
+            System.out.println(totalCost);
             startDate = sdf.parse(start);
             currentDate = sdf.parse(sdf.format(currentDate));
         }catch(ParseException e){
@@ -641,10 +640,10 @@ public class ReservationController implements Initializable, ControlledScreen {
         System.out.println(daysAway);
         int refund = 0;
         if(daysAway > 3){
-            refund = Integer.parseInt(total);
+            refund = Integer.parseInt(totalCost.toString());
         }
         else if(daysAway > 1 && daysAway <= 3){
-            refund = (int)(Integer.parseInt(total)*.8);
+            refund = (int)(Integer.parseInt(totalCost)*.8);
         }
         else if(daysAway <= 1){
             refund = 0;
